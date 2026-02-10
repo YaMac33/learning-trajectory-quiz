@@ -4,25 +4,26 @@
   <meta charset="UTF-8" />
   <title>Learning Trajectory Quiz</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
   <main id="app">
     <div id="status"></div>
 
-    <div id="qid"></div>
-    <div id="question"></div>
-    <div id="choices"></div>
+    <div id="question-area">
+      <div id="qid"></div>
+      <div id="question"></div>
+      <div id="choices"></div>
+    </div>
 
     <div id="result"></div>
 
-    <div style="display:flex; gap:8px; margin-top:12px;">
-      <button id="submitBtn" type="button">回答する</button>
-      <button id="nextBtn" type="button" disabled>次の問題へ</button>
+    <div class="actions">
+      <button id="submitBtn">回答</button>
+      <button id="nextBtn" disabled>次の問題へ</button>
     </div>
   </main>
 
-  <!-- app.js が api.js を import するので module で読み込む -->
-  <script type="module" src="./js/app.js"></script>
+  <script type="module" src="./app.js"></script>
 </body>
 </html>
