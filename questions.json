@@ -7,25 +7,25 @@
         "text": "AWS Tag Editor",
         "overview": "AWS Tag Editorは複数リソースのタグを一括管理できるツールです。",
         "detail": "AWS Tag Editorは複数のAWSサービスやリージョンにまたがるリソースのタグを検索、編集、追加できるタグ管理専用ツールです。",
-        "link": "https://yamac33.github.io/LearningTrajectory/awscp/posts/2026-02-03-awscp-aws-systems-manager-basic-functions/"
+        "link": ""
       },
       {
         "text": "AWS Config",
         "overview": "AWS Configはリソースの設定変更を記録・監査するサービスです。",
         "detail": "AWS Configはリソースの変更履歴や設定を監査目的で記録し、コンプライアンス管理に使われますが、タグの一括編集機能はありません。",
-        "link": "https://yamac33.github.io/LearningTrajectory/awscp/posts/2026-02-03-awscp-aws-config-features/"
+        "link": ""
       },
       {
         "text": "AWS CloudFormation",
         "overview": "CloudFormationはリソースの構築自動化に使うテンプレートサービスです。",
         "detail": "AWS CloudFormationはテンプレートを使って複数リソースの作成や管理を自動化します。タグ管理も可能ですが、一括編集用の専用ツールではありません。",
-        "link": "https://yamac33.github.io/LearningTrajectory/awscp/posts/2026-02-02-awscp-aws-cloudformation-overview/"
+        "link": ""
       },
       {
         "text": "AWS Trusted Advisor",
         "overview": "Trusted AdvisorはAWS環境のベストプラクティスをチェックするサービスです。",
         "detail": "AWS Trusted Advisorはコスト最適化やセキュリティなどの観点からチェックや提案をしますが、タグの一括管理機能はありません。",
-        "link": "https://yamac33.github.io/LearningTrajectory/awscp/posts/2026-02-10-awscp-aws-cost-optimization-tools/"
+        "link": ""
       }
     ],
     "correct_indices": [
@@ -40,25 +40,58 @@
         "text": "AWS上でシステム監視を行うサービス",
         "overview": "誤り：システム監視はCloudWatchが担当。",
         "detail": "AWSのシステム監視は主にAmazon CloudWatchによって行われます。Launch Wizardは監視サービスではありません。",
-        "link": "https://yamac33.github.io/LearningTrajectory/awscp/posts/2026-02-01-awscp-aws-cloudwatch-basics/"
+        "link": ""
       },
       {
         "text": "クラウド環境でアプリケーションを自動スケーリングできる",
         "overview": "誤り：自動スケーリングはAuto Scalingなどが担当。",
         "detail": "アプリケーションの自動スケーリングはAuto ScalingやElastic Beanstalkが提供。Launch Wizardは初期セットアップ支援です。",
-        "link": "https://yamac33.github.io/LearningTrajectory/awscp/posts/2026-01-31-awscp-aws-auto-scaling-introduction/"
+        "link": ""
       },
       {
         "text": "特定のアプリケーションのワークロードをAWS上に迅速にデプロイできる",
         "overview": "正解：特定アプリのワークロードを簡単にデプロイ可能。",
         "detail": "Launch WizardはMicrosoft SQL ServerやSAPなど特定アプリの要件に合わせ、最適なAWSリソースを迅速に構築し、コスト推定やベストプラクティスを支援します。",
-        "link": "https://yamac33.github.io/LearningTrajectory/awscp/posts/2026-02-10-awscp-aws-launch-wizard-basics/"
+        "link": ""
       },
       {
         "text": "AWS環境でリソースの請求管理を行える",
         "overview": "誤り：請求管理はBilling and Cost Managementの役割。",
         "detail": "AWSの請求管理とコスト分析はBilling and Cost Managementサービスが担当しており、Launch Wizardは関与しません。",
-        "link": "https://yamac33.github.io/LearningTrajectory/awscp/posts/2026-02-01-awscp-aws-cost-management-basics/"
+        "link": ""
+      }
+    ],
+    "correct_indices": [
+      2
+    ]
+  },
+  {
+    "id": "aws-push-messaging-service",
+    "question": "「構成要素ごとのコンポーネントメッセージング」をプッシュ方式で送受信できるサービスを1つ選択してください。",
+    "choices": [
+      {
+        "text": "SES",
+        "overview": "SESはEメール送受信サービスでプッシュ通知は不可",
+        "detail": "Amazon SESはクラウドベースのEメール送受信サービスですが、プッシュ方式のメッセージングには対応していません。",
+        "link": ""
+      },
+      {
+        "text": "SMS",
+        "overview": "SMSはAWSのServer Migration Serviceでプッシュ方式ではない",
+        "detail": "ここでのSMSはServer Migration Serviceの略称で、オンプレミスの仮想環境をAWSに移行するサービスであり、メッセージプッシュ方式とは無関係です。",
+        "link": ""
+      },
+      {
+        "text": "SNS",
+        "overview": "SNSはプッシュ方式のpub/subメッセージングサービスで正解",
+        "detail": "Amazon SNSは高可用性と耐久性を備えたフルマネージドのpub/sub型メッセージングサービスで、プッシュ方式でコンポーネント間のメッセージ送受信を実現します。",
+        "link": ""
+      },
+      {
+        "text": "SQS",
+        "overview": "SQSはポーリング方式のメッセージキューイングサービス",
+        "detail": "Amazon SQSは完全マネージドのメッセージキューイングサービスであり、プッシュ方式ではなく消費者によるポーリング処理でメッセージを取得します。",
+        "link": ""
       }
     ],
     "correct_indices": [
