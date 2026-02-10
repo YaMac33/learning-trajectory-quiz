@@ -10,18 +10,17 @@
   <main id="app">
     <div id="status"></div>
 
-    <div id="question-area">
-      <div id="qid"></div>
-      <div id="question"></div>
-      <div id="choices"></div>
-    </div>
+    <div id="qid" class="qid"></div>
+    <div id="question" class="question"></div>
 
-    <div id="result"></div>
+    <div id="choices" class="choices"></div>
 
     <div class="actions">
-      <button id="submitBtn">回答</button>
-      <button id="nextBtn" disabled>次の問題へ</button>
+      <button id="submitBtn" type="button">回答する</button>
+      <button id="nextBtn" type="button" disabled>次の問題へ</button>
     </div>
+
+    <div id="result" class="result"></div>
   </main>
 
   <script type="module" src="./app.js"></script>
