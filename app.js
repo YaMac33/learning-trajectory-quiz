@@ -2,7 +2,10 @@
  * - Load questions via api.js
  * - Render 1 question using <template id="choice-template">
  * - Answer check (client-side)
- * - Explanation toggle (overview -> detail)
+ * - Explanation 3-step toggle:
+ *    1st click: show overview
+ *    2nd click: show detail
+ *    3rd click: hide all
  *
  * Expected question schema:
  * {
@@ -35,7 +38,7 @@ function arraysEqual(a, b) {
 }
 
 function parseCorrectIndices(q) {
-  if (Array.isArray(q.correct_indices)) {
+  if (Array.isArray(q?.correct_indices)) {
     return q.correct_indices
       .map((n) => Number(n))
       .filter((n) => Number.isFinite(n))
@@ -109,19 +112,38 @@ function renderChoices(q) {
       linkEl.style.display = "none";
     }
 
-    // toggle detail
+    // --- IMPORTANT: initial hidden state (overview + detail) ---
+    overviewEl.setAttribute("hidden", "");
+    detailWrap.setAttribute("hidden", "");
+    toggleBtn.textContent = "解説を表示";
+
+    // 3-step toggle (ONE listener only)
     toggleBtn.addEventListener("click", () => {
-      const hidden = detailWrap.hasAttribute("hidden");
-      if (hidden) {
+      const overviewHidden = overviewEl.hasAttribute("hidden");
+      const detailHidden = detailWrap.hasAttribute("hidden");
+
+      if (overviewHidden) {
+        // step1: show overview only
+        overviewEl.removeAttribute("hidden");
+        detailWrap.setAttribute("hidden", "");
+        toggleBtn.textContent = "詳細を表示";
+        return;
+      }
+
+      if (detailHidden) {
+        // step2: show detail too
         detailWrap.removeAttribute("hidden");
         toggleBtn.textContent = "解説を隠す";
-      } else {
-        detailWrap.setAttribute("hidden", "");
-        toggleBtn.textContent = "解説を表示";
+        return;
       }
+
+      // step3: hide all
+      overviewEl.setAttribute("hidden", "");
+      detailWrap.setAttribute("hidden", "");
+      toggleBtn.textContent = "解説を表示";
     });
 
-    // remove any judgement classes (just in case)
+    // reset any classes
     root.classList.remove("correct", "wrong", "unselected");
 
     choicesEl.appendChild(frag);
@@ -143,7 +165,6 @@ function getSelectedIndices() {
 }
 
 function applyJudgementClasses(selected, correct) {
-  // .choice の並びは choices と同じ
   const choiceNodes = Array.from(document.querySelectorAll("#choices .choice"));
 
   choiceNodes.forEach((node, idx) => {
@@ -152,7 +173,6 @@ function applyJudgementClasses(selected, correct) {
     const isSel = selected.includes(idx);
     const isCor = correct.includes(idx);
 
-    // class設計（CSSで見た目を付ける）
     if (isCor) node.classList.add("correct");
     if (isSel && !isCor) node.classList.add("wrong");
     if (!isSel && isCor) node.classList.add("unselected");
