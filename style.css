@@ -1,171 +1,291 @@
-/* ===== base ===== */
-* {
-  box-sizing: border-box;
+@charset "UTF-8";
+
+/* --- Variables --- */
+:root {
+  /* Palette */
+  --color-bg: #f8fafc;
+  --color-surface: #ffffff;
+  --color-text-main: #1e293b;
+  --color-text-sub: #64748b;
+  
+  /* Brand */
+  --color-primary: #4f46e5;       /* Indigo 600 */
+  --color-primary-hover: #4338ca; /* Indigo 700 */
+  
+  /* Status */
+  --color-success: #10b981;       /* Emerald 500 */
+  --color-success-bg: #ecfdf5;    /* Emerald 50 */
+  --color-success-border: #34d399;
+  
+  --color-error: #f43f5e;         /* Rose 500 */
+  --color-error-bg: #fff1f2;      /* Rose 50 */
+  --color-error-border: #fb7185;
+
+  /* UI Components */
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --transition: all 0.2s ease-in-out;
 }
 
+/* --- Base --- */
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, sans-serif;
-  background: #f7f8fa;
-  color: #222;
+  font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
-#app {
+main#app {
   max-width: 720px;
-  margin: 0 auto;
-  padding: 16px;
+  margin: 40px auto;
+  padding: 0 20px;
 }
 
+/* --- Header & Question --- */
 #status {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 8px;
+  font-size: 0.875rem;
+  color: var(--color-text-sub);
+  min-height: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-/* ===== question ===== */
 .question-header {
-  margin-bottom: 16px;
+  margin-bottom: 2rem;
 }
 
 .qid {
-  font-size: 12px;
-  color: #999;
-  margin-bottom: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-primary);
+  background: #e0e7ff;
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-bottom: 0.5rem;
 }
 
 .question {
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 1.5;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  line-height: 1.4;
 }
 
-/* ===== choices ===== */
+/* --- Choices --- */
 .choices {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 1rem;
 }
 
 .choice {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 12px;
-  transition: background-color 0.2s, border-color 0.2s;
+  background-color: var(--color-surface);
+  border: 2px solid transparent; /* 境界線用にスペース確保 */
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
 }
 
+.choice:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Choice Main Layout */
 .choice-main {
   display: flex;
-  gap: 10px;
   align-items: flex-start;
+  gap: 1rem;
+  cursor: pointer;
+  width: 100%;
 }
 
 .choice-input {
-  margin-top: 4px;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid #cbd5e1;
+  border-radius: 4px;
+  margin-top: 0.25rem;
+  flex-shrink: 0;
+  display: grid;
+  place-content: center;
+  transition: 0.2s;
+}
+
+.choice-input::before {
+  content: "";
+  width: 0.65rem;
+  height: 0.65rem;
+  background-color: white;
+  transform: scale(0);
+  transition: 0.2s;
+  border-radius: 2px;
+}
+
+.choice-input:checked {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.choice-input:checked::before {
+  transform: scale(1);
 }
 
 .choice-text {
-  font-size: 15px;
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 1.05rem;
+  flex: 1;
 }
 
-/* ===== explanations ===== */
+/* Choice Info Area */
 .choice-info {
-  margin-left: 26px;
-  margin-top: 6px;
+  margin-top: 0.75rem;
+  padding-left: 2.25rem; /* チェックボックスの幅分インデント */
+  color: var(--color-text-sub);
 }
 
 .choice-overview {
-  font-size: 13px;
-  color: #555;
-  margin-bottom: 4px;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
 }
 
+.choice-toggle-detail {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: var(--transition);
+}
+
+.choice-toggle-detail:hover {
+  text-decoration-color: var(--color-primary);
+}
+
+/* Detail Area */
 .choice-detail {
-  margin-top: 6px;
-  padding: 8px;
-  background: #f3f4f6;
-  border-radius: 6px;
-  font-size: 13px;
-  color: #333;
+  margin-top: 0.75rem;
+  background-color: #f1f5f9;
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.choice-detail[hidden] {
+  display: none;
 }
 
 .choice-link {
   display: inline-block;
-  margin-top: 6px;
-  font-size: 12px;
-  color: #2563eb;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--color-primary);
   text-decoration: none;
+  border-bottom: 1px solid transparent;
 }
 
 .choice-link:hover {
-  text-decoration: underline;
+  border-bottom-color: var(--color-primary);
 }
 
-.choice-toggle-detail {
-  margin-top: 4px;
-  padding: 0;
-  border: none;
-  background: none;
-  font-size: 12px;
-  color: #2563eb;
-  cursor: pointer;
-}
+/* --- Judgement Styling (Important) --- */
 
-.choice-toggle-detail:hover {
-  text-decoration: underline;
-}
-
-/* ===== judgement states ===== */
-/* 正解 */
+/* 正解のスタイル */
 .choice.correct {
-  border-color: #22c55e;
-  background: #ecfdf5;
+  border-color: var(--color-success-border);
+  background-color: var(--color-success-bg);
+}
+.choice.correct .choice-input {
+  background-color: var(--color-success);
+  border-color: var(--color-success);
 }
 
-/* ユーザーが選んだ誤答 */
+/* 不正解のスタイル */
 .choice.wrong {
-  border-color: #ef4444;
-  background: #fef2f2;
+  border-color: var(--color-error-border);
+  background-color: var(--color-error-bg);
+}
+.choice.wrong .choice-input {
+  background-color: var(--color-error);
+  border-color: var(--color-error);
 }
 
-/* 正解だが未選択 */
+/* 正解だが未選択のスタイル */
 .choice.unselected {
+  border-color: var(--color-success-border);
   border-style: dashed;
-  border-color: #22c55e;
-  background: #f0fdf4;
+  opacity: 0.8;
+}
+.choice.unselected::after {
+  content: "（正解）";
+  font-size: 0.75rem;
+  color: var(--color-success);
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
-/* ===== actions ===== */
+/* --- Actions --- */
 .actions {
-  display: flex;
-  gap: 12px;
-  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
 .actions button {
-  flex: 1;
-  padding: 12px;
-  font-size: 15px;
-  font-weight: 600;
-  border-radius: 8px;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 700;
   border: none;
+  border-radius: var(--radius-sm);
   cursor: pointer;
+  transition: var(--transition);
 }
 
 #submitBtn {
-  background: #2563eb;
-  color: #fff;
+  background-color: var(--color-primary);
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.4);
 }
 
-#submitBtn:hover {
-  background: #1d4ed8;
+#submitBtn:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-2px);
+}
+
+#submitBtn:disabled {
+  background-color: #cbd5e1;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
 
 #nextBtn {
-  background: #e5e7eb;
-  color: #111;
+  background-color: var(--color-surface);
+  color: var(--color-text-main);
+  border: 1px solid #e2e8f0;
+}
+
+#nextBtn:hover:not(:disabled) {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
 }
 
 #nextBtn:disabled {
@@ -173,28 +293,59 @@ body {
   cursor: not-allowed;
 }
 
-/* ===== result ===== */
+/* --- Result --- */
 .result {
-  margin-top: 16px;
-  font-size: 16px;
-  font-weight: 600;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.4s ease;
 }
 
-.result.ok {
-  color: #16a34a;
+.result-correct {
+  opacity: 1;
+  transform: translateY(0);
+  color: var(--color-success);
+  background-color: var(--color-success-bg);
+  border: 1px solid var(--color-success-border);
 }
 
-.result.ng {
-  color: #dc2626;
+.result-wrong {
+  opacity: 1;
+  transform: translateY(0);
+  color: var(--color-error);
+  background-color: var(--color-error-bg);
+  border: 1px solid var(--color-error-border);
 }
 
-/* ===== mobile ===== */
-@media (max-width: 480px) {
+/* --- Animation --- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Mobile Responsive --- */
+@media (max-width: 600px) {
   .question {
-    font-size: 16px;
+    font-size: 1.25rem;
   }
-
-  .choice-text {
-    font-size: 14px;
+  
+  .actions {
+    grid-template-columns: 1fr; /* スタックさせる */
+  }
+  
+  .choice {
+    padding: 1rem;
+  }
+  
+  .choice-info {
+    padding-left: 0;
+    margin-top: 1rem;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 0.5rem;
   }
 }
