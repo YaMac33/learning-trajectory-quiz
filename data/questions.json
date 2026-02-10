@@ -1,0 +1,22 @@
+[
+  {
+    "id": "aws-organizations-account-creation",
+    "question": "従業員数が1000人を超えた企業で、複数のAWSアカウントをまとめて作成・管理するために最適なサービスはどれですか。",
+    "choices": [
+      {
+        "text": "IAMグループ",
+        "overview": "IAMユーザーをまとめる仕組み",
+        "detail": "IAMはユーザーと権限管理が目的で、アカウント作成はできません。",
+        "link": ""
+      },
+      {
+        "text": "AWS Organizations",
+        "overview": "複数アカウントを一元管理できる",
+        "detail": "アカウント作成・管理・ポリシー適用を自動化できます。",
+        "link": ""
+      }
+    ],
+    "correct_indices": [1],
+    "tags": ["aws-organizations", "account"]
+  }
+]
