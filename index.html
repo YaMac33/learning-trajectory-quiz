@@ -10,10 +10,33 @@
   <main id="app">
     <div id="status"></div>
 
-    <div id="qid" class="qid"></div>
-    <div id="question" class="question"></div>
+    <div class="question-header">
+      <div id="qid" class="qid"></div>
+      <div id="question" class="question"></div>
+    </div>
 
     <div id="choices" class="choices"></div>
+
+    <!-- 選択肢テンプレート: JSがこの構造を複製して使用することを想定 -->
+    <template id="choice-template">
+      <div class="choice">
+        <label class="choice-main">
+          <input type="checkbox" class="choice-input" />
+          <span class="choice-text"></span>
+        </label>
+        
+        <div class="choice-info">
+          <div class="choice-overview"></div>
+          
+          <button type="button" class="choice-toggle-detail">解説を表示</button>
+          
+          <div class="choice-detail" hidden>
+            <div class="choice-detail-content"></div>
+            <a href="" class="choice-link" target="_blank" rel="noopener noreferrer">参考リンク</a>
+          </div>
+        </div>
+      </div>
+    </template>
 
     <div class="actions">
       <button id="submitBtn" type="button">回答する</button>
