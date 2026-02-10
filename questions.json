@@ -31,5 +31,38 @@
     "correct_indices": [
       0
     ]
+  },
+  {
+    "id": "aws-launch-wizard-purpose",
+    "question": "AWS Launch Wizard の用途として、正しい内容を1つ選択してください。",
+    "choices": [
+      {
+        "text": "AWS上でシステム監視を行うサービス",
+        "overview": "誤り：システム監視はCloudWatchが担当。",
+        "detail": "AWSのシステム監視は主にAmazon CloudWatchによって行われます。Launch Wizardは監視サービスではありません。",
+        "link": ""
+      },
+      {
+        "text": "クラウド環境でアプリケーションを自動スケーリングできる",
+        "overview": "誤り：自動スケーリングはAuto Scalingなどが担当。",
+        "detail": "アプリケーションの自動スケーリングはAuto ScalingやElastic Beanstalkが提供。Launch Wizardは初期セットアップ支援です。",
+        "link": ""
+      },
+      {
+        "text": "特定のアプリケーションのワークロードをAWS上に迅速にデプロイできる",
+        "overview": "正解：特定アプリのワークロードを簡単にデプロイ可能。",
+        "detail": "Launch WizardはMicrosoft SQL ServerやSAPなど特定アプリの要件に合わせ、最適なAWSリソースを迅速に構築し、コスト推定やベストプラクティスを支援します。",
+        "link": ""
+      },
+      {
+        "text": "AWS環境でリソースの請求管理を行える",
+        "overview": "誤り：請求管理はBilling and Cost Managementの役割。",
+        "detail": "AWSの請求管理とコスト分析はBilling and Cost Managementサービスが担当しており、Launch Wizardは関与しません。",
+        "link": ""
+      }
+    ],
+    "correct_indices": [
+      2
+    ]
   }
 ]
