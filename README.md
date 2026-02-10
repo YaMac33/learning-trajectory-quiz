@@ -20,6 +20,7 @@ https://yamac33.github.io/learning-trajectory-quiz/
 ---
 
 ## 📁 ディレクトリ構成
+```
 learning-trajectory-quiz/
 ├── index.html        # エントリーポイント
 ├── style.css         # UIスタイル
@@ -27,7 +28,7 @@ learning-trajectory-quiz/
 ├── api.js            # questions.json ローダー
 ├── questions.json    # 問題データ本体
 └── README.md         # このファイル
-
+```
 ---
 
 ## ✨ 主な特徴
@@ -58,6 +59,7 @@ learning-trajectory-quiz/
   ],
   "correct_indices": [2]
 }
+```
 
 🧠 解説トグル（学習向けUI）
 
