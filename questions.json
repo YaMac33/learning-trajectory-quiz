@@ -7,19 +7,19 @@
         "text": "AWS Tag Editor",
         "overview": "AWS Tag Editorは複数リソースのタグを一括管理できるツールです。",
         "detail": "AWS Tag Editorは複数のAWSサービスやリージョンにまたがるリソースのタグを検索、編集、追加できるタグ管理専用ツールです。",
-        "link": "https://yamac33.github.io/LearningTrajectory/awscp/posts/2026-02-10-awscp-aws-systems-manager-basic-functions/"
+        "link": "https://yamac33.github.io/LearningTrajectory/awscp/posts/2026-02-03-awscp-aws-systems-manager-basic-functions/"
       },
       {
         "text": "AWS Config",
         "overview": "AWS Configはリソースの設定変更を記録・監査するサービスです。",
         "detail": "AWS Configはリソースの変更履歴や設定を監査目的で記録し、コンプライアンス管理に使われますが、タグの一括編集機能はありません。",
-        "link": "https://yamac33.github.io/LearningTrajectory/awscp/posts/2026-02-10-awscp-aws-config-features/"
+        "link": "https://yamac33.github.io/LearningTrajectory/awscp/posts/2026-02-03-awscp-aws-config-features/"
       },
       {
         "text": "AWS CloudFormation",
         "overview": "CloudFormationはリソースの構築自動化に使うテンプレートサービスです。",
         "detail": "AWS CloudFormationはテンプレートを使って複数リソースの作成や管理を自動化します。タグ管理も可能ですが、一括編集用の専用ツールではありません。",
-        "link": "https://yamac33.github.io/LearningTrajectory/awscp/posts/2026-02-10-awscp-aws-cloudformation-overview/"
+        "link": "https://yamac33.github.io/LearningTrajectory/awscp/posts/2026-02-02-awscp-aws-cloudformation-overview/"
       },
       {
         "text": "AWS Trusted Advisor",
@@ -28,7 +28,9 @@
         "link": "https://yamac33.github.io/LearningTrajectory/awscp/posts/2026-02-10-awscp-aws-cost-optimization-tools/"
       }
     ],
-    "correct_indices": [0]
+    "correct_indices": [
+      0
+    ]
   },
   {
     "id": "aws-launch-wizard-purpose",
@@ -38,13 +40,13 @@
         "text": "AWS上でシステム監視を行うサービス",
         "overview": "誤り：システム監視はCloudWatchが担当。",
         "detail": "AWSのシステム監視は主にAmazon CloudWatchによって行われます。Launch Wizardは監視サービスではありません。",
-        "link": "https://yamac33.github.io/LearningTrajectory/awscp/posts/2026-02-10-awscp-aws-cloudwatch-basic/"
+        "link": "https://yamac33.github.io/LearningTrajectory/awscp/posts/2026-02-01-awscp-aws-cloudwatch-basics/"
       },
       {
         "text": "クラウド環境でアプリケーションを自動スケーリングできる",
         "overview": "誤り：自動スケーリングはAuto Scalingなどが担当。",
         "detail": "アプリケーションの自動スケーリングはAuto ScalingやElastic Beanstalkが提供。Launch Wizardは初期セットアップ支援です。",
-        "link": "https://yamac33.github.io/LearningTrajectory/awscp/posts/2026-02-10-awscp-aws-auto-scaling-overview/"
+        "link": "https://yamac33.github.io/LearningTrajectory/awscp/posts/2026-01-31-awscp-aws-auto-scaling-introduction/"
       },
       {
         "text": "特定のアプリケーションのワークロードをAWS上に迅速にデプロイできる",
@@ -56,9 +58,11 @@
         "text": "AWS環境でリソースの請求管理を行える",
         "overview": "誤り：請求管理はBilling and Cost Managementの役割。",
         "detail": "AWSの請求管理とコスト分析はBilling and Cost Managementサービスが担当しており、Launch Wizardは関与しません。",
-        "link": "https://yamac33.github.io/LearningTrajectory/awscp/posts/2026-02-10-awscp-aws-billing-and-cost-management/"
+        "link": "https://yamac33.github.io/LearningTrajectory/awscp/posts/2026-02-01-awscp-aws-cost-management-basics/"
       }
     ],
-    "correct_indices": [2]
+    "correct_indices": [
+      2
+    ]
   }
 ]
