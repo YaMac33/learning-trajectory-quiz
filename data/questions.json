@@ -1,22 +1,33 @@
 [
   {
-    "id": "aws-organizations-account-creation",
-    "question": "従業員数が1000人を超えた企業で、複数のAWSアカウントをまとめて作成・管理するために最適なサービスはどれですか。",
+    "id": "aws-organizations-account-create",
+    "question": "企業内で多数のAWSアカウントを一元的に作成・管理したい場合、最適なサービスはどれですか？",
     "choices": [
       {
-        "text": "IAMグループ",
+        "text": "IAM グループ",
         "overview": "IAMユーザーをまとめる仕組み",
-        "detail": "IAMはユーザーと権限管理が目的で、アカウント作成はできません。",
+        "detail": "IAMグループはユーザー権限の管理には使えますが、AWSアカウント自体の作成や統合管理はできません。",
         "link": ""
       },
       {
         "text": "AWS Organizations",
-        "overview": "複数アカウントを一元管理できる",
-        "detail": "アカウント作成・管理・ポリシー適用を自動化できます。",
+        "overview": "複数AWSアカウントを統合管理できる",
+        "detail": "AWS Organizationsを使うことで、アカウント作成・請求統合・ポリシー適用などを一元管理できます。",
+        "link": "https://yamac33.github.io/LearningTrajectory/awscp/posts/2026-02-02-awscp-aws-organizations-knowledge/"
+      },
+      {
+        "text": "AWS CLI",
+        "overview": "AWS操作用のコマンドラインツール",
+        "detail": "CLIは操作手段であり、アカウント管理の仕組みそのものではありません。",
+        "link": "https://yamac33.github.io/LearningTrajectory/awscp/posts/2026-02-03-awscp-ci-cd-iac-cli/"
+      },
+      {
+        "text": "Amazon EC2",
+        "overview": "仮想サーバーサービス",
+        "detail": "EC2はコンピューティングサービスであり、アカウント管理とは無関係です。",
         "link": ""
       }
     ],
-    "correct_indices": [1],
-    "tags": ["aws-organizations", "account"]
+    "correct_indices": [1]
   }
 ]
