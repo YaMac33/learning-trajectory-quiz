@@ -54,3 +54,45 @@ body {
   width: 100%;
   font-size: 1rem;
 }
+
+/* --- Explanation toggle --- */
+.choice-explain {
+  margin-top: 8px;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fafafa;
+}
+
+.choice-explain .overview {
+  white-space: pre-wrap;
+}
+
+.choice-explain .detail {
+  margin-top: 8px;
+  white-space: pre-wrap;
+}
+
+.choice-explain .detail[hidden] {
+  display: none;
+}
+
+.choice-explain .explain-actions {
+  margin-top: 8px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.choice-explain .toggle-detail {
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background: #fff;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+.choice-explain .link {
+  margin-left: auto;
+  font-size: 0.95em;
+}
