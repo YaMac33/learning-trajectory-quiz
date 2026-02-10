@@ -130,5 +130,39 @@
     "correct_indices": [
       2
     ]
+  },
+  {
+    "id": "aws-multiaz-default-services",
+    "question": "サービスのデフォルト設定において、マルチAZ構成を実現可能なAWSのサービスを2つ選択してください。",
+    "choices": [
+      {
+        "text": "DynamoDB",
+        "overview": "正解：デフォルトでマルチAZ構成が有効。",
+        "detail": "DynamoDBはフルマネージド型のNoSQLデータベースで、複数のAZに自動でデータを分散配置します。",
+        "link": ""
+      },
+      {
+        "text": "RDS",
+        "overview": "不正解：デフォルトではマルチAZ構成が有効ではない。",
+        "detail": "RDSはマルチAZを選択的に設定可能だが、デフォルトでは単一AZの構成となっています。",
+        "link": ""
+      },
+      {
+        "text": "Aurora",
+        "overview": "不正解：デフォルトでマルチAZ構成ではない。",
+        "detail": "Auroraは高可用性を備えるが、マルチAZのデフォルト有効化はされていません。",
+        "link": ""
+      },
+      {
+        "text": "S3",
+        "overview": "正解：デフォルトでマルチAZ構成が有効。",
+        "detail": "S3はデータを複数のAZに自動的に分散して保管し、高耐久性を実現しています。",
+        "link": ""
+      }
+    ],
+    "correct_indices": [
+      0,
+      3
+    ]
   }
 ]
