@@ -1,98 +1,66 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #f7f7f7;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", sans-serif;
 }
 
 #app {
-  max-width: 720px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 16px;
 }
 
-#question-text {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 16px;
+.qid {
+  opacity: 0.6;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.question {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 8px 0 16px;
+  white-space: pre-wrap;
 }
 
 .choice {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 12px;
-  margin-bottom: 10px;
-  cursor: pointer;
-}
-
-.choice:hover {
-  background: #f0f0f0;
-}
-
-.choice.correct {
-  background: #d4edda;
-  border-color: #28a745;
-}
-
-.choice.wrong {
-  background: #f8d7da;
-  border-color: #dc3545;
-}
-
-#result-area {
-  margin-top: 16px;
-  font-weight: bold;
-}
-
-.hidden {
-  display: none;
-}
-
-#next-btn {
-  margin-top: 20px;
-  padding: 12px;
-  width: 100%;
-  font-size: 1rem;
-}
-
-/* --- Explanation toggle --- */
-.choice-explain {
-  margin-top: 8px;
-  padding: 10px 12px;
   border: 1px solid #ddd;
   border-radius: 10px;
-  background: #fafafa;
+  padding: 12px;
+  margin: 10px 0;
+}
+
+.choice-text {
+  font-weight: 600;
+  margin-bottom: 6px;
 }
 
 .choice-explain .overview {
-  white-space: pre-wrap;
+  opacity: 0.9;
 }
 
 .choice-explain .detail {
   margin-top: 8px;
+  opacity: 0.9;
   white-space: pre-wrap;
 }
 
-.choice-explain .detail[hidden] {
-  display: none;
-}
-
-.choice-explain .explain-actions {
-  margin-top: 8px;
+.explain-actions {
   display: flex;
   gap: 10px;
   align-items: center;
+  margin-top: 8px;
 }
 
-.choice-explain .toggle-detail {
-  cursor: pointer;
-  border: 1px solid #ccc;
-  background: #fff;
-  padding: 6px 10px;
-  border-radius: 8px;
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
 }
 
-.choice-explain .link {
-  margin-left: auto;
-  font-size: 0.95em;
+.result {
+  margin-top: 12px;
+  font-weight: 700;
 }
+
+.result.ok { color: #137333; }
+.result.ng { color: #b00020; }
