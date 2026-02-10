@@ -1,34 +1,35 @@
 [
   {
-    "id": "aws-organizations-account-create",
-    "question": "企業内で多数のAWSアカウントを一元的に作成・管理したい場合、最適なサービスはどれですか？",
+    "id": "aws-launch-wizard-purpose",
+    "question": "AWS Launch Wizard の用途として、正しい内容を1つ選択してください。",
     "choices": [
       {
-        "text": "IAM グループ",
-        "overview": "IAMユーザーをまとめる仕組み",
-        "detail": "IAMグループはユーザー権限の管理には使えますが、AWSアカウント自体の作成や統合管理はできません。",
+        "text": "AWS上でシステム監視を行うサービス",
+        "overview": "AWSのシステム監視サービスではない。",
+        "detail": "AWSのシステム監視はCloudWatchなどのサービスが担当しており、AWS Launch Wizardは監視サービスではない。",
         "link": ""
       },
       {
-        "text": "AWS Organizations",
-        "overview": "複数AWSアカウントを統合管理できる",
-        "detail": "AWS Organizationsを使うことで、アカウント作成・請求統合・ポリシー適用などを一元管理できます。",
-        "link": "https://yamac33.github.io/LearningTrajectory/awscp/posts/2026-02-02-awscp-aws-organizations-knowledge/"
+        "text": "クラウド環境でアプリケーションを自動スケーリングできる",
+        "overview": "自動スケーリング機能は持たない。",
+        "detail": "自動スケーリングはAuto ScalingやElastic Beanstalkで実現可能だが、Launch Wizardはアプリケーションの初期セットアップを支援するサービスであり、スケーリング機能はない。",
+        "link": ""
       },
       {
-        "text": "AWS CLI",
-        "overview": "AWS操作用のコマンドラインツール",
-        "detail": "CLIは操作手段であり、アカウント管理の仕組みそのものではありません。",
-        "link": "https://yamac33.github.io/LearningTrajectory/awscp/posts/2026-02-03-awscp-ci-cd-iac-cli/"
+        "text": "特定のアプリケーションのワークロードをAWS上に迅速にデプロイできる",
+        "overview": "AWS Launch Wizardの主要な機能である。",
+        "detail": "Microsoft SQL ServerやSAPなど特定アプリケーションのワークロードを、CPUやメモリ、ストレージなどの要件に合わせ最適なAWSリソースで迅速にプロビジョニング可能。コスト推定やベストプラクティスの実装も支援。",
+        "link": ""
       },
       {
-        "text": "Amazon EC2",
-        "overview": "仮想サーバーサービス",
-        "detail": "EC2はコンピューティングサービスであり、アカウント管理とは無関係です。",
+        "text": "AWS環境でリソースの請求管理を行える",
+        "overview": "請求管理機能ではない。",
+        "detail": "リソースの請求管理はAWS Billing and Cost Managementの機能であり、Launch Wizardの機能ではない。",
         "link": ""
       }
     ],
-    "correct_indices": [1]
+    "correct_indices": [
+      2
+    ]
   }
 ]
-
