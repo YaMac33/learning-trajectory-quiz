@@ -251,7 +251,7 @@
         "text": "5Gネットワークを利用することで、従来のリージョンと比べてより低遅延でアクセスが出来るようになる",
         "overview": "正解：5Gネットワークの近接配置により超低遅延を実現。",
         "detail": "AWS Wavelength Zonesは5GネットワークのエッジにAWSリソースを配置し、通信事業者と連携して超低遅延でアクセス可能な環境を提供します。",
-        "link": "https://yamac33.github.io/LearningTrajectory/awscp/posts/2026-02-03-awscp-aws-wavelength-explanation/"
+        "link": ""
       },
       {
         "text": "長期的なデータをアーカイブするためにコールドストレージを利用できる",
@@ -362,6 +362,39 @@
     ],
     "correct_indices": [
       2
+    ]
+  },
+  {
+    "id": "choose-aws-service-for-global-web-conten",
+    "question": "次のサービスの中で、グローバルで利用されるウェブアプリのコンテンツを最適に提供するために利用するべきサービスを1つ選択してください。",
+    "choices": [
+      {
+        "text": "CloudFormation",
+        "overview": "誤りです。CloudFormationはインフラ構築自動化のサービスです。",
+        "detail": "CloudFormationはAWSリソースをテンプレートで自動的に構築・管理するサービスであり、コンテンツ配信には使いません。",
+        "link": ""
+      },
+      {
+        "text": "CloudDelivery",
+        "overview": "誤りです。正しいAWSサービス名ではありません。",
+        "detail": "CloudDeliveryは存在しないサービス名であり、AWSの正式サービス名ではありません。",
+        "link": ""
+      },
+      {
+        "text": "ElasticCache",
+        "overview": "誤りです。ElasticCacheはインメモリキャッシュのサービスです。",
+        "detail": "ElasticCacheはRedisやMemcached互換のインメモリキャッシュサービスであり、コンテンツ配信のためのCDNではありません。",
+        "link": ""
+      },
+      {
+        "text": "CloudFront",
+        "overview": "正解です。CloudFrontは高速コンテンツ配信ネットワーク（CDN）サービスです。",
+        "detail": "CloudFrontはデータ、動画、アプリケーション、APIを低レイテンシーで高速に世界中の視聴者へ配信可能なCDNサービスで、グローバル配信に最適です。",
+        "link": ""
+      }
+    ],
+    "correct_indices": [
+      3
     ]
   }
 ]
