@@ -1,87 +1,71 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
   <title>Learning Trajectory Quiz</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <!-- Google Fonts: Inter & Noto Sans JP -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-  
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-  <!-- 背景装飾用の要素 -->
-  <div class="bg-decoration"></div>
+  <header class="topbar">
+    <h1>Learning Trajectory Quiz</h1>
+    <button id="backBtn" type="button" class="btn-back" hidden>← 一覧へ戻る</button>
+  </header>
 
   <main id="app">
     <div id="status"></div>
 
-    <!-- 一覧ビュー -->
-    <section id="view-list" class="view-section">
-      <header class="list-header">
-        <h1>Select a Question</h1>
-        <p class="subtitle">解きたい問題を選択してください</p>
-      </header>
-      <div id="list" class="question-grid"></div>
+    <!-- List View -->
+    <section id="view-list">
+      <h2>問題一覧</h2>
+      <p class="hint">クリックするとその問題へ移動します</p>
+      <div id="quizList" class="quiz-list"></div>
     </section>
 
-    <!-- クイズビュー -->
-    <section id="view-quiz" class="view-section" hidden>
-      <button id="backBtn" type="button" class="btn-back">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        Back to List
-      </button>
-
-      <div class="quiz-card">
-        <div class="question-header">
-          <span id="qid" class="qid-badge"></span>
-          <h2 id="question" class="question-text"></h2>
-        </div>
-
-        <div id="choices" class="choices-container"></div>
-
-        <div class="actions">
-          <button id="submitBtn" type="button" class="btn-primary">回答する</button>
-        </div>
-
-        <div id="result" class="result-box"></div>
+    <!-- Quiz View -->
+    <section id="view-quiz" hidden>
+      <div class="question-header">
+        <div id="qid" class="qid"></div>
+        <div id="question" class="question"></div>
       </div>
+
+      <div id="choices" class="choices"></div>
 
       <!-- 選択肢テンプレート -->
       <template id="choice-template">
-        <div class="choice-item">
-          <label class="choice-label">
-            <div class="checkbox-wrapper">
-              <input type="checkbox" class="choice-input" />
-              <div class="checkbox-custom">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              </div>
-            </div>
+        <div class="choice">
+          <label class="choice-main">
+            <input type="checkbox" class="choice-input" />
             <span class="choice-text"></span>
           </label>
 
-          <div class="choice-feedback">
+          <div class="choice-info">
             <div class="choice-overview" hidden></div>
-            
-            <button type="button" class="choice-toggle-detail">
-              <span>詳細解説</span>
-              <svg class="icon-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+
+            <!-- 1回で overview + detail をまとめて開閉する -->
+            <button type="button" class="choice-toggle-detail" disabled>
+              <span>解説（回答後）</span>
+              <svg class="chev" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
             </button>
-            
+
             <div class="choice-detail" hidden>
               <div class="choice-detail-content"></div>
-              <a class="choice-link" target="_blank" rel="noopener noreferrer">
-                関連ドキュメントを開く
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-              </a>
+              <a href="" class="choice-link" target="_blank" rel="noopener noreferrer">参考リンク</a>
             </div>
           </div>
         </div>
       </template>
 
+      <div class="actions">
+        <button id="prevBtn" type="button" class="btn-secondary">前の問題へ</button>
+        <button id="submitBtn" type="button" class="btn-primary">回答する</button>
+        <button id="nextBtn" type="button" class="btn-secondary">次の問題へ</button>
+      </div>
+
+      <div id="result" class="result"></div>
     </section>
   </main>
 
