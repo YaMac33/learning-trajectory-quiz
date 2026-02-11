@@ -2,350 +2,494 @@
 
 /* --- Variables --- */
 :root {
-  /* Palette */
-  --color-bg: #f8fafc;
-  --color-surface: #ffffff;
-  --color-text-main: #1e293b;
-  --color-text-sub: #64748b;
+  /* Colors */
+  --c-primary: #6366f1;       /* Indigo 500 */
+  --c-primary-hover: #4f46e5; /* Indigo 600 */
+  --c-secondary: #0f172a;     /* Slate 900 */
   
-  /* Brand */
-  --color-primary: #4f46e5;       /* Indigo 600 */
-  --color-primary-hover: #4338ca; /* Indigo 700 */
+  --c-bg: #f8fafc;
+  --c-surface: #ffffff;
+  --c-surface-hover: #f1f5f9;
   
-  /* Status */
-  --color-success: #10b981;       /* Emerald 500 */
-  --color-success-bg: #ecfdf5;    /* Emerald 50 */
-  --color-success-border: #34d399;
+  --c-text-main: #1e293b;
+  --c-text-sub: #64748b;
   
-  --color-error: #f43f5e;         /* Rose 500 */
-  --color-error-bg: #fff1f2;      /* Rose 50 */
-  --color-error-border: #fb7185;
+  --c-success: #10b981;
+  --c-success-light: #d1fae5;
+  --c-error: #ef4444;
+  --c-error-light: #fee2e2;
 
-  /* UI Components */
+  /* UI */
+  --radius-lg: 16px;
   --radius-md: 12px;
   --radius-sm: 8px;
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --transition: all 0.2s ease-in-out;
+  
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+
+  --font-main: 'Inter', 'Noto Sans JP', sans-serif;
+  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* --- Base --- */
 body {
   margin: 0;
-  font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-  background-color: var(--color-bg);
-  color: var(--color-text-main);
+  font-family: var(--font-main);
+  background-color: var(--c-bg);
+  color: var(--c-text-main);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Decorative Background */
+.bg-decoration {
+  position: fixed;
+  top: -50vh;
+  left: -50vw;
+  width: 200vw;
+  height: 200vh;
+  background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 50%);
+  z-index: -1;
+  pointer-events: none;
 }
 
 main#app {
-  max-width: 720px;
-  margin: 40px auto;
-  padding: 0 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
 }
 
-/* --- Header & Question --- */
-#status {
-  font-size: 0.875rem;
-  color: var(--color-text-sub);
-  min-height: 1.5rem;
+/* Sections & Animation */
+.view-section {
+  animation: fadeUp 0.4s ease-out;
+}
+
+.view-section[hidden] {
+  display: none;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Header (List View) --- */
+.list-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.list-header h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0;
+  background: linear-gradient(135deg, var(--c-primary), #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  color: var(--c-text-sub);
+  margin-top: 0.5rem;
+}
+
+/* --- Question Grid (List View) --- */
+.question-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: var(--c-surface);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  border: 1px solid rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(99, 102, 241, 0.2);
+}
+
+.card div {
+  font-weight: 600;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--c-text-main);
+}
+
+.card button {
+  align-self: flex-start;
+  background-color: var(--c-surface-hover);
+  color: var(--c-primary);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.card button:hover {
+  background-color: var(--c-primary);
+  color: white;
+}
+
+/* --- Quiz View Components --- */
+
+/* Back Button */
+.btn-back {
+  background: transparent;
+  border: none;
+  color: var(--c-text-sub);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 0.5rem 0;
   margin-bottom: 1rem;
+  transition: var(--transition);
 }
 
+.btn-back:hover {
+  color: var(--c-primary);
+  transform: translateX(-4px);
+}
+
+/* Quiz Card Container */
+.quiz-card {
+  background: var(--c-surface);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-xl);
+  border: 1px solid rgba(255,255,255,0.5);
+}
+
+/* Question Header */
 .question-header {
   margin-bottom: 2rem;
 }
 
-.qid {
+.qid-badge {
+  display: inline-block;
+  background-color: #e0e7ff;
+  color: var(--c-primary);
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.05em;
-  color: var(--color-primary);
-  background: #e0e7ff;
-  display: inline-block;
-  padding: 2px 8px;
+  padding: 4px 10px;
   border-radius: 999px;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
-.question {
-  font-size: 1.5rem;
+.question-text {
+  font-size: 1.4rem;
   font-weight: 700;
-  color: var(--color-text-main);
+  color: var(--c-secondary);
+  margin: 0;
   line-height: 1.4;
 }
 
-/* --- Choices --- */
-.choices {
+/* Choices List */
+.choices-container {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.choice {
-  background-color: var(--color-surface);
-  border: 2px solid transparent; /* 境界線用にスペース確保 */
+.choice-item {
+  border: 2px solid #e2e8f0;
   border-radius: var(--radius-md);
-  padding: 1.25rem;
-  box-shadow: var(--shadow-sm);
   transition: var(--transition);
-  position: relative;
+  background-color: var(--c-surface);
   overflow: hidden;
 }
 
-.choice:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+.choice-item:hover {
+  border-color: #cbd5e1;
 }
 
-/* Choice Main Layout */
-.choice-main {
+/* Choice Label (Input Area) */
+.choice-label {
   display: flex;
   align-items: flex-start;
-  gap: 1rem;
+  padding: 1.25rem;
   cursor: pointer;
   width: 100%;
+  box-sizing: border-box;
+  gap: 1rem;
+}
+
+/* Custom Checkbox */
+.checkbox-wrapper {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .choice-input {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 1.25rem;
-  height: 1.25rem;
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkbox-custom {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  background-color: #fff;
   border: 2px solid #cbd5e1;
-  border-radius: 4px;
-  margin-top: 0.25rem;
-  flex-shrink: 0;
-  display: grid;
-  place-content: center;
-  transition: 0.2s;
+  border-radius: 6px;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
 }
 
-.choice-input::before {
-  content: "";
-  width: 0.65rem;
-  height: 0.65rem;
-  background-color: white;
+.checkbox-custom svg {
+  width: 16px;
+  height: 16px;
   transform: scale(0);
-  transition: 0.2s;
-  border-radius: 2px;
+  transition: transform 0.2s cubic-bezier(0.5, 1.6, 0.4, 0.7);
 }
 
-.choice-input:checked {
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
+/* Checked State */
+.choice-item:has(.choice-input:checked) {
+  border-color: var(--c-primary);
+  background-color: #eef2ff;
 }
 
-.choice-input:checked::before {
+.choice-input:checked ~ .checkbox-custom {
+  background-color: var(--c-primary);
+  border-color: var(--c-primary);
+}
+
+.choice-input:checked ~ .checkbox-custom svg {
   transform: scale(1);
 }
 
 .choice-text {
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1.05rem;
-  flex: 1;
+  color: var(--c-secondary);
 }
 
-/* Choice Info Area */
-.choice-info {
-  margin-top: 0.75rem;
-  padding-left: 2.25rem; /* チェックボックスの幅分インデント */
-  color: var(--color-text-sub);
+/* Choice Feedback (Overview/Detail) */
+.choice-feedback {
+  border-top: 1px solid rgba(0,0,0,0.05);
+  background-color: #f8fafc;
 }
 
-.choice-overview {
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
-}
-
-.choice-toggle-detail {
-  background: none;
-  border: none;
-  color: var(--color-primary);
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 0;
-  text-decoration: underline;
-  text-decoration-color: transparent;
-  transition: var(--transition);
-}
-
-.choice-toggle-detail:hover {
-  text-decoration-color: var(--color-primary);
-}
-
-/* Detail Area */
-.choice-detail {
-  margin-top: 0.75rem;
-  background-color: #f1f5f9;
-  padding: 1rem;
-  border-radius: var(--radius-sm);
-  font-size: 0.9rem;
-  animation: fadeIn 0.3s ease;
-}
-
-.choice-detail[hidden] {
+/* Feedback が空のときは非表示にするためのCSSハック (JSで制御するが念のため) */
+.choice-feedback:empty {
   display: none;
 }
 
-.choice-link {
-  display: inline-block;
-  margin-top: 0.5rem;
+/* 常に表示される要素がない場合はpadding消す */
+.choice-feedback:not(:has(div:not([hidden]))):not(:has(button)) {
+  display: none;
+}
+
+.choice-overview {
+  padding: 1rem 1.25rem;
+  font-size: 0.95rem;
+  color: var(--c-text-main);
+  border-left: 4px solid transparent;
+  animation: slideDown 0.3s ease;
+}
+
+.choice-toggle-detail {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  padding: 0.75rem 1.25rem;
+  color: var(--c-primary);
   font-size: 0.85rem;
-  color: var(--color-primary);
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.2s;
+}
+
+.choice-toggle-detail:hover {
+  background-color: rgba(99, 102, 241, 0.05);
+}
+
+.choice-toggle-detail .icon-chevron {
+  transition: transform 0.3s ease;
+}
+
+/* Detail Expanded State */
+.choice-detail {
+  padding: 1rem 1.25rem;
+  background-color: #fff;
+  border-top: 1px dashed #cbd5e1;
+  font-size: 0.9rem;
+  color: var(--c-text-sub);
+  animation: fadeIn 0.3s ease;
+}
+
+.choice-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 0.75rem;
+  color: var(--c-primary);
   text-decoration: none;
-  border-bottom: 1px solid transparent;
+  font-weight: 600;
+  font-size: 0.85rem;
 }
 
 .choice-link:hover {
-  border-bottom-color: var(--color-primary);
+  text-decoration: underline;
 }
 
-/* --- Judgement Styling (Important) --- */
+/* --- Judgement States --- */
 
-/* 正解のスタイル */
-.choice.correct {
-  border-color: var(--color-success-border);
-  background-color: var(--color-success-bg);
+/* Correct Choice */
+.choice-item.correct {
+  border-color: var(--c-success);
+  background-color: #f0fdf4; /* Very light green */
 }
-.choice.correct .choice-input {
-  background-color: var(--color-success);
-  border-color: var(--color-success);
+.choice-item.correct .checkbox-custom {
+  background-color: var(--c-success);
+  border-color: var(--c-success);
 }
-
-/* 不正解のスタイル */
-.choice.wrong {
-  border-color: var(--color-error-border);
-  background-color: var(--color-error-bg);
-}
-.choice.wrong .choice-input {
-  background-color: var(--color-error);
-  border-color: var(--color-error);
+.choice-item.correct .choice-overview {
+  border-left-color: var(--c-success);
+  color: #065f46;
 }
 
-/* 正解だが未選択のスタイル */
-.choice.unselected {
-  border-color: var(--color-success-border);
+/* User Wrong Selection */
+.choice-item.wrong {
+  border-color: var(--c-error);
+  background-color: #fef2f2; /* Very light red */
+}
+.choice-item.wrong .checkbox-custom {
+  background-color: var(--c-error);
+  border-color: var(--c-error);
+}
+.choice-item.wrong .choice-custom svg {
+  /* Consider changing icon to X via CSS or JS, but color is enough context */
+}
+
+/* Correct but Unselected */
+.choice-item.unselected {
+  border-color: var(--c-success);
   border-style: dashed;
   opacity: 0.8;
 }
-.choice.unselected::after {
-  content: "（正解）";
+.choice-item.unselected .choice-label::after {
+  content: "Correct Answer";
+  margin-left: auto;
   font-size: 0.75rem;
-  color: var(--color-success);
-  font-weight: bold;
-  position: absolute;
-  top: 10px;
-  right: 10px;
+  font-weight: 700;
+  color: var(--c-success);
+  text-transform: uppercase;
 }
 
 /* --- Actions --- */
 .actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
   margin-top: 2rem;
+  display: flex;
+  justify-content: flex-end;
 }
 
-.actions button {
-  padding: 1rem;
-  font-size: 1rem;
-  font-weight: 700;
+.btn-primary {
+  background-color: var(--c-primary);
+  color: white;
   border: none;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
   border-radius: var(--radius-sm);
   cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.4);
   transition: var(--transition);
 }
 
-#submitBtn {
-  background-color: var(--color-primary);
-  color: white;
-  box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.4);
-}
-
-#submitBtn:hover:not(:disabled) {
-  background-color: var(--color-primary-hover);
+.btn-primary:hover {
+  background-color: var(--c-primary-hover);
   transform: translateY(-2px);
+  box-shadow: 0 6px 10px -1px rgba(79, 70, 229, 0.5);
 }
 
-#submitBtn:disabled {
-  background-color: #cbd5e1;
-  cursor: not-allowed;
-  box-shadow: none;
-  transform: none;
+.btn-primary:active {
+  transform: translateY(0);
 }
 
-#nextBtn {
-  background-color: var(--color-surface);
-  color: var(--color-text-main);
-  border: 1px solid #e2e8f0;
-}
-
-#nextBtn:hover:not(:disabled) {
-  background-color: #f1f5f9;
-  border-color: #cbd5e1;
-}
-
-#nextBtn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* --- Result --- */
-.result {
+/* --- Result Box --- */
+.result-box {
   margin-top: 1.5rem;
   padding: 1rem;
   border-radius: var(--radius-sm);
   text-align: center;
   font-weight: 700;
   font-size: 1.1rem;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: all 0.4s ease;
+  display: none; /* JS will toggle textContent which makes it visible if not empty logic used */
 }
 
-.result-correct {
-  opacity: 1;
-  transform: translateY(0);
-  color: var(--color-success);
-  background-color: var(--color-success-bg);
-  border: 1px solid var(--color-success-border);
+.result-box:not(:empty) {
+  display: block;
+  animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.result-wrong {
-  opacity: 1;
-  transform: translateY(0);
-  color: var(--color-error);
-  background-color: var(--color-error-bg);
-  border: 1px solid var(--color-error-border);
+.result-box.ok {
+  background-color: var(--c-success-light);
+  color: #064e3b;
+  border: 1px solid var(--c-success);
 }
 
-/* --- Animation --- */
-@keyframes fadeIn {
+.result-box.ng {
+  background-color: var(--c-error-light);
+  color: #7f1d1d;
+  border: 1px solid var(--c-error);
+}
+
+/* Animations */
+@keyframes slideDown {
   from { opacity: 0; transform: translateY(-5px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- Mobile Responsive --- */
-@media (max-width: 600px) {
-  .question {
-    font-size: 1.25rem;
+@keyframes popIn {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@media (max-width: 640px) {
+  .quiz-card {
+    padding: 1.5rem;
   }
-  
-  .actions {
-    grid-template-columns: 1fr; /* スタックさせる */
-  }
-  
-  .choice {
-    padding: 1rem;
-  }
-  
-  .choice-info {
-    padding-left: 0;
-    margin-top: 1rem;
-    border-top: 1px solid #f1f5f9;
-    padding-top: 0.5rem;
+  .question-text {
+    font-size: 1.2rem;
   }
 }
