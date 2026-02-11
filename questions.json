@@ -251,7 +251,7 @@
         "text": "5Gネットワークを利用することで、従来のリージョンと比べてより低遅延でアクセスが出来るようになる",
         "overview": "正解：5Gネットワークの近接配置により超低遅延を実現。",
         "detail": "AWS Wavelength Zonesは5GネットワークのエッジにAWSリソースを配置し、通信事業者と連携して超低遅延でアクセス可能な環境を提供します。",
-        "link": ""
+        "link": "https://yamac33.github.io/LearningTrajectory/awscp/posts/2026-02-03-awscp-aws-wavelength-explanation/"
       },
       {
         "text": "長期的なデータをアーカイブするためにコールドストレージを利用できる",
@@ -390,6 +390,39 @@
         "text": "CloudFront",
         "overview": "正解です。CloudFrontは高速コンテンツ配信ネットワーク（CDN）サービスです。",
         "detail": "CloudFrontはデータ、動画、アプリケーション、APIを低レイテンシーで高速に世界中の視聴者へ配信可能なCDNサービスで、グローバル配信に最適です。",
+        "link": ""
+      }
+    ],
+    "correct_indices": [
+      3
+    ]
+  },
+  {
+    "id": "api-gateway-edge-optimization",
+    "question": "企業Aが運営するアプリケーションでは、利用ユーザーはグローバルに広く点在しています。APIリクエストとレスポンスのレイテンシーを短縮するために、API Gateway と連携させるべきサービスを1つ選択してください。",
+    "choices": [
+      {
+        "text": "AWS Global Accelerator",
+        "overview": "不正解。API Gatewayと連携はしない。",
+        "detail": "AWS Global Acceleratorはアプリケーションの可用性やパフォーマンスを向上させるサービスですが、API Gatewayとの連携は想定されていません。",
+        "link": ""
+      },
+      {
+        "text": "ElastiCache",
+        "overview": "不正解。グローバルなレスポンス短縮のためのサービスではない。",
+        "detail": "ElastiCacheはインメモリキャッシュのサービスであり、グローバルなレイテンシ短縮やAPI Gatewayとの連携には適しません。",
+        "link": ""
+      },
+      {
+        "text": "Lambda@Edge",
+        "overview": "不正解。API Gatewayとは併用不可。",
+        "detail": "Lambda@EdgeはCloudFrontの機能でエンドユーザーに近い場所でコードを実行可能ですが、API Gatewayと直接連携して利用することはできません。",
+        "link": ""
+      },
+      {
+        "text": "CloudFront",
+        "overview": "正解。API GatewayはCloudFrontの仕組みを利用している。",
+        "detail": "API Gatewayは内部的にCloudFrontを活用し、グローバルに分散したユーザーへのレスポンスの高速化とスケーラビリティを提供します。エッジ最適化APIエンドポイントとして連携が可能です。",
         "link": ""
       }
     ],
