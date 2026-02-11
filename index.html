@@ -2,16 +2,57 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>問題一覧 | Learning Trajectory Quiz</title>
+  <title>Learning Trajectory Quiz</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-  <main>
-    <h1>問題一覧</h1>
-    <div id="list"></div>
+  <main id="app">
+    <div id="status"></div>
+
+    <!-- 一覧ビュー -->
+    <section id="view-list">
+      <h1>問題一覧</h1>
+      <div id="list"></div>
+    </section>
+
+    <!-- クイズビュー -->
+    <section id="view-quiz" hidden>
+      <button id="backBtn">← 一覧に戻る</button>
+
+      <div class="question-header">
+        <div id="qid" class="qid"></div>
+        <div id="question" class="question"></div>
+      </div>
+
+      <div id="choices" class="choices"></div>
+
+      <template id="choice-template">
+        <div class="choice">
+          <label class="choice-main">
+            <input type="checkbox" class="choice-input" />
+            <span class="choice-text"></span>
+          </label>
+
+          <div class="choice-info">
+            <div class="choice-overview" hidden></div>
+            <button type="button" class="choice-toggle-detail">解説を表示</button>
+            <div class="choice-detail" hidden>
+              <div class="choice-detail-content"></div>
+              <a class="choice-link" target="_blank">参考リンク</a>
+            </div>
+          </div>
+        </div>
+      </template>
+
+      <div class="actions">
+        <button id="submitBtn">回答する</button>
+      </div>
+
+      <div id="result" class="result"></div>
+    </section>
   </main>
 
-  <script type="module" src="./list.js"></script>
+  <script type="module" src="./app.js"></script>
 </body>
 </html>
