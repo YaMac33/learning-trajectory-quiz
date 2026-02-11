@@ -230,5 +230,38 @@
     "correct_indices": [
       2
     ]
+  },
+  {
+    "id": "aws-wavelength-zones-characteristics",
+    "question": "次の選択肢の中から、AWS Wavelength Zones の特徴として正しいものを1つ選んでください。",
+    "choices": [
+      {
+        "text": "データセンター内へ仮想プライベートクラウド（VPC）を作成できる",
+        "overview": "誤り：Wavelength ZonesはVPC作成の場所ではない。",
+        "detail": "AWS Wavelength Zonesは5GネットワークのエッジにAWSインフラを配置し、低遅延を実現する仕組みであり、単にVPCを作成する場所ではありません。",
+        "link": ""
+      },
+      {
+        "text": "特定のAWSリージョン内でデータのバックアップとリカバリを行える",
+        "overview": "誤り：Wavelength Zonesはバックアップ・リカバリ機能を提供しない。",
+        "detail": "Wavelength Zonesは主に低遅延処理向けのエッジコンピューティング環境であり、バックアップやリカバリ機能はAWSリージョンのサービスが担当します。",
+        "link": ""
+      },
+      {
+        "text": "5Gネットワークを利用することで、従来のリージョンと比べてより低遅延でアクセスが出来るようになる",
+        "overview": "正解：5Gネットワークの近接配置により超低遅延を実現。",
+        "detail": "AWS Wavelength Zonesは5GネットワークのエッジにAWSリソースを配置し、通信事業者と連携して超低遅延でアクセス可能な環境を提供します。",
+        "link": ""
+      },
+      {
+        "text": "長期的なデータをアーカイブするためにコールドストレージを利用できる",
+        "overview": "誤り：Wavelength Zonesはアーカイブ用ストレージではない。",
+        "detail": "Wavelength Zonesはエッジコンピューティングや低遅延処理に特化しており、長期アーカイブ用のコールドストレージ機能はAWSの別サービスが提供しています。",
+        "link": ""
+      }
+    ],
+    "correct_indices": [
+      2
+    ]
   }
 ]
