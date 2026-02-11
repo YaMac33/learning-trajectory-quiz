@@ -251,7 +251,7 @@
         "text": "5Gネットワークを利用することで、従来のリージョンと比べてより低遅延でアクセスが出来るようになる",
         "overview": "正解：5Gネットワークの近接配置により超低遅延を実現。",
         "detail": "AWS Wavelength Zonesは5GネットワークのエッジにAWSリソースを配置し、通信事業者と連携して超低遅延でアクセス可能な環境を提供します。",
-        "link": ""
+        "link": "https://yamac33.github.io/LearningTrajectory/awscp/posts/2026-02-03-awscp-aws-wavelength-explanation/"
       },
       {
         "text": "長期的なデータをアーカイブするためにコールドストレージを利用できる",
