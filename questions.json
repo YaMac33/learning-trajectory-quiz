@@ -660,5 +660,39 @@
     "correct_indices": [
       2
     ]
+  },
+  {
+    "id": "aws-infrastructure-automation-01",
+    "question": "企業Eでは、新しいWebアプリケーションをAWS上に展開する計画があります。インフラリソース（EC2、ロードバランサー、データベースなど）の作成や、アプリケーションのデプロイ作業をできる限り自動化し、環境構築の手間を削減したいと考えています。AWSクラウド環境のセットアップやアプリケーションのデプロイを自動化できるサービスを2つ選択してください。",
+    "choices": [
+      {
+        "text": "AWS CloudFormation",
+        "overview": "インフラ自動構築が可能で正解。",
+        "detail": "CloudFormationはインフラ資源の構築をコード化し、自動化できるサービスです。環境構築の手間を削減します。",
+        "link": ""
+      },
+      {
+        "text": "AWS Step Functions",
+        "overview": "ワークフロー自動化用で不正解。",
+        "detail": "Step Functionsは分散アプリケーションのワークフローを自動化しますが、環境構築の自動化には向きません。",
+        "link": ""
+      },
+      {
+        "text": "AWS Elastic Beanstalk",
+        "overview": "アプリケーションデプロイ自動化で正解。",
+        "detail": "Elastic Beanstalkはアプリケーションのデプロイや管理を自動化するプラットフォームサービスです。",
+        "link": ""
+      },
+      {
+        "text": "AWS DataSync",
+        "overview": "データ転送用で不正解。",
+        "detail": "DataSyncはオンプレミスとクラウド間のデータ転送を自動化しますが、インフラ構築やアプリケーションデプロイの自動化サービスではありません。",
+        "link": ""
+      }
+    ],
+    "correct_indices": [
+      0,
+      2
+    ]
   }
 ]
