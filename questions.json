@@ -627,5 +627,38 @@
     "correct_indices": [
       1
     ]
+  },
+  {
+    "id": "aws-cognito-authentication-quiz-01",
+    "question": "オンライン学習サービスを提供する企業が、スマートフォン向けアプリでユーザーごとにログイン機能を実装し、認証後に特定のAWSリソースへアクセスできる仕組みを構築したい。サインアップ・サインイン機能を簡単に実装できるAWSサービスはどれか。",
+    "choices": [
+      {
+        "text": "A. AWS IAM",
+        "overview": "誤り。IAMはユーザー管理だが、アプリのサインイン機能向けではない。",
+        "detail": "AWS IAMはAWSリソースへのアクセス管理に使うが、一般ユーザー向けのサインアップ・サインイン機能は持たない。",
+        "link": ""
+      },
+      {
+        "text": "B. AWS Directory Service",
+        "overview": "誤り。企業内ディレクトリサービスで、アプリ認証向けではない。",
+        "detail": "AWS Directory ServiceはActive Directory互換サービスで、社内ユーザー認証向けであり、一般ユーザー向けアプリ認証には適さない。",
+        "link": ""
+      },
+      {
+        "text": "C. Amazon Cognito",
+        "overview": "正解。ユーザーのサインアップ・サインイン機能を簡単に構築できる。",
+        "detail": "Amazon Cognitoはモバイル・ウェブアプリ向けにユーザー管理・認証機能を提供し、サインアップやサインインが簡単に実装可能。AWSリソースへのアクセス権限付与も連携可能。",
+        "link": ""
+      },
+      {
+        "text": "D. AWS Organizations",
+        "overview": "誤り。複数AWSアカウントの管理サービスであり、ユーザー認証機能はない。",
+        "detail": "AWS Organizationsは複数AWSアカウントの管理とポリシー統制を行うサービスで、アプリユーザー認証機能は持たない。",
+        "link": ""
+      }
+    ],
+    "correct_indices": [
+      2
+    ]
   }
 ]
