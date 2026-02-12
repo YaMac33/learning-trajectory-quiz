@@ -304,5 +304,38 @@
     "correct_indices": [
       2
     ]
+  },
+  {
+    "id": "aws-multi-az-storage-choose-service",
+    "question": "複数のアベイラビリティゾーン（AZ）に自動的にデータが分散され、利用者側で特定のAZを選択せずにリージョン単位でリソースを作成できるAWSのストレージサービスはどれか。",
+    "choices": [
+      {
+        "text": "Amazon EC2",
+        "overview": "誤り。EC2はAZ単位でインスタンスを配置する。",
+        "detail": "Amazon EC2は仮想サーバーであり、インスタンスは特定のAZに配置されるため、AZを選ばずにリージョン単位で自動的に分散されるストレージではない。",
+        "link": ""
+      },
+      {
+        "text": "Amazon EBS",
+        "overview": "誤り。EBSは単一AZ内のストレージ。",
+        "detail": "Amazon EBSはEC2インスタンスに接続するブロックストレージであり、基本的に単一のAZ内に存在し、リージョン全体への自動分散はされない。",
+        "link": ""
+      },
+      {
+        "text": "Amazon S3",
+        "overview": "正解。リージョン単位で自動的に複数AZにデータが分散されるストレージ。",
+        "detail": "Amazon S3はオブジェクトストレージサービスであり、ユーザはAZを指定せずにバケットを作成する。データは自動的に複数のAZに分散され、高い耐障害性を持つ。",
+        "link": ""
+      },
+      {
+        "text": "Amazon RDS（シングルAZ）",
+        "overview": "誤り。シングルAZ配置でAZを指定する必要がある。",
+        "detail": "Amazon RDSのシングルAZ配置は特定のAZにデータベースインスタンスを作成するため、AZの自動分散やリージョン単位での管理は行われない。",
+        "link": ""
+      }
+    ],
+    "correct_indices": [
+      2
+    ]
   }
 ]
