@@ -198,5 +198,45 @@
       1,
       3
     ]
+  },
+  {
+    "id": "aws-multiaz-default-services",
+    "question": "特別な追加設定を行わなくても、AWSの複数のアベイラビリティゾーン（AZ）に自動的にデータを分散し、耐障害性を確保できるサービスを選定したい。デフォルト設定でマルチAZ構成を実現可能なAWSサービスを2つ選択してください。",
+    "choices": [
+      {
+        "text": "Amazon EC2",
+        "overview": "誤り。EC2はデフォルトでマルチAZ配置されない。",
+        "detail": "Amazon EC2はインスタンス単位でアベイラビリティゾーンを指定できるが、マルチAZ配置は手動設定や複数インスタンスを利用する必要がある。",
+        "link": ""
+      },
+      {
+        "text": "Amazon RDS（シングルAZ設定）",
+        "overview": "誤り。シングルAZ設定のRDSはマルチAZ構成でない。",
+        "detail": "RDSはマルチAZ配置可能だが、シングルAZ設定の場合はマルチAZの冗長性が確保されない。",
+        "link": ""
+      },
+      {
+        "text": "Amazon EBS",
+        "overview": "誤り。EBSは単一AZに紐づく。",
+        "detail": "Amazon EBSボリュームは特定のアベイラビリティゾーンに所属し、マルチAZに自動分散されない。",
+        "link": ""
+      },
+      {
+        "text": "Amazon DynamoDB",
+        "overview": "正解。DynamoDBは全リージョンの複数AZにデータを自動複製。",
+        "detail": "DynamoDBはデフォルトでデータを複数のアベイラビリティゾーンに分散・複製し、高い耐障害性を提供する。",
+        "link": ""
+      },
+      {
+        "text": "Amazon S3",
+        "overview": "正解。S3は標準で複数AZにデータを冗長保存。",
+        "detail": "Amazon S3はデフォルトでデータを複数のアベイラビリティゾーンに自動的に分散保存し、高可用性を担保する。",
+        "link": ""
+      }
+    ],
+    "correct_indices": [
+      3,
+      4
+    ]
   }
 ]
