@@ -370,5 +370,38 @@
     "correct_indices": [
       2
     ]
+  },
+  {
+    "id": "aws-event-push-notification-service",
+    "question": "企業Lでは、システム内の各コンポーネント間でイベント発生時に即時通知を行う仕組みを構築したいと考えています。あるサービスで発生したイベントを、複数の受信先（Lambda、HTTPエンドポイント、メールなど）へ自動的に配信する必要があります。メッセージをプッシュ方式で配信できるAWSサービスを1つ選択してください。",
+    "choices": [
+      {
+        "text": "A. Amazon SQS",
+        "overview": "誤り。Amazon SQSはプル型のメッセージキューイングサービスです。",
+        "detail": "Amazon SQSはメッセージをキューに保存し、受信側がポーリングでメッセージを取得するプル型の仕組みで、プッシュ配信は対応していません。",
+        "link": ""
+      },
+      {
+        "text": "B. Amazon SNS",
+        "overview": "正解。Amazon SNSはマルチプロトコルのプッシュ型通知サービスです。",
+        "detail": "Amazon SNSはイベントが発生すると、Lambda関数やHTTPエンドポイント、メールなど複数のサブスクライバーに同時にプッシュ配信が可能です。",
+        "link": ""
+      },
+      {
+        "text": "C. AWS Step Functions",
+        "overview": "誤り。AWS Step Functionsはワークフローオーケストレーションサービスです。",
+        "detail": "AWS Step Functionsは分散アプリケーションのワークフロー管理に用いますが、イベントのプッシュ通知機能はありません。",
+        "link": ""
+      },
+      {
+        "text": "D. Amazon EventBridge（ポーリング専用サービス）",
+        "overview": "誤り。EventBridgeはイベントバスサービスで、プッシュ型だがポーリング専用ではありません。",
+        "detail": "Amazon EventBridgeはイベントをルールに基づいてターゲットにルーティングします。ポーリング専用ではなく、プッシュ配信の仕組みがありますが主にイベントルーティング用です。",
+        "link": ""
+      }
+    ],
+    "correct_indices": [
+      1
+    ]
   }
 ]
