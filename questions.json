@@ -7,19 +7,19 @@
         "text": "端末数が250台程度までの小規模ネットワークにホストアドレスを割り振る。",
         "overview": "誤り。小規模ホスト割当は主にクラスC相当の用途である。",
         "detail": "クラスC相当のアドレスは小規模なホスト数に対する割当を想定していた。クラスDはホスト割当用途ではなく、宛先グループを指定して同報するためのマルチキャスト用途である。",
-        "link": ""
+        "link": "https://docs.google.com/document/d/1E5uOwJt2EDMkdTDJcKZ5OM01THKszYt4YmZY_XbbuEw/edit?tab=t.hw0o58tvdrm8#bookmark=id.e83z85p2gfoa"
       },
       {
         "text": "端末数が65,000台程度の中規模ネットワークにホストアドレスを割り振る。",
         "overview": "誤り。中規模ホスト割当は主にクラスB相当の用途である。",
         "detail": "クラスB相当のアドレスは中規模のホスト数に対する割当を想定していた。一方、クラスDはネットワーク部とホスト部に分けて端末へ割り当てる概念ではなく、マルチキャストのグループIDとして使われる。",
-        "link": ""
+        "link": "https://docs.google.com/document/d/1E5uOwJt2EDMkdTDJcKZ5OM01THKszYt4YmZY_XbbuEw/edit?tab=t.hw0o58tvdrm8#bookmark=id.e83z85p2gfoa"
       },
       {
         "text": "プライベートアドレスとして利用するためにアドレスを割り振る。",
         "overview": "誤り。プライベートアドレスはRFCで定められた範囲でありクラスDではない。",
         "detail": "プライベートIPv4アドレスは10.0.0.0/8、172.16.0.0/12、192.168.0.0/16などの範囲が予約されている。クラスD（224.0.0.0〜239.255.255.255）はマルチキャスト用であり、ホストに割り当てるユニキャストアドレスやプライベートアドレスとしては利用しない。",
-        "link": ""
+        "link": "https://docs.google.com/document/d/1E5uOwJt2EDMkdTDJcKZ5OM01THKszYt4YmZY_XbbuEw/edit?tab=t.hw0o58tvdrm8#bookmark=id.e83z85p2gfoa"
       },
       {
         "text": "特定グループに属する複数ホストへ同時送信するためのマルチキャストアドレスを割り振る。",
