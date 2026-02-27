@@ -89,6 +89,56 @@ body {
 }
 
 /* -------------------- */
+/* Category Section */
+/* -------------------- */
+
+.category-section {
+  margin-bottom: 28px;
+}
+
+.category-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 18px 0 12px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--c-primary);
+  letter-spacing: 0.5px;
+}
+
+/* -------------------- */
+/* Filter UI */
+/* -------------------- */
+
+.filters {
+  margin: 16px 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.filters select {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--c-border);
+  font-size: 13px;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.filters select:focus {
+  outline: none;
+  border-color: var(--c-primary);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+.category-title::before {
+  content: "■ ";
+  color: var(--c-primary);
+  margin-right: 4px;
+}
+
+/* -------------------- */
 /* Question */
 /* -------------------- */
 
@@ -235,3 +285,4 @@ button:disabled {
   border-color: var(--c-warn);
   background: #fffbeb;
 }
+
