@@ -1,11 +1,14 @@
 // app.js
 import { loadQuestions } from "./api.js";
 
-// id取得ヘルパ（このファイル内で $("id") を使っている前提）
+// id取得ヘルパ
 const $ = (id) => document.getElementById(id);
 
 let QUESTIONS = [];
 let CURRENT_ID = null;
+
+// GitHub Pages 配下のベースパス（あなたの既存コードに合わせて固定）
+const BASE_PATH = "/learning-trajectory-quiz/";
 
 // --- Views ---
 function showList() {
@@ -50,32 +53,109 @@ function handleRouting() {
   if (q) renderQuestion(q);
 }
 
+// --- Category helpers ---
+function normalizeCategory(q) {
+  const c = (q.category ?? "").trim();
+  return c ? c : "未分類";
+}
+
+function getCategories(questions) {
+  const set = new Set(questions.map(normalizeCategory));
+  return Array.from(set).sort((a, b) => a.localeCompare(b, "ja"));
+}
+
+function groupByCategory(questions) {
+  const map = new Map();
+  for (const q of questions) {
+    const cat = normalizeCategory(q);
+    if (!map.has(cat)) map.set(cat, []);
+    map.get(cat).push(q);
+  }
+  // 各カテゴリ内の順序を安定させる（id順）
+  for (const arr of map.values()) {
+    arr.sort((a, b) => String(a.id).localeCompare(String(b.id)));
+  }
+  return map;
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, (m) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  }[m]));
+}
+
 // --- List ---
+function setupCategoryFilter() {
+  const sel = $("categoryFilter");
+  if (!sel) return;
+
+  const cats = getCategories(QUESTIONS);
+  sel.innerHTML =
+    `<option value="">すべて</option>` +
+    cats.map((c) => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join("");
+
+  sel.onchange = () => {
+    renderList();
+  };
+}
+
 function renderList() {
   const listEl = $("quizList");
   listEl.innerHTML = "";
 
-  QUESTIONS.forEach((q, idx) => {
-    const card = document.createElement("button");
-    card.type = "button";
-    card.className = "quiz-card";
+  const filterEl = $("categoryFilter");
+  const selected = filterEl ? String(filterEl.value || "") : "";
 
-    const title = document.createElement("div");
-    title.className = "quiz-card-title";
-    title.textContent = `${idx + 1}. ${q.question}`;
+  const filtered = selected
+    ? QUESTIONS.filter((q) => normalizeCategory(q) === selected)
+    : QUESTIONS;
 
-    const meta = document.createElement("div");
-    meta.className = "quiz-card-meta";
-    meta.textContent = `ID: ${q.id}`;
+  const grouped = groupByCategory(filtered);
+  const cats = Array.from(grouped.keys()).sort((a, b) => a.localeCompare(b, "ja"));
 
-    card.appendChild(title);
-    card.appendChild(meta);
+  let globalIndex = 0;
 
-    card.onclick = () => {
-      setRoute(`/learning-trajectory-quiz/quiz?id=${encodeURIComponent(q.id)}`);
-    };
+  cats.forEach((cat) => {
+    const arr = grouped.get(cat) || [];
 
-    listEl.appendChild(card);
+    const sec = document.createElement("section");
+    sec.className = "category-section";
+
+    const h3 = document.createElement("h3");
+    h3.className = "category-title";
+    h3.textContent = `${cat}（${arr.length}）`;
+    sec.appendChild(h3);
+
+    arr.forEach((q) => {
+      globalIndex++;
+
+      const card = document.createElement("button");
+      card.type = "button";
+      card.className = "quiz-card";
+
+      const title = document.createElement("div");
+      title.className = "quiz-card-title";
+      title.textContent = `${globalIndex}. ${q.question}`;
+
+      const meta = document.createElement("div");
+      meta.className = "quiz-card-meta";
+      meta.textContent = `ID: ${q.id}`;
+
+      card.appendChild(title);
+      card.appendChild(meta);
+
+      card.onclick = () => {
+        setRoute(`${BASE_PATH}quiz?id=${encodeURIComponent(q.id)}`);
+      };
+
+      sec.appendChild(card);
+    });
+
+    listEl.appendChild(sec);
   });
 }
 
@@ -100,20 +180,22 @@ function renderQuestion(q) {
   const currentIndex = QUESTIONS.findIndex((x) => x.id === q.id);
   const prevBtn = $("prevBtn");
   const nextBtn = $("nextBtn");
+
   if (prevBtn) {
     prevBtn.disabled = currentIndex <= 0;
     prevBtn.onclick = () => {
       if (currentIndex <= 0) return;
       const prev = QUESTIONS[currentIndex - 1];
-      setRoute(`/learning-trajectory-quiz/quiz?id=${encodeURIComponent(prev.id)}`);
+      setRoute(`${BASE_PATH}quiz?id=${encodeURIComponent(prev.id)}`);
     };
   }
+
   if (nextBtn) {
     nextBtn.disabled = currentIndex >= QUESTIONS.length - 1;
     nextBtn.onclick = () => {
       if (currentIndex >= QUESTIONS.length - 1) return;
       const next = QUESTIONS[currentIndex + 1];
-      setRoute(`/learning-trajectory-quiz/quiz?id=${encodeURIComponent(next.id)}`);
+      setRoute(`${BASE_PATH}quiz?id=${encodeURIComponent(next.id)}`);
     };
   }
 
@@ -123,13 +205,11 @@ function renderQuestion(q) {
   $("result").textContent = "";
 
   const tpl = $("choice-template");
-
   let answered = false;
 
   q.choices.forEach((choice, i) => {
     const node = tpl.content.cloneNode(true);
 
-    const root = node.querySelector(".choice");
     const input = node.querySelector(".choice-input");
     const text = node.querySelector(".choice-text");
     const overview = node.querySelector(".choice-overview");
@@ -243,12 +323,14 @@ async function init() {
     QUESTIONS = await loadQuestions();
     statusEl.textContent = ""; // Clear loading
 
+    setupCategoryFilter();
     renderList();
     handleRouting();
 
-    $("backBtn").onclick = showList;
-    window.onpopstate = handleRouting;
+    // 戻る：一覧（URLも戻す）
+    $("backBtn").onclick = () => setRoute(`${BASE_PATH}`);
 
+    window.onpopstate = handleRouting;
   } catch (err) {
     console.error(err);
     statusEl.textContent = "Failed to load data.";
