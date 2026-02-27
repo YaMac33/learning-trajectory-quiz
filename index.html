@@ -21,14 +21,96 @@
       <h2>問題一覧</h2>
       <p class="hint">クリックするとその問題へ移動します</p>
 
-      <!-- ★カテゴリフィルタ -->
+      <!-- Dashboard -->
+      <section class="dash" aria-label="学習ダッシュボード">
+        <div class="dash-row">
+          <div class="dash-card">
+            <div class="dash-k">総問題数</div>
+            <div class="dash-v" id="dashTotal">-</div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-k">回答済み</div>
+            <div class="dash-v" id="dashAnswered">-</div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-k">正答率（最新）</div>
+            <div class="dash-v" id="dashAccuracyLatest">-</div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-k">正答率（全履歴）</div>
+            <div class="dash-v" id="dashAccuracyAll">-</div>
+          </div>
+        </div>
+
+        <div class="dash-row dash-row-2">
+          <div class="dash-card dash-wide">
+            <div class="dash-k">カテゴリ別（最新の結果で集計）</div>
+            <div class="dash-table-wrap">
+              <table class="dash-table" id="dashCatTable">
+                <thead>
+                  <tr>
+                    <th>カテゴリ</th>
+                    <th>回答</th>
+                    <th>正解</th>
+                    <th>正答率</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="dash-card dash-wide">
+            <div class="dash-k">最近の回答（直近10件）</div>
+            <div class="dash-table-wrap">
+              <table class="dash-table" id="dashRecentTable">
+                <thead>
+                  <tr>
+                    <th>日時</th>
+                    <th>ID</th>
+                    <th>結果</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Filters -->
       <div class="filters">
-        <label>
-          カテゴリ：
-          <select id="categoryFilter">
-            <option value="">すべて</option>
-          </select>
-        </label>
+        <div class="filters-left">
+          <label class="filter-item">
+            検索：
+            <input id="searchInput" type="search" placeholder="問題文 / ID で検索" />
+          </label>
+
+          <label class="filter-item">
+            親カテゴリ：
+            <select id="parentFilter">
+              <option value="">すべて</option>
+            </select>
+          </label>
+
+          <label class="filter-item">
+            子カテゴリ：
+            <select id="subFilter" disabled>
+              <option value="">すべて</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="filters-right">
+          <label class="chip">
+            <input type="checkbox" id="onlyUnanswered" />
+            未回答のみ
+          </label>
+          <label class="chip">
+            <input type="checkbox" id="onlyIncorrect" />
+            不正解のみ
+          </label>
+        </div>
       </div>
 
       <div id="quizList" class="quiz-list"></div>
@@ -39,6 +121,7 @@
       <div class="question-header">
         <div id="qid" class="qid"></div>
         <div id="question" class="question"></div>
+        <div id="qmeta" class="qmeta"></div>
       </div>
 
       <div id="choices" class="choices"></div>
