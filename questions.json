@@ -25,7 +25,7 @@
         "text": "特定グループに属する複数ホストへ同時送信するためのマルチキャストアドレスを割り振る。",
         "overview": "正しい。クラスDはマルチキャスト通信用に予約されたアドレスである。",
         "detail": "クラスDは先頭ビットが1110で、224.0.0.0〜239.255.255.255の範囲がマルチキャスト用に予約されている。ユニキャストのようにホストへ1対1で割り当てるのではなく、宛先グループを表すアドレスとして用い、同一グループに参加する複数ホストに同報する。",
-        "link": "https://docs.google.com/document/d/1E5uOwJt2EDMkdTDJcKZ5OM01THKszYt4YmZY_XbbuEw/edit?tab=t.hw0o58tvdrm8"
+        "link": "https://docs.google.com/document/d/1E5uOwJt2EDMkdTDJcKZ5OM01THKszYt4YmZY_XbbuEw/edit?tab=t.hw0o58tvdrm8#bookmark=id.e83z85p2gfoa"
       }
     ],
     "correct_indices": [
