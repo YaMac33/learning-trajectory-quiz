@@ -7,8 +7,51 @@ const $ = (id) => document.getElementById(id);
 let QUESTIONS = [];
 let CURRENT_ID = null;
 
-// GitHub Pages 配下のベースパス（あなたの既存コードに合わせて固定）
+// GitHub Pages 配下のベースパス
 const BASE_PATH = "/learning-trajectory-quiz/";
+
+// localStorage key（あなたの以前の方針に合わせる）
+const LOG_KEY = "ltQuizLogs";
+
+/**
+ * logs: Array<{
+ *   t: number,              // epoch ms
+ *   id: string,
+ *   category: string,
+ *   selected: number[],
+ *   correct: number[],
+ *   isCorrect: boolean
+ * }>
+ */
+function loadLogs() {
+  try {
+    const s = localStorage.getItem(LOG_KEY);
+    const arr = s ? JSON.parse(s) : [];
+    return Array.isArray(arr) ? arr : [];
+  } catch {
+    return [];
+  }
+}
+function saveLogs(logs) {
+  localStorage.setItem(LOG_KEY, JSON.stringify(logs));
+}
+function addLog(entry) {
+  const logs = loadLogs();
+  logs.push(entry);
+  // 無限に増えすぎないように上限（必要なら調整）
+  const MAX = 3000;
+  if (logs.length > MAX) logs.splice(0, logs.length - MAX);
+  saveLogs(logs);
+}
+function fmtDateTime(ms) {
+  const d = new Date(ms);
+  const yy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const dd = String(d.getDate()).padStart(2, "0");
+  const hh = String(d.getHours()).padStart(2, "0");
+  const mi = String(d.getMinutes()).padStart(2, "0");
+  return `${yy}/${mm}/${dd} ${hh}:${mi}`;
+}
 
 // --- Views ---
 function showList() {
@@ -38,7 +81,6 @@ function handleRouting() {
     return;
   }
 
-  // quiz route
   const url = new URL(location.href);
   const id = url.searchParams.get("id");
   if (!id) {
@@ -54,28 +96,57 @@ function handleRouting() {
 }
 
 // --- Category helpers ---
-function normalizeCategory(q) {
-  const c = (q.category ?? "").trim();
-  return c ? c : "未分類";
+function normalizeCategoryValue(v) {
+  const s = String(v ?? "").trim();
+  return s ? s : "未分類 / 未分類";
+}
+function splitCategory(cat) {
+  const s = normalizeCategoryValue(cat);
+  const parts = s.split("/").map((x) => x.trim()).filter(Boolean);
+  const parent = parts[0] || "未分類";
+  const sub = parts[1] || "未分類";
+  return { parent, sub, full: `${parent} / ${sub}` };
+}
+function qCategoryFull(q) {
+  // questions.json 側が "テクノロジ系 / データベース" の文字列想定
+  const { full } = splitCategory(q.category);
+  return full;
+}
+function qCategoryParent(q) {
+  return splitCategory(q.category).parent;
+}
+function qCategorySub(q) {
+  return splitCategory(q.category).sub;
 }
 
-function getCategories(questions) {
-  const set = new Set(questions.map(normalizeCategory));
+function getParents(questions) {
+  const set = new Set(questions.map(qCategoryParent));
+  return Array.from(set).sort((a, b) => a.localeCompare(b, "ja"));
+}
+function getSubsForParent(questions, parent) {
+  const set = new Set(
+    questions.filter((q) => qCategoryParent(q) === parent).map(qCategorySub)
+  );
   return Array.from(set).sort((a, b) => a.localeCompare(b, "ja"));
 }
 
-function groupByCategory(questions) {
-  const map = new Map();
+function groupByParentSub(questions) {
+  // Map<parent, Map<sub, question[]>>
+  const top = new Map();
   for (const q of questions) {
-    const cat = normalizeCategory(q);
-    if (!map.has(cat)) map.set(cat, []);
-    map.get(cat).push(q);
+    const { parent, sub } = splitCategory(q.category);
+    if (!top.has(parent)) top.set(parent, new Map());
+    const subMap = top.get(parent);
+    if (!subMap.has(sub)) subMap.set(sub, []);
+    subMap.get(sub).push(q);
   }
-  // 各カテゴリ内の順序を安定させる（id順）
-  for (const arr of map.values()) {
-    arr.sort((a, b) => String(a.id).localeCompare(String(b.id)));
+  // sort inside each sub by id for stability
+  for (const subMap of top.values()) {
+    for (const arr of subMap.values()) {
+      arr.sort((a, b) => String(a.id).localeCompare(String(b.id)));
+    }
   }
-  return map;
+  return top;
 }
 
 function escapeHtml(s) {
@@ -88,75 +159,261 @@ function escapeHtml(s) {
   }[m]));
 }
 
-// --- List ---
-function setupCategoryFilter() {
-  const sel = $("categoryFilter");
-  if (!sel) return;
-
-  const cats = getCategories(QUESTIONS);
-  sel.innerHTML =
-    `<option value="">すべて</option>` +
-    cats.map((c) => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join("");
-
-  sel.onchange = () => {
-    renderList();
-  };
+// --- Status from logs ---
+function latestResultById(logs) {
+  // Map<id, {t,isCorrect,category}>
+  const map = new Map();
+  for (const e of logs) {
+    if (!e || !e.id) continue;
+    const prev = map.get(e.id);
+    if (!prev || Number(e.t) > Number(prev.t)) {
+      map.set(e.id, { t: Number(e.t) || 0, isCorrect: !!e.isCorrect, category: String(e.category || "") });
+    }
+  }
+  return map;
 }
 
+function buildDashboard(logs) {
+  const latest = latestResultById(logs);
+
+  const total = QUESTIONS.length;
+  const answered = latest.size;
+
+  // latest accuracy (per question latest)
+  let latestCorrect = 0;
+  for (const v of latest.values()) if (v.isCorrect) latestCorrect++;
+  const latestAcc = answered ? (latestCorrect / answered) : 0;
+
+  // all accuracy (per attempt)
+  const allAnswered = logs.length;
+  const allCorrect = logs.filter((x) => x && x.isCorrect).length;
+  const allAcc = allAnswered ? (allCorrect / allAnswered) : 0;
+
+  $("dashTotal").textContent = String(total);
+  $("dashAnswered").textContent = String(answered);
+  $("dashAccuracyLatest").textContent = answered ? `${Math.round(latestAcc * 100)}%` : "-";
+  $("dashAccuracyAll").textContent = allAnswered ? `${Math.round(allAcc * 100)}%` : "-";
+
+  // category table (latest)
+  const catAgg = new Map(); // full -> {answered, correct}
+  for (const q of QUESTIONS) {
+    const full = qCategoryFull(q);
+    if (!catAgg.has(full)) catAgg.set(full, { answered: 0, correct: 0 });
+    const r = latest.get(q.id);
+    if (r) {
+      const a = catAgg.get(full);
+      a.answered++;
+      if (r.isCorrect) a.correct++;
+    }
+  }
+
+  const catRows = Array.from(catAgg.entries())
+    .filter(([, v]) => v.answered > 0)
+    .map(([k, v]) => ({
+      cat: k,
+      answered: v.answered,
+      correct: v.correct,
+      rate: v.answered ? (v.correct / v.answered) : 0
+    }))
+    .sort((a, b) => b.rate - a.rate);
+
+  const tbody = $("dashCatTable").querySelector("tbody");
+  tbody.innerHTML = "";
+  if (catRows.length === 0) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td colspan="4" class="muted">まだ回答がありません</td>`;
+    tbody.appendChild(tr);
+  } else {
+    for (const r of catRows) {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${escapeHtml(r.cat)}</td>
+        <td>${r.answered}</td>
+        <td>${r.correct}</td>
+        <td>${Math.round(r.rate * 100)}%</td>
+      `;
+      tbody.appendChild(tr);
+    }
+  }
+
+  // recent table
+  const recent = [...logs].slice(-10).reverse();
+  const rbody = $("dashRecentTable").querySelector("tbody");
+  rbody.innerHTML = "";
+  if (recent.length === 0) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td colspan="3" class="muted">まだ回答がありません</td>`;
+    rbody.appendChild(tr);
+  } else {
+    for (const e of recent) {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${escapeHtml(fmtDateTime(e.t))}</td>
+        <td>${escapeHtml(e.id)}</td>
+        <td>${e.isCorrect ? "✅" : "❌"}</td>
+      `;
+      rbody.appendChild(tr);
+    }
+  }
+}
+
+// --- Filters UI ---
+function setupFilters() {
+  // parent
+  const parentSel = $("parentFilter");
+  const subSel = $("subFilter");
+  const parents = getParents(QUESTIONS);
+  parentSel.innerHTML =
+    `<option value="">すべて</option>` +
+    parents.map((p) => `<option value="${escapeHtml(p)}">${escapeHtml(p)}</option>`).join("");
+
+  const refreshSubs = () => {
+    const p = String(parentSel.value || "");
+    if (!p) {
+      subSel.disabled = true;
+      subSel.innerHTML = `<option value="">すべて</option>`;
+      return;
+    }
+    const subs = getSubsForParent(QUESTIONS, p);
+    subSel.disabled = false;
+    subSel.innerHTML =
+      `<option value="">すべて</option>` +
+      subs.map((s) => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join("");
+  };
+
+  parentSel.onchange = () => {
+    refreshSubs();
+    renderList();
+  };
+  subSel.onchange = () => renderList();
+
+  // search
+  $("searchInput").addEventListener("input", () => renderList());
+
+  // chips
+  $("onlyUnanswered").addEventListener("change", () => renderList());
+  $("onlyIncorrect").addEventListener("change", () => renderList());
+
+  refreshSubs();
+}
+
+function getFilteredQuestions() {
+  const logs = loadLogs();
+  const latest = latestResultById(logs);
+
+  const qSearch = String($("searchInput").value || "").trim().toLowerCase();
+  const parent = String($("parentFilter").value || "").trim();
+  const sub = String($("subFilter").value || "").trim();
+  const onlyUnanswered = !!$("onlyUnanswered").checked;
+  const onlyIncorrect = !!$("onlyIncorrect").checked;
+
+  return QUESTIONS.filter((q) => {
+    // parent/sub
+    if (parent && qCategoryParent(q) !== parent) return false;
+    if (sub && qCategorySub(q) !== sub) return false;
+
+    // search
+    if (qSearch) {
+      const hay = `${q.id} ${q.question}`.toLowerCase();
+      if (!hay.includes(qSearch)) return false;
+    }
+
+    const r = latest.get(q.id);
+    const isAnswered = !!r;
+    const isCorrect = r ? r.isCorrect : false;
+
+    if (onlyUnanswered && isAnswered) return false;
+    if (onlyIncorrect && (!isAnswered || isCorrect)) return false;
+
+    return true;
+  });
+}
+
+// --- List ---
 function renderList() {
+  const logs = loadLogs();
+  const latest = latestResultById(logs);
+
+  // dashboard refresh
+  buildDashboard(logs);
+
   const listEl = $("quizList");
   listEl.innerHTML = "";
 
-  const filterEl = $("categoryFilter");
-  const selected = filterEl ? String(filterEl.value || "") : "";
+  const filtered = getFilteredQuestions();
+  const grouped = groupByParentSub(filtered);
 
-  const filtered = selected
-    ? QUESTIONS.filter((q) => normalizeCategory(q) === selected)
-    : QUESTIONS;
-
-  const grouped = groupByCategory(filtered);
-  const cats = Array.from(grouped.keys()).sort((a, b) => a.localeCompare(b, "ja"));
+  const parents = Array.from(grouped.keys()).sort((a, b) => a.localeCompare(b, "ja"));
 
   let globalIndex = 0;
 
-  cats.forEach((cat) => {
-    const arr = grouped.get(cat) || [];
+  for (const p of parents) {
+    const pSec = document.createElement("section");
+    pSec.className = "parent-section";
 
-    const sec = document.createElement("section");
-    sec.className = "category-section";
+    const pTitle = document.createElement("h3");
+    pTitle.className = "parent-title";
+    pTitle.textContent = p;
+    pSec.appendChild(pTitle);
 
-    const h3 = document.createElement("h3");
-    h3.className = "category-title";
-    h3.textContent = `${cat}（${arr.length}）`;
-    sec.appendChild(h3);
+    const subMap = grouped.get(p);
+    const subs = Array.from(subMap.keys()).sort((a, b) => a.localeCompare(b, "ja"));
 
-    arr.forEach((q) => {
-      globalIndex++;
+    for (const s of subs) {
+      const arr = subMap.get(s) || [];
 
-      const card = document.createElement("button");
-      card.type = "button";
-      card.className = "quiz-card";
+      const sSec = document.createElement("section");
+      sSec.className = "category-section";
 
-      const title = document.createElement("div");
-      title.className = "quiz-card-title";
-      title.textContent = `${globalIndex}. ${q.question}`;
+      const sTitle = document.createElement("h4");
+      sTitle.className = "category-title";
+      sTitle.textContent = `${p} / ${s}（${arr.length}）`;
+      sSec.appendChild(sTitle);
 
-      const meta = document.createElement("div");
-      meta.className = "quiz-card-meta";
-      meta.textContent = `ID: ${q.id}`;
+      for (const q of arr) {
+        globalIndex++;
 
-      card.appendChild(title);
-      card.appendChild(meta);
+        const card = document.createElement("button");
+        card.type = "button";
+        card.className = "quiz-card";
 
-      card.onclick = () => {
-        setRoute(`${BASE_PATH}quiz?id=${encodeURIComponent(q.id)}`);
-      };
+        const title = document.createElement("div");
+        title.className = "quiz-card-title";
+        title.textContent = `${globalIndex}. ${q.question}`;
 
-      sec.appendChild(card);
-    });
+        const meta = document.createElement("div");
+        meta.className = "quiz-card-meta";
 
-    listEl.appendChild(sec);
-  });
+        const r = latest.get(q.id);
+        let badge = `<span class="badge badge-gray">未回答</span>`;
+        if (r) badge = r.isCorrect
+          ? `<span class="badge badge-green">正解</span>`
+          : `<span class="badge badge-red">不正解</span>`;
+
+        meta.innerHTML = `${badge}<span class="meta-id">ID: ${escapeHtml(q.id)}</span>`;
+
+        card.appendChild(title);
+        card.appendChild(meta);
+
+        card.onclick = () => {
+          setRoute(`${BASE_PATH}quiz?id=${encodeURIComponent(q.id)}`);
+        };
+
+        sSec.appendChild(card);
+      }
+
+      pSec.appendChild(sSec);
+    }
+
+    listEl.appendChild(pSec);
+  }
+
+  if (filtered.length === 0) {
+    const empty = document.createElement("div");
+    empty.className = "empty";
+    empty.textContent = "条件に一致する問題がありません。";
+    listEl.appendChild(empty);
+  }
 }
 
 // --- Quiz ---
@@ -172,6 +429,18 @@ function arraysEqual(a, b) {
 function renderQuestion(q) {
   $("qid").textContent = q.id;
   $("question").textContent = q.question;
+
+  // meta（カテゴリ・直近結果）
+  const logs = loadLogs();
+  const latest = latestResultById(logs);
+  const r = latest.get(q.id);
+  const cat = qCategoryFull(q);
+  $("qmeta").innerHTML = `
+    <span class="meta-pill">${escapeHtml(cat)}</span>
+    ${r ? (r.isCorrect
+      ? `<span class="meta-pill ok">最新：正解</span>`
+      : `<span class="meta-pill ng">最新：不正解</span>`) : `<span class="meta-pill">未回答</span>`}
+  `;
 
   const choicesEl = $("choices");
   choicesEl.innerHTML = "";
@@ -236,13 +505,13 @@ function renderQuestion(q) {
       link.hidden = true;
     }
 
-    // 初期状態: overview, detail ともに非表示（回答後に開ける）
+    // 初期状態
     overview.hidden = true;
     detailWrap.hidden = true;
     toggleBtn.disabled = true;
     if (toggleText) toggleText.textContent = "解説（回答後）";
 
-    // 解説トグル: 1回で overview + detail をまとめて開閉
+    // 解説トグル
     toggleBtn.onclick = () => {
       if (!answered) return;
 
@@ -272,6 +541,16 @@ function renderQuestion(q) {
 
     answered = true;
 
+    // 履歴保存
+    addLog({
+      t: Date.now(),
+      id: q.id,
+      category: qCategoryFull(q),
+      selected,
+      correct,
+      isCorrect
+    });
+
     // 結果表示
     const resultEl = $("result");
     resultEl.textContent = isCorrect ? "✅ 正解" : "❌ 不正解";
@@ -290,10 +569,9 @@ function renderQuestion(q) {
       if (!isAns && isSel) item.classList.add("is-wrong");
       if (isAns && !isSel) item.classList.add("is-missed");
 
-      // 入力ロック
       input.disabled = true;
 
-      // 解説はトグルで一括オープン（Overview + Detail）
+      // 解説はトグルで開く
       const ov = item.querySelector(".choice-overview");
       const dt = item.querySelector(".choice-detail");
       if (ov) ov.hidden = true;
@@ -311,6 +589,18 @@ function renderQuestion(q) {
     });
 
     submitBtn.disabled = true;
+
+    // ダッシュボード/一覧表示にも反映されるように、メタ更新
+    const logs = loadLogs();
+    const latest = latestResultById(logs);
+    const r2 = latest.get(q.id);
+    const cat = qCategoryFull(q);
+    $("qmeta").innerHTML = `
+      <span class="meta-pill">${escapeHtml(cat)}</span>
+      ${r2 ? (r2.isCorrect
+        ? `<span class="meta-pill ok">最新：正解</span>`
+        : `<span class="meta-pill ng">最新：不正解</span>`) : `<span class="meta-pill">未回答</span>`}
+    `;
   };
 }
 
@@ -321,16 +611,15 @@ async function init() {
 
   try {
     QUESTIONS = await loadQuestions();
-    statusEl.textContent = ""; // Clear loading
+    statusEl.textContent = "";
 
-    setupCategoryFilter();
+    setupFilters();
     renderList();
     handleRouting();
 
-    // 戻る：一覧（URLも戻す）
     $("backBtn").onclick = () => setRoute(`${BASE_PATH}`);
-
     window.onpopstate = handleRouting;
+
   } catch (err) {
     console.error(err);
     statusEl.textContent = "Failed to load data.";
