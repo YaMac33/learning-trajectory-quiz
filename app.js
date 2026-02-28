@@ -620,7 +620,7 @@ async function init() {
     QUESTIONS = await loadQuestions();
     statusEl.textContent = "";
 
-    setupFilters();
+    setupFilters();              // ← そのまま維持
     renderList();
     handleRouting();
 
@@ -629,11 +629,13 @@ async function init() {
 
   } catch (err) {
     console.error(err);
-    statusEl.textContent = "Failed to load data.";
+
+    // ★ ここだけ変更
+    statusEl.textContent =
+      "Failed to load data: " + (err?.message || String(err));
+
     statusEl.style.color = "red";
   }
 }
 
 init();
-
-
