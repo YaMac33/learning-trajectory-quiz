@@ -427,7 +427,9 @@ function arraysEqual(a, b) {
 }
 
 function renderQuestion(q) {
-  $("qid").textContent = q.id;
+  $("qid").textContent = `ID: ${q.id}`;
+  $("qcategory").textContent = q.category ? `分類: ${q.category}` : "";
+  $("qsource").textContent = q.source ? `出典: ${q.source}` : "";
   $("question").textContent = q.question;
 
   // meta（カテゴリ・直近結果）
@@ -628,3 +630,4 @@ async function init() {
 }
 
 init();
+
