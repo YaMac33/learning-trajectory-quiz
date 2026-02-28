@@ -333,14 +333,16 @@ function getFilteredQuestions() {
 function renderList() {
   const logs = loadLogs();
   const latest = latestResultById(logs);
-  const source = document.createElement("div");
-  source.className = "quiz-card-source";
-  source.textContent = q.source ? `出典: ${q.source}` : "";
 
-  card.appendChild(source);
-
-  // dashboard refresh
-  buildDashboard(logs);
+  // dashboard refresh（HTML側にdash系が無い場合でも落ちないようにガード）
+  try {
+    if ($("dashTotal") && $("dashAnswered") && $("dashAccuracyLatest") && $("dashAccuracyAll")
+      && $("dashCatTable") && $("dashRecentTable")) {
+      buildDashboard(logs);
+    }
+  } catch (e) {
+    console.warn("buildDashboard skipped:", e);
+  }
 
   const listEl = $("quizList");
   listEl.innerHTML = "";
@@ -391,14 +393,21 @@ function renderList() {
 
         const r = latest.get(q.id);
         let badge = `<span class="badge badge-gray">未回答</span>`;
-        if (r) badge = r.isCorrect
-          ? `<span class="badge badge-green">正解</span>`
-          : `<span class="badge badge-red">不正解</span>`;
-
+        if (r) {
+          badge = r.isCorrect
+            ? `<span class="badge badge-green">正解</span>`
+            : `<span class="badge badge-red">不正解</span>`;
+        }
         meta.innerHTML = `${badge}<span class="meta-id">ID: ${escapeHtml(q.id)}</span>`;
+
+        // ★出典表示（q が存在するこのスコープ内で作る）
+        const source = document.createElement("div");
+        source.className = "quiz-card-source";
+        source.textContent = (q.source ?? "").trim() ? `出典: ${q.source.trim()}` : "";
 
         card.appendChild(title);
         card.appendChild(meta);
+        card.appendChild(source);
 
         card.onclick = () => {
           setRoute(`${BASE_PATH}quiz?id=${encodeURIComponent(q.id)}`);
@@ -639,3 +648,4 @@ async function init() {
 }
 
 init();
+
