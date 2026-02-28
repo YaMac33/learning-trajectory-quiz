@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -20,109 +19,19 @@
     <section id="view-list">
       <h2>問題一覧</h2>
       <p class="hint">クリックするとその問題へ移動します</p>
-
-      <!-- Dashboard -->
-      <section class="dash" aria-label="学習ダッシュボード">
-        <div class="dash-row">
-          <div class="dash-card">
-            <div class="dash-k">総問題数</div>
-            <div class="dash-v" id="dashTotal">-</div>
-          </div>
-          <div class="dash-card">
-            <div class="dash-k">回答済み</div>
-            <div class="dash-v" id="dashAnswered">-</div>
-          </div>
-          <div class="dash-card">
-            <div class="dash-k">正答率（最新）</div>
-            <div class="dash-v" id="dashAccuracyLatest">-</div>
-          </div>
-          <div class="dash-card">
-            <div class="dash-k">正答率（全履歴）</div>
-            <div class="dash-v" id="dashAccuracyAll">-</div>
-          </div>
-        </div>
-
-        <div class="dash-row dash-row-2">
-          <div class="dash-card dash-wide">
-            <div class="dash-k">カテゴリ別（最新の結果で集計）</div>
-            <div class="dash-table-wrap">
-              <table class="dash-table" id="dashCatTable">
-                <thead>
-                  <tr>
-                    <th>カテゴリ</th>
-                    <th>回答</th>
-                    <th>正解</th>
-                    <th>正答率</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-            </div>
-          </div>
-
-          <div class="dash-card dash-wide">
-            <div class="dash-k">最近の回答（直近10件）</div>
-            <div class="dash-table-wrap">
-              <table class="dash-table" id="dashRecentTable">
-                <thead>
-                  <tr>
-                    <th>日時</th>
-                    <th>ID</th>
-                    <th>結果</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Filters -->
-      <div class="filters">
-        <div class="filters-left">
-          <label class="filter-item">
-            検索：
-            <input id="searchInput" type="search" placeholder="問題文 / ID で検索" />
-          </label>
-
-          <label class="filter-item">
-            親カテゴリ：
-            <select id="parentFilter">
-              <option value="">すべて</option>
-            </select>
-          </label>
-
-          <label class="filter-item">
-            子カテゴリ：
-            <select id="subFilter" disabled>
-              <option value="">すべて</option>
-            </select>
-          </label>
-        </div>
-
-        <div class="filters-right">
-          <label class="chip">
-            <input type="checkbox" id="onlyUnanswered" />
-            未回答のみ
-          </label>
-          <label class="chip">
-            <input type="checkbox" id="onlyIncorrect" />
-            不正解のみ
-          </label>
-        </div>
-      </div>
-
       <div id="quizList" class="quiz-list"></div>
     </section>
 
     <!-- Quiz View -->
     <section id="view-quiz" hidden>
-      <div class="question-header">
+
+      <div class="question-meta">
         <div id="qid" class="qid"></div>
-        <div id="question" class="question"></div>
-        <div id="qmeta" class="qmeta"></div>
+        <div id="qcategory" class="qcategory"></div>
+        <div id="qsource" class="qsource"></div>
       </div>
+
+      <div id="question" class="question"></div>
 
       <div id="choices" class="choices"></div>
 
@@ -137,17 +46,19 @@
           <div class="choice-info">
             <div class="choice-overview" hidden></div>
 
-            <!-- 1回で overview + detail をまとめて開閉する -->
             <button type="button" class="choice-toggle-detail" disabled>
               <span>解説（回答後）</span>
-              <svg class="chev" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <svg class="chev" width="16" height="16" viewBox="0 0 24 24">
+                <path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </button>
 
             <div class="choice-detail" hidden>
               <div class="choice-detail-content"></div>
-              <a href="" class="choice-link" target="_blank" rel="noopener noreferrer">参考リンク</a>
+              <a href="" class="choice-link" target="_blank" rel="noopener noreferrer">
+                参考リンク
+              </a>
             </div>
           </div>
         </div>
