@@ -333,6 +333,11 @@ function getFilteredQuestions() {
 function renderList() {
   const logs = loadLogs();
   const latest = latestResultById(logs);
+  const source = document.createElement("div");
+  source.className = "quiz-card-source";
+  source.textContent = q.source ? `出典: ${q.source}` : "";
+
+  card.appendChild(source);
 
   // dashboard refresh
   buildDashboard(logs);
@@ -630,4 +635,5 @@ async function init() {
 }
 
 init();
+
 
