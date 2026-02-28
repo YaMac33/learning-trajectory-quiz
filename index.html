@@ -18,13 +18,49 @@
     <!-- List View -->
     <section id="view-list">
       <h2>問題一覧</h2>
+
+      <!-- Filters -->
+      <section class="filters" aria-label="フィルタ">
+        <div class="filters-row">
+          <label class="filters-item">
+            <span class="filters-label">親カテゴリ</span>
+            <select id="parentFilter" class="filters-select">
+              <option value="">すべて</option>
+            </select>
+          </label>
+
+          <label class="filters-item">
+            <span class="filters-label">子カテゴリ</span>
+            <select id="subFilter" class="filters-select" disabled>
+              <option value="">すべて</option>
+            </select>
+          </label>
+
+          <label class="filters-item filters-grow">
+            <span class="filters-label">検索</span>
+            <input id="searchInput" class="filters-input" type="search" placeholder="問題文 / ID / 出典で検索" />
+          </label>
+        </div>
+
+        <div class="filters-row filters-row-compact">
+          <label class="chip">
+            <input id="onlyUnanswered" type="checkbox" />
+            <span>未回答のみ</span>
+          </label>
+
+          <label class="chip">
+            <input id="onlyIncorrect" type="checkbox" />
+            <span>不正解のみ</span>
+          </label>
+        </div>
+      </section>
+
       <p class="hint">クリックするとその問題へ移動します</p>
       <div id="quizList" class="quiz-list"></div>
     </section>
 
     <!-- Quiz View -->
     <section id="view-quiz" hidden>
-
       <div class="question-meta">
         <div id="qid" class="qid"></div>
         <div id="qcategory" class="qcategory"></div>
@@ -48,17 +84,14 @@
 
             <button type="button" class="choice-toggle-detail" disabled>
               <span>解説（回答後）</span>
-              <svg class="chev" width="16" height="16" viewBox="0 0 24 24">
-                <path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round"/>
+              <svg class="chev" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </button>
 
             <div class="choice-detail" hidden>
               <div class="choice-detail-content"></div>
-              <a href="" class="choice-link" target="_blank" rel="noopener noreferrer">
-                参考リンク
-              </a>
+              <a href="" class="choice-link" target="_blank" rel="noopener noreferrer">参考リンク</a>
             </div>
           </div>
         </div>
