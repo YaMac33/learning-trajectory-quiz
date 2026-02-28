@@ -14,8 +14,6 @@ GitHub Pages 上で動作し、問題データはすべて JSON で管理され�
 - 解説を「概要 → 詳細」の段階で確認できる学習体験
 - バックエンド不要（完全静的）
 
-👉 **公開URL**  
-https://yamac33.github.io/learning-trajectory-quiz/
 
 ---
 
