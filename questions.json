@@ -31,7 +31,8 @@
     "correct_indices": [
       3
     ],
-    "category": "テクノロジ系 / 基礎理論"
+    "category": "テクノロジ系 / 基礎理論",
+    "source": ""
   },
   {
     "id": "ap-tech-db-checkpoint",
@@ -65,7 +66,8 @@
     "correct_indices": [
       1
     ],
-    "category": "テクノロジ系 / データベース"
+    "category": "テクノロジ系 / データベース",
+    "source": ""
   },
   {
     "id": "ap-strategy-ansoff-growth",
@@ -99,7 +101,8 @@
     "correct_indices": [
       2
     ],
-    "category": "ストラテジ系 / 経営戦略マネジメント"
+    "category": "ストラテジ系 / 経営戦略マネジメント",
+    "source": ""
   },
   {
     "id": "ap-tech-adas-sensor-characteristics",
@@ -133,7 +136,8 @@
     "correct_indices": [
       0
     ],
-    "category": "テクノロジ系 / 基礎理論"
+    "category": "テクノロジ系 / 基礎理論",
+    "source": ""
   },
   {
     "id": "ap-tech-nw-ip-classd",
@@ -167,7 +171,8 @@
     "correct_indices": [
       3
     ],
-    "category": "テクノロジ系 / ネットワーク"
+    "category": "テクノロジ系 / ネットワーク",
+    "source": ""
   },
   {
     "id": "ap-tech-os-task-preemption",
@@ -201,6 +206,7 @@
     "correct_indices": [
       2
     ],
-    "category": "テクノロジ系 / ソフトウェア"
+    "category": "テクノロジ系 / ソフトウェア",
+    "source": ""
   }
 ]
