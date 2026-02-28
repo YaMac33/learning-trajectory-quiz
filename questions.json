@@ -1,5 +1,39 @@
 [
   {
+    "id": "ap-tech-adas-sensor-characteristics",
+    "question": "自動車の先進運転支援システム（ADAS）で利用される各種センサーの特性に関する説明として、最も適切なものはどれか。",
+    "choices": [
+      {
+        "text": "可視光カメラは、雨や霧、逆光などの影響を受けやすいが、交通標識や車線の識別に利用できる。",
+        "overview": "正しい。色や文字の認識が可能だが、環境条件に影響されやすい。",
+        "detail": "可視光カメラは人間の視覚と同様の波長域の光を取得し、高解像度の画像から標識や車線、歩行者などを識別できる。一方で、雨・霧・夜間・逆光などの環境条件によって視認性が低下し、認識精度が影響を受けるため、他センサーとの組合せが重要である。",
+        "link": "https://yamac33.github.io/LearningTrajectory/ap/posts/2026-02-28-ap-autonomous-vehicle-camera/"
+      },
+      {
+        "text": "超音波センサーは、長距離測定に適しており、500メートル以上の障害物検知が可能である。",
+        "overview": "誤り。超音波は近距離検知向けである。",
+        "detail": "超音波センサーは音波の反射を利用して距離を測定するため、主に駐車支援などの近距離用途に用いられる。測定距離は一般に数メートル程度であり、500メートル級の長距離検知には適さない。",
+        "link": "https://yamac33.github.io/LearningTrajectory/ap/posts/2026-02-28-ap-ultrasonic-sensor-usage/"
+      },
+      {
+        "text": "ミリ波レーダーは、天候の影響を受けにくく、交通信号機の灯色の識別に適している。",
+        "overview": "誤り。ミリ波レーダーは色の識別はできない。",
+        "detail": "ミリ波レーダーは電磁波を用いて対象物の距離や相対速度を検知でき、雨や霧などの悪条件下でも安定した性能を発揮する。しかし、取得できるのは反射波の強度やドップラ情報であり、信号機の灯色のような色情報の判別はできない。",
+        "link": "https://yamac33.github.io/LearningTrajectory/ap/posts/2026-02-28-ap-millimeter-wave-radar-auto-driving/"
+      },
+      {
+        "text": "レーザーレーダー（LiDAR）は、雨や霧の影響をほとんど受けず、遮蔽物の背後にある物体も検知できる。",
+        "overview": "誤り。LiDARは悪天候で性能が低下し、遮蔽物の裏側は検知できない。",
+        "detail": "LiDARはレーザー光の反射時間から高精度な距離や形状を取得できるが、雨・霧・雪などで光が散乱しやすく性能が低下する。また、光は直進性が高いため、建物などの遮蔽物の背後にある物体を直接検知することは困難である。",
+        "link": "https://yamac33.github.io/LearningTrajectory/ap/posts/2026-02-28-ap-lidar-mechanism-features/"
+      }
+    ],
+    "correct_indices": [
+      0
+    ],
+    "category": "テクノロジ系 / 基礎理論"
+  },
+  {
     "id": "ap-tech-nw-ip-classd",
     "question": "IPv4アドレスのクラス分類において、クラスDのアドレスを使用する目的として最も適切なものはどれか。",
     "choices": [
