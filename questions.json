@@ -8,25 +8,25 @@
         "text": "目的変数と説明変数の関係を最小二乗法で推定する",
         "overview": "誤り。これは回帰分析の説明である。",
         "detail": "回帰分析は、数値の目的変数を説明変数で説明・予測するために係数を推定する手法である。アソシエーション分析は購買などの事象間の同時発生や関連性のルールを抽出する点が異なる。",
-        "link": ""
+        "link": "https://yamac33.github.io/LearningTrajectory/ap/posts/2026-03-01-ap-regression-analysis-vs-association/"
       },
       {
         "text": "購買データから同時購買などのルールを抽出し、支持度や確信度で評価する",
         "overview": "正しい。項目間の関連ルールを見いだし指標で有効性を判断する。",
         "detail": "アソシエーション分析は、例えば「Aを買う人はBも買う」といった関連ルールをトランザクションデータから抽出する。ルールの頻度を支持度、条件付き確率を確信度（頼度）、偶然以上の強さをリフト値で評価し、実務ではバスケット分析として販促や棚割りに活用される。",
-        "link": ""
+        "link": "https://yamac33.github.io/LearningTrajectory/ap/posts/2026-03-01-ap-association-analysis-indicators/"
       },
       {
         "text": "観測変数に共通因子を仮定してモデル化し、因子構造を推定する",
         "overview": "誤り。これは因子分析の説明である。",
         "detail": "因子分析は、多数の観測変数の背後にある少数の共通因子を推定し、変数間の相関を説明する手法である。アソシエーション分析は因子の推定ではなく、項目の同時出現からルールを抽出する点で異なる。",
-        "link": ""
+        "link": "https://yamac33.github.io/LearningTrajectory/ap/posts/2026-03-01-ap-factor-analysis/"
       },
       {
         "text": "多数の変数を少数の次元に要約し、情報を損なわずに可視化する",
         "overview": "誤り。これは主成分分析の説明である。",
         "detail": "主成分分析は、分散が大きい方向に主成分を求め、次元削減して可視化や要約を行う手法である。アソシエーション分析は次元削減ではなく、項目間の関連性ルール（if-then）を抽出して評価する。",
-        "link": ""
+        "link": "https://yamac33.github.io/LearningTrajectory/ap/posts/2026-03-01-ap-principal-component-analysis-pca/"
       }
     ],
     "correct_indices": [
