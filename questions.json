@@ -253,25 +253,25 @@
         "text": "スラッシング",
         "overview": "正しい。ページ置換えが多発し処理効率が著しく低下する現象である。",
         "detail": "主記憶容量が不足した状態で多数のプログラムを実行すると、ページイン・ページアウトが頻発し、CPU時間の多くがページ管理に費やされる。その結果、実際の処理が進まず処理能力が急激に低下する現象をスラッシングという。",
-        "link": "https://docs.google.com/document/d/1E5uOwJt2EDMkdTDJcKZ5OM01THKszYt4YmZY_XbbuEw/edit?tab=t.km6vbu3hxumt#bookmark=id.xqp4g29c1rjd"
+        "link": "https://yamac33.github.io/LearningTrajectory/ap/posts/2026-02-25-ap-virtual-memory-thrashing/"
       },
       {
         "text": "スワップアウト",
         "overview": "誤り。主記憶から補助記憶へ退避させる操作である。",
         "detail": "スワップアウトは、主記憶上のプログラムを補助記憶へ退避させる処理であり、現象そのものではない。スラッシングの原因となることはあるが、処理能力低下を指す用語ではない。",
-        "link": "https://docs.google.com/document/d/1E5uOwJt2EDMkdTDJcKZ5OM01THKszYt4YmZY_XbbuEw/edit?tab=t.km6vbu3hxumt#bookmark=id.xqp4g29c1rjd"
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.w7tuf3si2ta5#bookmark=id.1vbjbd5bap9c"
       },
       {
         "text": "フラグメンテーション",
         "overview": "誤り。記憶領域の断片化現象である。",
         "detail": "フラグメンテーションは、主記憶や補助記憶に未使用領域の断片が発生する現象である。ページ置換えの頻発による処理能力低下とは異なる概念である。",
-        "link": "https://docs.google.com/document/d/1E5uOwJt2EDMkdTDJcKZ5OM01THKszYt4YmZY_XbbuEw/edit?tab=t.km6vbu3hxumt#bookmark=id.xqp4g29c1rjd"
+        "link": "https://yamac33.github.io/LearningTrajectory/ap/posts/2026-02-25-ap-virtual-memory-thrashing/"
       },
       {
         "text": "ページフォールト",
         "overview": "誤り。主記憶にページが存在しないときの割込みである。",
         "detail": "ページフォールトは、要求されたページが主記憶に存在しない場合に発生する割込みである。ページフォールトが頻発することがスラッシングの要因となるが、現象そのものを指す用語ではない。",
-        "link": "https://docs.google.com/document/d/1E5uOwJt2EDMkdTDJcKZ5OM01THKszYt4YmZY_XbbuEw/edit?tab=t.km6vbu3hxumt#bookmark=id.xqp4g29c1rjd"
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.w7tuf3si2ta5#bookmark=id.vaqdm9tqm0ge"
       }
     ],
     "correct_indices": [
