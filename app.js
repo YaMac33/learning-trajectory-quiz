@@ -498,7 +498,8 @@ function renderQuestion(q) {
 
     text.textContent = c.text ?? "";
 
-    if (c.overview) {
+    // ★overview（例：「誤り。これは〜」）は回答後だけ表示
+    if (c.overview && isAnsweredThisSession) {
       overview.hidden = false;
       overview.textContent = c.overview;
     } else {
@@ -517,6 +518,10 @@ function renderQuestion(q) {
 
     // 解説ボタンは回答後のみ
     btn.disabled = !isAnsweredThisSession;
+
+    // ★安全のため：回答前は detail 自体も必ず閉じる
+    detail.hidden = true;
+
     btn.addEventListener("click", () => {
       detail.hidden = !detail.hidden;
     });
@@ -578,7 +583,7 @@ function renderQuestion(q) {
       ? `<div class="result-ok">✅ 正解</div>`
       : `<div class="result-ng">❌ 不正解</div>`;
 
-    // 解説ボタン解放
+    // 解説ボタン解放（念のため）
     const toggleBtns = document.querySelectorAll(".choice-toggle-detail");
     toggleBtns.forEach((b) => (b.disabled = false));
   }
