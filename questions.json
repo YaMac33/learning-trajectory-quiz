@@ -1,5 +1,40 @@
 [
   {
+    "id": "ap-tech-hardware-soc",
+    "source": "令和6年秋期　問22",
+    "question": "SOCの説明として、適切なものはどれか。",
+    "choices": [
+      {
+        "text": "システムLSIに内蔵されたソフトウェア",
+        "overview": "ハードウェアではなくファームウェアの説明である。",
+        "detail": "SoC（System on a Chip）はCPUやメモリ、I/Oなどを1チップに集積したハードウェアを指す。内蔵ソフトウェアはファームウェアと呼ばれ、SoCそのものの定義とは異なる。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.hy2wudf0h0qc#bookmark=id.uqk6vm85rocy"
+      },
+      {
+        "text": "複数のMCUを搭載したボード",
+        "overview": "マイコンボードの構成説明でありSoCの定義ではない。",
+        "detail": "複数のMCUを搭載した基板はボードレベルでの構成である。SoCは単一チップ上にシステム機能を集積する概念であり、ボード構成とは異なる。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.hy2wudf0h0qc#bookmark=id.uqk6vm85rocy"
+      },
+      {
+        "text": "複数のチップで構成していたコンピュータシステムを、一つのチップで実現したLSI",
+        "overview": "システム機能を単一チップに集積したLSIでありSoCの説明である。",
+        "detail": "SoCはCPU、メモリ、周辺回路など従来は複数チップで構成していた機能を1つの半導体チップに集積したLSIである。小型化や低消費電力化を実現し、組込み機器やモバイル機器で広く用いられている。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.hy2wudf0h0qc#bookmark=id.uqk6vm85rocy"
+      },
+      {
+        "text": "複数のチップを単一のパッケージに封入してシステム化したデバイス",
+        "overview": "SiPの説明でありSoCとは異なる。",
+        "detail": "SiP（System in a Package）は複数のチップを1つのパッケージに封入する技術である。SoCは単一チップに機能を集積する点が異なり、集積のレベルが異なる。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.hy2wudf0h0qc#bookmark=id.uqk6vm85rocy"
+      }
+    ],
+    "correct_indices": [
+      2
+    ],
+    "category": "テクノロジ系 / ハードウェア"
+  },
+  {
     "id": "ap-tech-storage-fc-interface",
     "source": "令和6年秋期　問11",
     "question": "ストレージのインタフェースとして用いられるFC（ファイバチャネル）の特徴として、適切なものはどれか。",
