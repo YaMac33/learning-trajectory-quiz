@@ -253,25 +253,25 @@
         "text": "論理的単位でアクセス保護ができる",
         "overview": "誤り。これはセグメンテーション方式の長所である。",
         "detail": "セグメンテーション方式ではプログラムやデータなどの論理的単位で区分するため、論理構造に基づくアクセス保護が可能である。一方、ページング方式では固定長ページ単位で管理するため、論理単位での保護は困難である。",
-        "link": ""
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.w7tuf3si2ta5#bookmark=id.ffxmrsn2mtfk"
       },
       {
         "text": "プログラム間で容易に記憶領域を共用できる",
         "overview": "誤り。これはセグメンテーション方式の特徴である。",
         "detail": "セグメンテーション方式では論理単位で区画されるため、特定のセグメントを他のプログラムと共用しやすい。ページング方式ではページが分散配置されるため、同様の共用は容易ではない。",
-        "link": ""
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.w7tuf3si2ta5#bookmark=id.ffxmrsn2mtfk"
       },
       {
         "text": "実行時に記憶領域の大きさを動的に変更できる",
         "overview": "誤り。可変長区画を持つセグメンテーション方式の特徴である。",
         "detail": "セグメンテーション方式は可変長の区画を扱うため、実行時に必要に応じてサイズを変更できる。一方、ページング方式は固定長ページで管理されるため、ページサイズ自体を動的に変更することはできない。",
-        "link": ""
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.w7tuf3si2ta5#bookmark=id.ffxmrsn2mtfk"
       },
       {
         "text": "主記憶の外部断片化が発生しない",
         "overview": "正しい。固定長ページにより外部断片化を防げる。",
         "detail": "ページング方式では固定長のページ単位で主記憶を管理するため、可変長区画を用いるセグメンテーション方式で発生する外部断片化が生じない。これがページング方式の代表的な長所である。",
-        "link": ""
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.w7tuf3si2ta5#bookmark=id.ffxmrsn2mtfk"
       }
     ],
     "correct_indices": [
