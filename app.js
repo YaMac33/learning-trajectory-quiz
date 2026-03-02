@@ -7,6 +7,9 @@ const $ = (id) => document.getElementById(id);
 let QUESTIONS = [];
 let CURRENT_ID = null;
 
+// ★追加：直前に「この画面で回答した」問題ID（結果表示をその時だけにする）
+let JUST_ANSWERED_ID = null;
+
 // GitHub Pages 配下のベースパス
 const BASE_PATH = "/learning-trajectory-quiz/";
 
@@ -38,13 +41,11 @@ function saveLogs(logs) {
 function addLog(entry) {
   const logs = loadLogs();
   logs.push(entry);
-  // 無限に増えすぎない簡易ガード（必要なら調整）
   if (logs.length > 5000) logs.splice(0, logs.length - 5000);
   saveLogs(logs);
 }
 
 function latestResultById(logs) {
-  // Map<id, log>
   const m = new Map();
   for (const e of logs) {
     const prev = m.get(e.id);
@@ -76,6 +77,7 @@ function syncViewFromUrl() {
     $("backBtn").hidden = true;
 
     CURRENT_ID = null;
+    JUST_ANSWERED_ID = null; // ★一覧に戻ったら結果表示フラグもリセット
     renderList();
     return;
   }
@@ -84,6 +86,9 @@ function syncViewFromUrl() {
   $("view-list").hidden = true;
   $("view-quiz").hidden = false;
   $("backBtn").hidden = false;
+
+  // ★別問題へ移動したら「直前回答フラグ」を落とす（結果が残らないように）
+  if (CURRENT_ID !== id) JUST_ANSWERED_ID = null;
 
   CURRENT_ID = id;
   const q = QUESTIONS.find((x) => String(x.id) === String(id));
@@ -144,7 +149,6 @@ function groupByParentSub(questions) {
     if (!subMap.has(sub)) subMap.set(sub, []);
     subMap.get(sub).push(q);
   }
-  // sort inside each sub by id for stability
   for (const subMap of top.values()) {
     for (const arr of subMap.values()) {
       arr.sort((a, b) => String(a.id).localeCompare(String(b.id)));
@@ -179,7 +183,7 @@ function extractSessionLabel(source) {
     const head = s.slice(0, idx).trim();
     return head || "出典不明";
   }
-  return s; // 「問」が無い形式ならそのまま
+  return s;
 }
 
 function groupBySession(questions) {
@@ -222,7 +226,6 @@ function buildDashboard(logs) {
     }
   }
 
-  // 全履歴ベース（重複含む）
   let correctAll = 0;
   for (const e of logs) if (e.isCorrect) correctAll++;
 
@@ -235,7 +238,6 @@ function buildDashboard(logs) {
   $("dashAccuracyLatest").textContent = `${accLatest}%`;
   $("dashAccuracyAll").textContent = `${accAll}%`;
 
-  // カテゴリ別（最新結果）
   const catAgg = new Map(); // parent -> { answered, correct }
   for (const q of QUESTIONS) {
     const parent = qCategoryParent(q);
@@ -262,7 +264,6 @@ function buildDashboard(logs) {
     tbody.appendChild(tr);
   }
 
-  // 最近の履歴（末尾から）
   const recent = logs.slice().sort((a, b) => (b.t ?? 0) - (a.t ?? 0)).slice(0, 20);
   const rbody = $("dashRecentTable").querySelector("tbody");
   rbody.innerHTML = "";
@@ -281,7 +282,6 @@ function buildDashboard(logs) {
 
 // --- Filters UI ---
 function setupFilters() {
-  // parent
   const parentSel = $("parentFilter");
   const subSel = $("subFilter");
   const groupSel = $("groupMode"); // 表示モード
@@ -305,12 +305,10 @@ function setupFilters() {
       subs.map((s) => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join("");
   };
 
-  // 表示モードに応じてフィルタUIの有効/無効を制御
   const applyGroupModeUi = () => {
     const mode = String(groupSel?.value || "cat-parent-sub");
 
     if (mode === "session") {
-      // 開催期表示：親/子カテゴリは使わない
       parentSel.value = "";
       subSel.value = "";
       parentSel.disabled = true;
@@ -320,18 +318,15 @@ function setupFilters() {
       return;
     }
 
-    // それ以外は親カテゴリは使える
     parentSel.disabled = false;
 
     if (mode === "cat-parent") {
-      // 親カテゴリのみ：子カテゴリは使わない
       subSel.value = "";
       subSel.disabled = true;
       subSel.innerHTML = `<option value="">すべて</option>`;
       return;
     }
 
-    // cat-parent-sub：通常どおり
     refreshSubs();
   };
 
@@ -341,7 +336,6 @@ function setupFilters() {
   };
   subSel.onchange = () => renderList();
 
-  // 表示モード変更
   if (groupSel) {
     groupSel.addEventListener("change", () => {
       applyGroupModeUi();
@@ -349,14 +343,10 @@ function setupFilters() {
     });
   }
 
-  // search
   $("searchInput").addEventListener("input", () => renderList());
-
-  // chips
   $("onlyUnanswered").addEventListener("change", () => renderList());
   $("onlyIncorrect").addEventListener("change", () => renderList());
 
-  // init
   refreshSubs();
   applyGroupModeUi();
 }
@@ -373,13 +363,11 @@ function getFilteredQuestions() {
   const onlyIncorrect = !!$("onlyIncorrect").checked;
 
   return QUESTIONS.filter((q) => {
-    // parent/sub（表示モードに応じて適用）
     if (mode !== "session") {
       if (parent && qCategoryParent(q) !== parent) return false;
       if (mode === "cat-parent-sub" && sub && qCategorySub(q) !== sub) return false;
     }
 
-    // search（問題文 / ID / 出典でも引っかかるように）
     if (qSearch) {
       const hay = `${q.id} ${q.question} ${q.source || ""}`.toLowerCase();
       if (!hay.includes(qSearch)) return false;
@@ -401,7 +389,6 @@ function renderList() {
   const logs = loadLogs();
   const latest = latestResultById(logs);
 
-  // dashboard refresh（HTML側にdash系が無い場合でも落ちないようにガード）
   try {
     if (
       $("dashTotal") && $("dashAnswered") && $("dashAccuracyLatest") && $("dashAccuracyAll")
@@ -444,7 +431,6 @@ function renderList() {
     }
     meta.innerHTML = `${badge}<span class="meta-id">ID: ${escapeHtml(q.id)}</span>`;
 
-    // 出典表示
     const source = document.createElement("div");
     source.className = "quiz-card-source";
     source.textContent = (q.source ?? "").trim() ? `出典: ${q.source.trim()}` : "";
@@ -487,10 +473,7 @@ function renderList() {
         sTitle.textContent = `${p} / ${s}（${arr.length}）`;
         sSec.appendChild(sTitle);
 
-        for (const q of arr) {
-          sSec.appendChild(makeCard(q));
-        }
-
+        for (const q of arr) sSec.appendChild(makeCard(q));
         pSec.appendChild(sSec);
       }
 
@@ -511,10 +494,7 @@ function renderList() {
       pTitle.textContent = `${p}（${arr.length}）`;
       pSec.appendChild(pTitle);
 
-      for (const q of arr) {
-        pSec.appendChild(makeCard(q));
-      }
-
+      for (const q of arr) pSec.appendChild(makeCard(q));
       listEl.appendChild(pSec);
     }
   } else if (mode === "session") {
@@ -532,10 +512,7 @@ function renderList() {
       sTitle.textContent = `${s}（${arr.length}）`;
       sSec.appendChild(sTitle);
 
-      for (const q of arr) {
-        sSec.appendChild(makeCard(q));
-      }
-
+      for (const q of arr) sSec.appendChild(makeCard(q));
       listEl.appendChild(sSec);
     }
   }
@@ -548,7 +525,7 @@ function renderList() {
   }
 }
 
-// --- Quiz ---
+// --- Quiz helpers ---
 function uniqSorted(arr) {
   return Array.from(new Set(arr)).sort((a, b) => a - b);
 }
@@ -558,7 +535,12 @@ function arraysEqual(a, b) {
   return a.every((v, i) => v === b[i]);
 }
 
+// --- Quiz ---
 function renderQuestion(q) {
+  // ★別問題に切り替えたとき、表示が残らないようにまずクリア
+  const resultEl = $("result");
+  resultEl.textContent = "";
+
   $("qid").textContent = `ID: ${q.id}`;
   $("qcategory").textContent = q.category ? `カテゴリ: ${q.category}` : "";
   $("qsource").textContent = q.source ? `出典: ${q.source}` : "";
@@ -570,14 +552,19 @@ function renderQuestion(q) {
   choicesEl.innerHTML = "";
 
   const tpl = $("choice-template");
+
+  // ★「この画面で今回答した直後」だけ answered 扱いにする
+  const isAnsweredNow = (JUST_ANSWERED_ID === String(q.id));
+
+  // 回答直後の場合だけ、ログから選択状態を復元して見せる
+  let answeredLog = null;
+  if (isAnsweredNow) {
+    const latest = latestResultById(loadLogs());
+    answeredLog = latest.get(String(q.id)) || null;
+  }
+
+  // 回答前にクリックした選択を保持
   const selected = new Set();
-
-  const logs = loadLogs();
-  const latest = latestResultById(logs);
-  const latestLog = latest.get(q.id);
-
-  // 既に回答済みならチェック状態と解説展開の制御を反映
-  const isAnswered = !!latestLog;
 
   // multi answer support
   for (let i = 0; i < q.choices.length; i++) {
@@ -593,12 +580,18 @@ function renderQuestion(q) {
     const detailContent = node.querySelector(".choice-detail-content");
     const link = node.querySelector(".choice-link");
 
-    input.checked = false;
-    input.disabled = isAnswered;
+    // ★回答前：自由に選択可 / 回答後：固定
+    input.disabled = isAnsweredNow;
+
+    // ★回答直後：ログに従ってチェックを復元
+    if (answeredLog && Array.isArray(answeredLog.selected)) {
+      input.checked = answeredLog.selected.includes(i);
+    } else {
+      input.checked = false;
+    }
 
     text.textContent = c.text ?? "";
 
-    // optional quick overview (if you have it)
     if (c.overview) {
       overview.hidden = false;
       overview.textContent = c.overview;
@@ -607,7 +600,6 @@ function renderQuestion(q) {
       overview.textContent = "";
     }
 
-    // detail (explanation)
     detailContent.textContent = c.detail ?? "";
     if (c.link) {
       link.href = c.link;
@@ -617,35 +609,31 @@ function renderQuestion(q) {
       link.hidden = true;
     }
 
-    // toggle button
-    btn.disabled = !isAnswered;
+    // ★解説ボタン：回答後だけ押せる
+    btn.disabled = !isAnsweredNow;
     btn.addEventListener("click", () => {
       const willOpen = detail.hidden;
       detail.hidden = !willOpen;
     });
 
-    input.addEventListener("change", () => {
-      if (input.checked) selected.add(i);
-      else selected.delete(i);
-    });
-
-    // restore answered state
-    if (latestLog && Array.isArray(latestLog.selected)) {
-      if (latestLog.selected.includes(i)) input.checked = true;
-    }
-
-    // if answered: open detail by default (optional)
-    if (isAnswered) {
-      // detail.hidden = false; // ←常時開きたいならコメント解除
+    // 回答前のみ選択状態を追跡
+    if (!isAnsweredNow) {
+      input.addEventListener("change", () => {
+        if (input.checked) selected.add(i);
+        else selected.delete(i);
+      });
     }
 
     choicesEl.appendChild(node);
   }
 
-  // buttons
-  $("submitBtn").disabled = isAnswered;
+  // ★Submit：回答後は無効（ただし過去ログがあっても回答前は有効）
+  $("submitBtn").disabled = isAnsweredNow;
 
   $("submitBtn").onclick = () => {
+    // 回答前のみ
+    if (isAnsweredNow) return;
+
     const sel = uniqSorted(Array.from(selected));
     const correct = uniqSorted(Array.isArray(q.correct) ? q.correct : []);
 
@@ -660,7 +648,10 @@ function renderQuestion(q) {
       isCorrect,
     });
 
-    // re-render to lock + enable details
+    // ★この問題だけ結果を表示する
+    JUST_ANSWERED_ID = String(q.id);
+
+    // re-render to lock + enable details + show result
     renderQuestion(q);
   };
 
@@ -678,21 +669,24 @@ function renderQuestion(q) {
     if (idx >= 0 && idx < ids.length - 1) setRoute(`${BASE_PATH}quiz?id=${encodeURIComponent(ids[idx + 1])}`);
   };
 
-  // result display
-  const latest2 = latestResultById(loadLogs());
-  const r = latest2.get(q.id);
-  const resultEl = $("result");
-
-  if (!r) {
+  // ★結果表示：この画面で今回答した直後だけ
+  if (!isAnsweredNow) {
     resultEl.textContent = "";
   } else {
-    resultEl.innerHTML = r.isCorrect
-      ? `<div class="result-ok">✅ 正解</div>`
-      : `<div class="result-ng">❌ 不正解</div>`;
+    const latest2 = latestResultById(loadLogs());
+    const r = latest2.get(String(q.id));
 
-    // enable details toggle buttons after answered
-    const toggleBtns = document.querySelectorAll(".choice-toggle-detail");
-    toggleBtns.forEach((b) => (b.disabled = false));
+    if (!r) {
+      resultEl.textContent = "";
+    } else {
+      resultEl.innerHTML = r.isCorrect
+        ? `<div class="result-ok">✅ 正解</div>`
+        : `<div class="result-ng">❌ 不正解</div>`;
+
+      // enable details toggle buttons after answered
+      const toggleBtns = document.querySelectorAll(".choice-toggle-detail");
+      toggleBtns.forEach((b) => (b.disabled = false));
+    }
   }
 }
 
@@ -702,7 +696,6 @@ async function main() {
     $("status").textContent = "読み込み中...";
     QUESTIONS = await loadQuestions();
 
-    // normalize minimal shape
     QUESTIONS = Array.isArray(QUESTIONS) ? QUESTIONS : [];
     QUESTIONS = QUESTIONS.map((q) => ({
       id: String(q.id ?? ""),
@@ -710,7 +703,10 @@ async function main() {
       source: String(q.source ?? ""),
       question: String(q.question ?? ""),
       choices: Array.isArray(q.choices) ? q.choices : [],
-      correct: Array.isArray(q.correct) ? q.correct : [],
+      // ★重要：questions.json 側は correct_indices なので、そちらを優先して読む
+      correct: Array.isArray(q.correct_indices)
+        ? q.correct_indices
+        : (Array.isArray(q.correct) ? q.correct : []),
     }));
 
     setupFilters();
