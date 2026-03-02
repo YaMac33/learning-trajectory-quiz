@@ -1,5 +1,40 @@
 [
   {
+    "id": "ap-tech-security-password-list-attack",
+    "source": "令和6年秋期　問40",
+    "question": "パスワードリスト攻撃に該当するものはどれか。",
+    "choices": [
+      {
+        "text": "一般的な単語のリストでログインを試行する",
+        "overview": "誤り。辞書攻撃に該当する。",
+        "detail": "一般的な単語や人名などを用いて総当たり的に試行する手法は辞書攻撃であり、既存のID・パスワードの流出リストを用いる攻撃とは異なる。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.vw7jy3tw8uev#bookmark=id.dg4r2rupd11"
+      },
+      {
+        "text": "ハッシュ値対照表でパスワードを解析する",
+        "overview": "誤り。レインボーテーブル攻撃である。",
+        "detail": "あらかじめ計算したパスワードとハッシュ値の対応表を用いて解析する手法はレインボーテーブル攻撃であり、認証試行型の攻撃ではない。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.vw7jy3tw8uev#bookmark=id.dg4r2rupd11"
+      },
+      {
+        "text": "流出したIDとパスワードで他サイトにログインを試行する",
+        "overview": "正しい。パスワードリスト攻撃の説明である。",
+        "detail": "他サイトから流出したIDとパスワードの組合せをそのまま用いて別のサイトにログインを試行する攻撃は、パスワードリスト攻撃と呼ばれる。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.vw7jy3tw8uev#bookmark=id.dg4r2rupd11"
+      },
+      {
+        "text": "認証操作を録画して再利用する",
+        "overview": "誤り。ショルダーハッキングに該当する。",
+        "detail": "入力操作を盗み見たり録画したりして不正利用する手法はショルダーハッキングであり、パスワードリスト攻撃とは異なる。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.vw7jy3tw8uev#bookmark=id.dg4r2rupd11"
+      }
+    ],
+    "correct_indices": [
+      2
+    ],
+    "category": "テクノロジ系 / セキュリティ"
+  },
+  {
     "id": "ap-tech-architecture-microservices",
     "source": "令和6年秋期　問47",
     "question": "マイクロサービスアーキテクチャを利用するとき、システム構築上の利点はどれか。",
