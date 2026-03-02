@@ -245,6 +245,41 @@
     "source": "令和6年秋期　問35"
   },
   {
+    "id": "ap-tech-security-cryptrec-list",
+    "source": "令和7年春期　問35",
+    "question": "デジタル庁、総務省及び経済産業省が策定したCRYPTREC暗号リストを構成する暗号リストの説明として、適切なものはどれか。",
+    "choices": [
+      {
+        "text": "推奨候補暗号リストは、市場で十分な実績があり利用を推奨する暗号の一覧である",
+        "overview": "誤り。利用を推奨するのは電子政府推奨暗号リストである。",
+        "detail": "推奨候補暗号リストは、安全性と実装性能が確認され、将来的に電子政府推奨暗号リストへ掲載される可能性がある暗号を示す。市場実績が十分で利用を推奨する段階のものは電子政府推奨暗号リストに分類される。",
+        "link": "https://yamac33.github.io/LearningTrajectory/ap/posts/2026-02-25-ap-cryptrec-3-classifications/"
+      },
+      {
+        "text": "推奨候補暗号リストは、格下げされ互換性維持のために利用を容認する暗号の一覧である",
+        "overview": "誤り。互換性維持目的で容認されるのは運用監視暗号リストである。",
+        "detail": "運用監視暗号リストは、解読リスクの高まりなどにより推奨状態ではないが、互換性維持のため継続利用を容認する暗号を示す。一方、推奨候補暗号リストは将来の推奨候補であり性質が異なる。",
+        "link": "https://yamac33.github.io/LearningTrajectory/ap/posts/2026-02-25-ap-cryptrec-3-classifications/"
+      },
+      {
+        "text": "電子政府推奨暗号リストは、安全性と実装性能が確認され、利用を推奨する暗号の一覧である",
+        "overview": "正しい。安全性と実装性能が確認され利用を推奨する暗号である。",
+        "detail": "電子政府推奨暗号リストは、CRYPTRECにより安全性と実装性能が確認され、市場実績や普及見込みも踏まえて利用を推奨する暗号技術の一覧である。政府情報システムでは原則として本リストのアルゴリズム採用が求められる。",
+        "link": "https://yamac33.github.io/LearningTrajectory/ap/posts/2026-02-25-ap-cryptrec-3-classifications/"
+      },
+      {
+        "text": "電子政府推奨暗号リストは、互換性維持のために限定的利用を認める暗号の一覧である",
+        "overview": "誤り。互換性維持目的の限定利用は運用監視暗号リストである。",
+        "detail": "推奨段階から外れた暗号であっても、既存システムとの互換性維持のために継続利用を容認するものは運用監視暗号リストに分類される。電子政府推奨暗号リストは現時点で利用を推奨する暗号である。",
+        "link": "https://yamac33.github.io/LearningTrajectory/ap/posts/2026-02-25-ap-cryptrec-3-classifications/"
+      }
+    ],
+    "correct_indices": [
+      2
+    ],
+    "category": "テクノロジ系 / セキュリティ"
+  },
+  {
     "id": "ap-tech-security-dnssec",
     "source": "令和6年秋期　問44",
     "question": "DNSSECの仕様として、適切なものはどれか。",
@@ -558,41 +593,6 @@
       1
     ],
     "category": "マネジメント系 / プロジェクトマネジメント"
-  },
-  {
-    "id": "ap-tech-security-cryptrec-list",
-    "source": "令和7年春期　問35",
-    "question": "デジタル庁、総務省及び経済産業省が策定したCRYPTREC暗号リストを構成する暗号リストの説明として、適切なものはどれか。",
-    "choices": [
-      {
-        "text": "推奨候補暗号リストは、市場で十分な実績があり利用を推奨する暗号の一覧である",
-        "overview": "誤り。利用を推奨するのは電子政府推奨暗号リストである。",
-        "detail": "推奨候補暗号リストは、安全性と実装性能が確認され、将来的に電子政府推奨暗号リストへ掲載される可能性がある暗号を示す。市場実績が十分で利用を推奨する段階のものは電子政府推奨暗号リストに分類される。",
-        "link": "https://yamac33.github.io/LearningTrajectory/ap/posts/2026-02-25-ap-cryptrec-3-classifications/"
-      },
-      {
-        "text": "推奨候補暗号リストは、格下げされ互換性維持のために利用を容認する暗号の一覧である",
-        "overview": "誤り。互換性維持目的で容認されるのは運用監視暗号リストである。",
-        "detail": "運用監視暗号リストは、解読リスクの高まりなどにより推奨状態ではないが、互換性維持のため継続利用を容認する暗号を示す。一方、推奨候補暗号リストは将来の推奨候補であり性質が異なる。",
-        "link": "https://yamac33.github.io/LearningTrajectory/ap/posts/2026-02-25-ap-cryptrec-3-classifications/"
-      },
-      {
-        "text": "電子政府推奨暗号リストは、安全性と実装性能が確認され、利用を推奨する暗号の一覧である",
-        "overview": "正しい。安全性と実装性能が確認され利用を推奨する暗号である。",
-        "detail": "電子政府推奨暗号リストは、CRYPTRECにより安全性と実装性能が確認され、市場実績や普及見込みも踏まえて利用を推奨する暗号技術の一覧である。政府情報システムでは原則として本リストのアルゴリズム採用が求められる。",
-        "link": "https://yamac33.github.io/LearningTrajectory/ap/posts/2026-02-25-ap-cryptrec-3-classifications/"
-      },
-      {
-        "text": "電子政府推奨暗号リストは、互換性維持のために限定的利用を認める暗号の一覧である",
-        "overview": "誤り。互換性維持目的の限定利用は運用監視暗号リストである。",
-        "detail": "推奨段階から外れた暗号であっても、既存システムとの互換性維持のために継続利用を容認するものは運用監視暗号リストに分類される。電子政府推奨暗号リストは現時点で利用を推奨する暗号である。",
-        "link": "https://yamac33.github.io/LearningTrajectory/ap/posts/2026-02-25-ap-cryptrec-3-classifications/"
-      }
-    ],
-    "correct_indices": [
-      2
-    ],
-    "category": "テクノロジ系 / セキュリティ"
   },
   {
     "id": "ap-tech-ai-cross-validation",
