@@ -1,5 +1,40 @@
 [
   {
+    "id": "ap-tech-architecture-microservices",
+    "source": "令和6年秋期　問47",
+    "question": "マイクロサービスアーキテクチャを利用するとき、システム構築上の利点はどれか。",
+    "choices": [
+      {
+        "text": "使用する技術要素を統一しやすい",
+        "overview": "誤り。各サービスは独立しており技術選択は統一前提ではない。",
+        "detail": "マイクロサービスでは各サービスが独立して設計・開発されるため、プログラム言語やミドルウェアを統一することが前提ではない。技術の多様性を許容する点が特徴である。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.1fjuq7apbrtk#bookmark=id.cfb38tlea4yz"
+      },
+      {
+        "text": "データ整合性を確保しやすい",
+        "overview": "誤り。分散データ管理により整合性確保は複雑になる。",
+        "detail": "各サービスが独自にデータを保有するため、全体の整合性を保つには分散トランザクションや最終的整合性の設計が必要となり、単一データベースより複雑である。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.1fjuq7apbrtk#bookmark=id.cfb38tlea4yz"
+      },
+      {
+        "text": "各サービスの変更がしやすい",
+        "overview": "正しい。サービス単位で独立して改修・デプロイできる。",
+        "detail": "マイクロサービスはサービス単位で独立して開発・デプロイできるため、特定サービスの変更が他へ影響しにくい。これにより変更の柔軟性や迅速なリリースが可能となる。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.1fjuq7apbrtk#bookmark=id.cfb38tlea4yz"
+      },
+      {
+        "text": "サービス呼出し回数が減りオーバーヘッドが削減できる",
+        "overview": "誤り。サービス間通信が増えオーバーヘッドが増加する場合がある。",
+        "detail": "マイクロサービスではサービス間通信が頻繁に発生するため、ネットワーク遅延や通信オーバーヘッドが増加する可能性がある。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.1fjuq7apbrtk#bookmark=id.cfb38tlea4yz"
+      }
+    ],
+    "correct_indices": [
+      2
+    ],
+    "category": "マネジメント系 / システム開発技術"
+  },
+  {
     "id": "ap-mgmt-data-io-policy",
     "source": "令和6年秋期　問57",
     "question": "入出力データの管理方針の例として、適切なものはどれか。",
