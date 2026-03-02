@@ -1,5 +1,40 @@
 [
   {
+    "id": "ap-tech-performance-mips-network",
+    "source": "令和6年秋期　問15",
+    "question": "あるクライアントサーバシステムにおいて、クライアントから要求された1件の検索を処理するために、サーバで平均100万命令が実行される。1件の検索につき、ネットワーク内で転送されるデータは平均2×10^5バイトである。このサーバの性能は100MIPSであり、ネットワークの転送速度は8×10^7ビット／秒である。このシステムにおいて、1秒間に処理できる検索要求は何件か。ここで、処理できる件数は、サーバとネットワークの処理能力だけで決まるものとする。また、1バイトは8ビットとする。",
+    "choices": [
+      {
+        "text": "50",
+        "overview": "ネットワークの上限が50件／秒となり全体のボトルネックになる。",
+        "detail": "1件当たりの転送量は2×10^5バイト×8＝1.6×10^6ビットである。ネットワーク帯域は8×10^7ビット／秒なので、8×10^7÷1.6×10^6＝50件／秒がネットワーク側の処理上限となる。一方、サーバは100MIPS＝1×10^8命令／秒で、1件当たり1×10^6命令なので100件／秒まで処理可能である。全体の処理件数は小さい方（ボトルネック）で決まるため50件／秒となる。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.vy4ja03tfbnu#bookmark=id.dn2wz2dpmipd"
+      },
+      {
+        "text": "100",
+        "overview": "サーバの上限値でありネットワーク帯域による制約を考慮していない。",
+        "detail": "サーバ側だけを見ると、100MIPS＝1×10^8命令／秒、1件当たり1×10^6命令なので100件／秒となる。しかしネットワーク側は1件当たり1.6×10^6ビットを転送する必要があり、8×10^7ビット／秒では50件／秒が上限となるため、100件／秒は達成できない。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.vy4ja03tfbnu#bookmark=id.dn2wz2dpmipd"
+      },
+      {
+        "text": "200",
+        "overview": "サーバ・ネットワークのいずれの処理能力でも成立しない。",
+        "detail": "200件／秒を処理するにはサーバで2×10^8命令／秒、ネットワークで3.2×10^8ビット／秒が必要となる。与えられた性能（1×10^8命令／秒、8×10^7ビット／秒）を超えるため不適切である。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.vy4ja03tfbnu#bookmark=id.dn2wz2dpmipd"
+      },
+      {
+        "text": "400",
+        "overview": "必要な命令数・転送量が与えられた性能を大きく上回る。",
+        "detail": "400件／秒ではサーバで4×10^8命令／秒、ネットワークで6.4×10^8ビット／秒が必要となる。どちらも条件の性能を大幅に超えており実現できない。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.vy4ja03tfbnu#bookmark=id.dn2wz2dpmipd"
+      }
+    ],
+    "correct_indices": [
+      0
+    ],
+    "category": "テクノロジ系 / システム構成要素"
+  },
+  {
     "id": "ap-tech-hardware-tamper-resistance",
     "source": "令和6年秋期　問24",
     "question": "マイクロプロセッサの耐タンパ性を向上させる手法として、適切なものはどれか。",
