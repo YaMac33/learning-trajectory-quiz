@@ -253,25 +253,25 @@
         "text": "DNSサーバのホスト名を登録するのはMXレコードである",
         "overview": "誤り。DNSサーバの指定はNSレコードで行う。",
         "detail": "MXレコードはメール配送先のメールサーバを指定するためのレコードである。ドメインを管理するDNSサーバを指定するのはNSレコードである。",
-        "link": ""
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.0#bookmark=id.3w0vbenjbba6"
       },
       {
         "text": "DNS問い合わせソフトをレゾリューションという",
         "overview": "誤り。問い合わせを行うソフトはリゾルバである。",
         "detail": "DNSで名前解決を行うソフトウェアはリゾルバと呼ばれる。レゾリューションは名前解決という処理そのものを指す用語である。",
-        "link": ""
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.0#bookmark=id.3w0vbenjbba6"
       },
       {
         "text": "IPアドレスからホスト名を調べることを逆引きという",
         "overview": "正しい。IPアドレスから名前を求める操作である。",
         "detail": "ホスト名からIPアドレスを求めるのは正引きであり、IPアドレスに対応するホスト名を調べるのは逆引きという。逆引きでは通常PTRレコードが用いられる。",
-        "link": ""
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.0#bookmark=id.3w0vbenjbba6"
       },
       {
         "text": "ホスト名の別名登録はNSレコードで行う",
         "overview": "誤り。別名登録はCNAMEレコードである。",
         "detail": "CNAMEレコードは既存のホスト名に対する別名を登録するためのレコードである。NSレコードはそのドメインを管理するネームサーバを指定するものである。",
-        "link": ""
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.0#bookmark=id.3w0vbenjbba6"
       }
     ],
     "correct_indices": [
