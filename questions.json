@@ -245,6 +245,41 @@
     "source": "令和6年秋期　問35"
   },
   {
+    "id": "ap-tech-security-dnssec",
+    "source": "令和6年秋期　問44",
+    "question": "DNSSECの仕様として、適切なものはどれか。",
+    "choices": [
+      {
+        "text": "問合せごとに送信元ポート番号をランダムに変更する",
+        "overview": "誤り。これはソースポートランダマイゼーションの説明である。",
+        "detail": "送信元ポート番号をランダムに変更することで推測を困難にする手法は、DNSキャッシュポイズニング対策の一つであるが、DNSSECの仕様そのものではない。DNSSECはデジタル署名によって応答の正当性を保証する仕組みである。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.vw7jy3tw8uev#bookmark=id.lfzz1n3vpfr8"
+      },
+      {
+        "text": "公開鍵を公開し、秘密鍵で署名したリソースレコードを検証する",
+        "overview": "正しい。DNS応答に付与されたデジタル署名を検証する仕組みである。",
+        "detail": "DNSSECでは、権威DNSサーバが秘密鍵でリソースレコードにデジタル署名を付与し、公開鍵を用いて検証できるようにする。これにより、応答が正当な管理者によって生成され、改ざんされていないことを確認できる。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.vw7jy3tw8uev#bookmark=id.5sffc7m9mbud"
+      },
+      {
+        "text": "DNSに登録した送信元IPアドレスでメールを検証する",
+        "overview": "誤り。これはSPFの説明である。",
+        "detail": "SPFは、送信元メールサーバのIPアドレスをDNSに登録し、受信側がそれを照合することでなりすましを防止する仕組みである。DNSSECはDNS応答自体の正当性を保証する技術である。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.vw7jy3tw8uev#bookmark=id.3el58lboz823"
+      },
+      {
+        "text": "公開鍵でメール署名を検証する仕組みである",
+        "overview": "誤り。これはDKIMの説明である。",
+        "detail": "DKIMは、メール送信側が秘密鍵で電子メールに署名し、受信側が公開鍵で検証する仕組みである。DNSSECはメールではなく、DNSのリソースレコードの正当性を保証する拡張仕様である。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.vw7jy3tw8uev#bookmark=id.k4n6wmin985t"
+      }
+    ],
+    "correct_indices": [
+      1
+    ],
+    "category": "テクノロジ系 / セキュリティ"
+  },
+  {
     "id": "ap-tech-security-sbom",
     "source": "令和6年秋期　問43",
     "question": "ソフトウェアのセキュリティ管理に使用されるSBOMの説明として、適切なものはどれか。",
@@ -276,41 +311,6 @@
     ],
     "correct_indices": [
       3
-    ],
-    "category": "テクノロジ系 / セキュリティ"
-  },
-  {
-    "id": "ap-tech-security-dnssec",
-    "source": "令和6年秋期　問44",
-    "question": "DNSSECの仕様として、適切なものはどれか。",
-    "choices": [
-      {
-        "text": "問合せごとに送信元ポート番号をランダムに変更する",
-        "overview": "誤り。これはソースポートランダマイゼーションの説明である。",
-        "detail": "送信元ポート番号をランダムに変更することで推測を困難にする手法は、DNSキャッシュポイズニング対策の一つであるが、DNSSECの仕様そのものではない。DNSSECはデジタル署名によって応答の正当性を保証する仕組みである。",
-        "link": ""
-      },
-      {
-        "text": "公開鍵を公開し、秘密鍵で署名したリソースレコードを検証する",
-        "overview": "正しい。DNS応答に付与されたデジタル署名を検証する仕組みである。",
-        "detail": "DNSSECでは、権威DNSサーバが秘密鍵でリソースレコードにデジタル署名を付与し、公開鍵を用いて検証できるようにする。これにより、応答が正当な管理者によって生成され、改ざんされていないことを確認できる。",
-        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.vw7jy3tw8uev#bookmark=id.5sffc7m9mbud"
-      },
-      {
-        "text": "DNSに登録した送信元IPアドレスでメールを検証する",
-        "overview": "誤り。これはSPFの説明である。",
-        "detail": "SPFは、送信元メールサーバのIPアドレスをDNSに登録し、受信側がそれを照合することでなりすましを防止する仕組みである。DNSSECはDNS応答自体の正当性を保証する技術である。",
-        "link": ""
-      },
-      {
-        "text": "公開鍵でメール署名を検証する仕組みである",
-        "overview": "誤り。これはDKIMの説明である。",
-        "detail": "DKIMは、メール送信側が秘密鍵で電子メールに署名し、受信側が公開鍵で検証する仕組みである。DNSSECはメールではなく、DNSのリソースレコードの正当性を保証する拡張仕様である。",
-        "link": ""
-      }
-    ],
-    "correct_indices": [
-      1
     ],
     "category": "テクノロジ系 / セキュリティ"
   },
