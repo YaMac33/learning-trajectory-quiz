@@ -1,5 +1,40 @@
 [
   {
+    "id": "ap-tech-control-actuator",
+    "source": "令和6年秋期　問23",
+    "question": "アクチュエーターの説明として、適切なものはどれか。",
+    "choices": [
+      {
+        "text": "与えられた目標量と、センサーから得られた制御量を比較し、制御量を目標量に一致させるように操作量を出力する。",
+        "overview": "目標値と制御量を比較して操作量を決定するのはコントローラーである。",
+        "detail": "フィードバック制御系では、コントローラーが目標値とセンサーからの値を比較し、偏差に基づいて操作量を決定する。アクチュエーターはその操作量を受け取り物理的動作を行う装置であり、役割が異なる。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.hy2wudf0h0qc#bookmark=id.rw2c11xty4op"
+      },
+      {
+        "text": "位置、角度、速度、加速度、力、温度などを検出し、電気的な情報に変換する。",
+        "overview": "物理量を検出して電気信号に変換するのはセンサーである。",
+        "detail": "センサーは温度や圧力などの物理量を検出し、電圧や電流などの電気信号に変換する入力系デバイスである。アクチュエーターは逆に電気信号を受けて物理的な動きを出力する。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.hy2wudf0h0qc#bookmark=id.rw2c11xty4op"
+      },
+      {
+        "text": "エネルギー源からのパワーを、回転や直進などの動きに変換する。",
+        "overview": "エネルギーを物理的な動作に変換する装置でありアクチュエーターの説明である。",
+        "detail": "アクチュエーターは、電気エネルギーや空気圧、油圧などのエネルギーを回転運動や直線運動などの機械的動作に変換する出力装置である。モーターやシリンダなどが代表例であり、制御系の最終段で実際の動作を担う。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.hy2wudf0h0qc#bookmark=id.rw2c11xty4op"
+      },
+      {
+        "text": "マイクロフォンやセンサーなどが出力する微小な電気信号を増幅する。",
+        "overview": "微小信号を増幅するのはアンプである。",
+        "detail": "アンプ（増幅器）は、入力された小さな電気信号を所定のレベルまで増幅する電子回路である。アクチュエーターのように機械的な動作を生み出す装置ではない。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.hy2wudf0h0qc#bookmark=id.rw2c11xty4op"
+      }
+    ],
+    "correct_indices": [
+      2
+    ],
+    "category": "テクノロジ系 / ハードウェア"
+  },
+  {
     "id": "ap-tech-uml-activity-diagram",
     "source": "令和6年秋期　問66",
     "question": "UMLの図のうち、業務要件定義において、業務フローを記述する際に使用する、処理の分岐や並行処理、処理の同期などを表現できる図はどれか。",
