@@ -245,6 +245,41 @@
     "source": "令和6年秋期　問35"
   },
   {
+    "id": "ap-tech-security-sbom",
+    "source": "令和6年秋期　問43",
+    "question": "ソフトウェアのセキュリティ管理に使用されるSBOMの説明として、適切なものはどれか。",
+    "choices": [
+      {
+        "text": "セキュリティログを集約・分析し脅威を検出する仕組み",
+        "overview": "誤り。これはSIEMの説明である。",
+        "detail": "SIEMは、セキュリティアラートやログを集約・分析し、脅威を検知する仕組みである。SBOMはログ分析ではなく、ソフトウェア構成要素の一覧を管理するものである。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.vw7jy3tw8uev#bookmark=id.tuywduftvtjt"
+      },
+      {
+        "text": "IT資産をリスト化した構成管理データベース",
+        "overview": "誤り。これはCMDBの説明である。",
+        "detail": "CMDBは、ハードウェアやソフトウェアなどのIT資産情報を管理するデータベースである。SBOMは特定のソフトウェア製品を構成するコンポーネント情報を記載した一覧であり、対象範囲が異なる。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.vw7jy3tw8uev#bookmark=id.tuywduftvtjt"
+      },
+      {
+        "text": "脆弱性を特定・評価・報告するための管理プロセス",
+        "overview": "誤り。これは脆弱性管理の説明である。",
+        "detail": "脆弱性管理は、組織内のシステムやソフトウェアの脆弱性を特定し、評価し、対処するためのプロセスや戦略である。SBOMは、その前提となる構成情報を整理した成果物である。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.vw7jy3tw8uev#bookmark=id.tuywduftvtjt"
+      },
+      {
+        "text": "ソフトウェアの構成要素や依存関係を一覧化したもの",
+        "overview": "正しい。SBOMは構成コンポーネントの一覧である。",
+        "detail": "SBOMはSoftware Bill of Materialsの略であり、ソフトウェアを構成する各コンポーネントの名称、バージョン、ライセンス、依存関係などを機械可読形式でまとめた一覧である。脆弱性の影響範囲特定やアップデート判断に活用される。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.vw7jy3tw8uev#bookmark=id.tuywduftvtjt"
+      }
+    ],
+    "correct_indices": [
+      3
+    ],
+    "category": "テクノロジ系 / セキュリティ"
+  },
+  {
     "id": "ap-tech-security-cryptrec-list",
     "source": "令和7年春期　問35",
     "question": "デジタル庁、総務省及び経済産業省が策定したCRYPTREC暗号リストを構成する暗号リストの説明として、適切なものはどれか。",
@@ -311,41 +346,6 @@
     ],
     "correct_indices": [
       1
-    ],
-    "category": "テクノロジ系 / セキュリティ"
-  },
-  {
-    "id": "ap-tech-security-sbom",
-    "source": "令和6年秋期　問43",
-    "question": "ソフトウェアのセキュリティ管理に使用されるSBOMの説明として、適切なものはどれか。",
-    "choices": [
-      {
-        "text": "セキュリティログを集約・分析し脅威を検出する仕組み",
-        "overview": "誤り。これはSIEMの説明である。",
-        "detail": "SIEMは、セキュリティアラートやログを集約・分析し、脅威を検知する仕組みである。SBOMはログ分析ではなく、ソフトウェア構成要素の一覧を管理するものである。",
-        "link": ""
-      },
-      {
-        "text": "IT資産をリスト化した構成管理データベース",
-        "overview": "誤り。これはCMDBの説明である。",
-        "detail": "CMDBは、ハードウェアやソフトウェアなどのIT資産情報を管理するデータベースである。SBOMは特定のソフトウェア製品を構成するコンポーネント情報を記載した一覧であり、対象範囲が異なる。",
-        "link": ""
-      },
-      {
-        "text": "脆弱性を特定・評価・報告するための管理プロセス",
-        "overview": "誤り。これは脆弱性管理の説明である。",
-        "detail": "脆弱性管理は、組織内のシステムやソフトウェアの脆弱性を特定し、評価し、対処するためのプロセスや戦略である。SBOMは、その前提となる構成情報を整理した成果物である。",
-        "link": ""
-      },
-      {
-        "text": "ソフトウェアの構成要素や依存関係を一覧化したもの",
-        "overview": "正しい。SBOMは構成コンポーネントの一覧である。",
-        "detail": "SBOMはSoftware Bill of Materialsの略であり、ソフトウェアを構成する各コンポーネントの名称、バージョン、ライセンス、依存関係などを機械可読形式でまとめた一覧である。脆弱性の影響範囲特定やアップデート判断に活用される。",
-        "link": ""
-      }
-    ],
-    "correct_indices": [
-      3
     ],
     "category": "テクノロジ系 / セキュリティ"
   },
