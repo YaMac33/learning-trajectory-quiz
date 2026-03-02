@@ -245,6 +245,41 @@
     "source": "令和6年秋期　問35"
   },
   {
+    "id": "ap-tech-network-arp-command",
+    "source": "令和6年秋期　問36",
+    "question": "IPv4のLANに接続されているプリンターのMACアドレスを、同一LAN上のPCから調べるときに使用するコマンドはどれか。ここで、PCはこのプリンターを直前に使用しており、プリンターのIPアドレスは分かっているものとする。",
+    "choices": [
+      {
+        "text": "arp",
+        "overview": "正しい。ARPテーブルからIPアドレスに対応するMACアドレスを確認できる。",
+        "detail": "PCが直前にプリンターへ通信していれば、ARPテーブルにIPアドレスとMACアドレスの対応が保持されている。arpコマンドでARPテーブルを表示すれば、対象プリンターのMACアドレスを確認できる。",
+        "link": ""
+      },
+      {
+        "text": "ipconfig／ifconfig",
+        "overview": "誤り。自端末のIP設定情報を表示するコマンドである。",
+        "detail": "ipconfig（Windows）やifconfig（UNIX系）は、自端末のIPアドレスやサブネットマスクなどの設定情報を表示するコマンドであり、他機器のMACアドレスを直接確認する用途ではない。",
+        "link": ""
+      },
+      {
+        "text": "netstat",
+        "overview": "誤り。通信状態や接続状況を確認するコマンドである。",
+        "detail": "netstatはTCP／IPの接続状況やルーティングテーブルなどを表示するコマンドであり、IPアドレスからMACアドレスを調べる用途ではない。",
+        "link": ""
+      },
+      {
+        "text": "ping",
+        "overview": "誤り。疎通確認のためのコマンドである。",
+        "detail": "pingはICMPを用いて通信の到達可否を確認するコマンドであり、直接MACアドレスを表示する機能はない。ただし、ping後にARPテーブルを参照することで確認できる場合がある。",
+        "link": ""
+      }
+    ],
+    "correct_indices": [
+      0
+    ],
+    "category": "テクノロジ系 / ネットワーク"
+  },
+  {
     "id": "ap-tech-network-icmp",
     "source": "令和6年秋期　問34",
     "question": "IPv4ネットワークにおけるICMPの機能として、適切なものはどれか。",
