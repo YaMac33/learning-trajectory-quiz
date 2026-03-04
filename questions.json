@@ -1,5 +1,40 @@
 [
   {
+    "id": "ap-tech-network-udp-ntp",
+    "source": "令和4年春期　問33",
+    "question": "UDPを使用しているものはどれか。",
+    "choices": [
+      {
+        "text": "FTP",
+        "overview": "FTPはTCPを使用するプロトコルでありUDPではない。",
+        "detail": "FTP（File Transfer Protocol）はファイル転送に用いられるプロトコルであり、制御用ポート21とデータ転送用ポート20でTCPを使用する。UDPは使用しない。",
+        "link": ""
+      },
+      {
+        "text": "NTP",
+        "overview": "NTPはUDPを使用して時刻同期を行うプロトコルである。",
+        "detail": "NTP（Network Time Protocol）はネットワーク上のコンピュータの時刻を同期するためのプロトコルであり、UDPのポート123を使用する。軽量な通信で周期的に時刻情報をやり取りするためUDPが用いられる。",
+        "link": ""
+      },
+      {
+        "text": "POP3",
+        "overview": "POP3は電子メール受信に使用されるTCPベースのプロトコルである。",
+        "detail": "POP3（Post Office Protocol version 3）はメールサーバからメールを取得するためのプロトコルであり、TCPポート110を使用する。UDPは使用しない。",
+        "link": ""
+      },
+      {
+        "text": "TELNET",
+        "overview": "TELNETはTCPを使用してリモートログインを行うプロトコルである。",
+        "detail": "TELNETは遠隔のコンピュータにログインして操作するためのプロトコルであり、TCPポート23を使用する。信頼性の高い通信が必要なためUDPではなくTCPが使用される。",
+        "link": ""
+      }
+    ],
+    "correct_indices": [
+      1
+    ],
+    "category": "テクノロジ系 / ネットワーク"
+  },
+  {
     "id": "ap-tech-network-ftp-port",
     "source": "令和7年春期　問33",
     "question": "TCP/IPネットワークで、データ転送用と制御用とに異なるウェルノウンポート番号が割り当てられているプロトコルはどれか。",
