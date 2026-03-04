@@ -1,5 +1,40 @@
 [
   {
+    "id": "ap-tech-network-vrrp",
+    "source": "令和6年春期　問32",
+    "question": "ルータを冗長化するために用いられるプロトコルはどれか。",
+    "choices": [
+      {
+        "text": "PPP",
+        "overview": "PPPは2点間通信を行うためのプロトコルでありルータ冗長化の仕組みではない。",
+        "detail": "PPP（Point-to-Point Protocol）は、主にダイヤルアップ接続などで利用されるポイントツーポイント通信のためのプロトコルである。回線認証や圧縮などの機能を提供するが、ルータの冗長化や仮想ルータの構成には関係しない。",
+        "link": ""
+      },
+      {
+        "text": "RARP",
+        "overview": "RARPはMACアドレスからIPアドレスを取得するためのプロトコルであり冗長化とは無関係である。",
+        "detail": "RARP（Reverse Address Resolution Protocol）は、機器のMACアドレスから対応するIPアドレスを取得するためのプロトコルである。主にディスクレス端末の起動時などに利用されていたが、現在ではDHCPに置き換えられていることが多い。",
+        "link": ""
+      },
+      {
+        "text": "SNMP",
+        "overview": "SNMPはネットワーク機器を監視・管理するためのプロトコルであり冗長化の仕組みではない。",
+        "detail": "SNMP（Simple Network Management Protocol）は、ネットワーク機器の状態監視や設定管理を行うための管理プロトコルである。ルータやスイッチなどの情報収集を行うが、ルータを冗長化する機能は持たない。",
+        "link": ""
+      },
+      {
+        "text": "VRRP",
+        "overview": "VRRPは複数のルータで仮想ルータを構成して冗長化するプロトコルである。",
+        "detail": "VRRP（Virtual Router Redundancy Protocol）は、複数のルータで仮想ルータを構成し、通常は1台をマスタとして動作させ、障害時にはバックアップルータが自動的に引き継ぐことで通信を継続する仕組みを提供する。デフォルトゲートウェイの冗長化に利用される。",
+        "link": ""
+      }
+    ],
+    "correct_indices": [
+      3
+    ],
+    "category": "テクノロジ系 / ネットワーク"
+  },
+  {
     "id": "ap-tech-network-icmp",
     "source": "令和6年秋期　問34",
     "question": "IPv4ネットワークにおけるICMPの機能として、適切なものはどれか。",
