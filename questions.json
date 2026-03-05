@@ -1144,6 +1144,50 @@
     }
   },
   {
+    "id": "ap-tech-network-csma-cd",
+    "source": {
+      "label": "令和6年春期　問30"
+    },
+    "taxonomy": {
+      "parent": "未分類",
+      "child": "未分類",
+      "path": [
+        "未分類",
+        "未分類"
+      ]
+    },
+    "question": "CSMA/CD方式のLANに接続されたノードの送信動作として、適切なものはどれか。",
+    "choices": [
+      {
+        "text": "各ノードに論理的な順位付けを行い、送信権を順次受け渡し、これを受け取ったノードだけが送信を行う。",
+        "overview": "トークンパッシング方式の説明でありCSMA/CDではない。",
+        "detail": "送信権を順番に受け渡す方式はトークンパッシング方式である。CSMA/CDは送信権を明示的に受け渡すのではなく、媒体の状態を監視して送信する方式である。",
+        "link": ""
+      },
+      {
+        "text": "各ノードは伝送媒体が使用中かどうかを調べ、使用中でなければ送信を行う。衝突を検出したらランダムな時間の経過後に再度送信を行う。",
+        "overview": "媒体監視と衝突検出後の再送を行うCSMA/CDの動作である。",
+        "detail": "CSMA/CD（Carrier Sense Multiple Access with Collision Detection）は、送信前に媒体を監視し、空いていれば送信する。衝突が発生した場合は送信を中止し、ランダムなバックオフ時間経過後に再送する方式である。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.0#bookmark=id.m7jfnf2b4yy8"
+      },
+      {
+        "text": "各ノードを環状に接続して、送信権を制御するための特殊なフレームを巡回させ、これを受け取ったノードだけが送信を行う。",
+        "overview": "トークンリング方式の説明でありCSMA/CDではない。",
+        "detail": "環状接続でトークンと呼ばれる特殊フレームを巡回させる方式はトークンリングである。CSMA/CDはバス型やスター型構成で媒体共有を行う方式である。",
+        "link": ""
+      },
+      {
+        "text": "タイムスロットを割り当てられたノードだけが送信を行う。",
+        "overview": "TDMAの説明でありCSMA/CDではない。",
+        "detail": "タイムスロットごとに送信権を割り当てる方式はTDMA（Time Division Multiple Access）である。CSMA/CDは時間割当ではなく、媒体の状態に基づいて送信を制御する。",
+        "link": ""
+      }
+    ],
+    "correct_indices": [
+      1
+    ]
+  },
+  {
     "id": "ap-tech-os-task-preemption",
     "source": {
       "label": ""
@@ -2149,50 +2193,6 @@
         "text": "USB",
         "overview": "周辺機器接続用インタフェースでありLANケーブル給電ではない。",
         "detail": "USB（Universal Serial Bus）は周辺機器接続用インタフェースであり、給電機能も持つがEthernetケーブルを利用する仕組みではない。",
-        "link": ""
-      }
-    ],
-    "correct_indices": [
-      1
-    ]
-  },
-  {
-    "id": "ap-tech-network-csma-cd",
-    "source": {
-      "label": "令和6年春期　問30"
-    },
-    "taxonomy": {
-      "parent": "未分類",
-      "child": "未分類",
-      "path": [
-        "未分類",
-        "未分類"
-      ]
-    },
-    "question": "CSMA/CD方式のLANに接続されたノードの送信動作として、適切なものはどれか。",
-    "choices": [
-      {
-        "text": "各ノードに論理的な順位付けを行い、送信権を順次受け渡し、これを受け取ったノードだけが送信を行う。",
-        "overview": "トークンパッシング方式の説明でありCSMA/CDではない。",
-        "detail": "送信権を順番に受け渡す方式はトークンパッシング方式である。CSMA/CDは送信権を明示的に受け渡すのではなく、媒体の状態を監視して送信する方式である。",
-        "link": ""
-      },
-      {
-        "text": "各ノードは伝送媒体が使用中かどうかを調べ、使用中でなければ送信を行う。衝突を検出したらランダムな時間の経過後に再度送信を行う。",
-        "overview": "媒体監視と衝突検出後の再送を行うCSMA/CDの動作である。",
-        "detail": "CSMA/CD（Carrier Sense Multiple Access with Collision Detection）は、送信前に媒体を監視し、空いていれば送信する。衝突が発生した場合は送信を中止し、ランダムなバックオフ時間経過後に再送する方式である。",
-        "link": ""
-      },
-      {
-        "text": "各ノードを環状に接続して、送信権を制御するための特殊なフレームを巡回させ、これを受け取ったノードだけが送信を行う。",
-        "overview": "トークンリング方式の説明でありCSMA/CDではない。",
-        "detail": "環状接続でトークンと呼ばれる特殊フレームを巡回させる方式はトークンリングである。CSMA/CDはバス型やスター型構成で媒体共有を行う方式である。",
-        "link": ""
-      },
-      {
-        "text": "タイムスロットを割り当てられたノードだけが送信を行う。",
-        "overview": "TDMAの説明でありCSMA/CDではない。",
-        "detail": "タイムスロットごとに送信権を割り当てる方式はTDMA（Time Division Multiple Access）である。CSMA/CDは時間割当ではなく、媒体の状態に基づいて送信を制御する。",
         "link": ""
       }
     ],
