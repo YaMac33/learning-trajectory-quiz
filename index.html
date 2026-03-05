@@ -472,10 +472,10 @@
           </label>
 
           <label class="filters-item">
-            <span class="filters-label">表示グループ</span>
+            <span class="filters-label">表示・並び順</span>
             <select id="groupMode" class="filters-select">
-              <option value="cat-parent">カテゴリ</option>
-              <option value="source-session">開催期（出典）</option>
+              <option value="cat-parent">カテゴリ別に表示</option>
+              <option value="source-session">出題年度・問題順に表示</option>
             </select>
           </label>
 
@@ -602,14 +602,12 @@
     }
 
     function splitCategoryFromTaxonomy(q) {
-      // 確定版: taxonomy.parent / taxonomy.child
       const p = String(q?.taxonomy?.parent || "").trim() || "未分類";
       const c = String(q?.taxonomy?.child || "").trim() || "未分類";
       return { parent: p, child: c, full: `${p} / ${c}` };
     }
 
     function sourceLabel(q) {
-      // 確定版: source.label
       const s = String(q?.source?.label || "").trim();
       return s || "";
     }
@@ -620,8 +618,48 @@
       if (!s) return "不明";
       const m = s.match(/^(.*?)(?:\s*問\s*\d+)?\s*$/);
       const head = (m && m[1]) ? m[1].trim() : s;
-      // 末尾が "問" で終わるような崩れも防ぐ
       return head.replace(/\s*問\s*$/,"").trim() || "不明";
+    }
+
+    // --- ソート用パーサー ---
+    function parseSourceLabel(label) {
+      const s = String(label || "").trim();
+      let year = 0, term = 0, qNum = 9999;
+      // 例: "令和6年秋期 問19", "平成31年春期"
+      const m = s.match(/(令和|平成|昭和)?(?:(\d+|元)年)?(春期|秋期|春|秋)?\s*(?:問\s*(\d+))?/);
+      if (m && (m[1] || m[2] || s.match(/(\d{4})年/))) {
+        const gengou = m[1], nen = m[2], season = m[3], num = m[4];
+        if (gengou && nen) {
+          let y = nen === "元" ? 1 : parseInt(nen, 10);
+          if (gengou === "令和") year = 2018 + y;
+          else if (gengou === "平成") year = 1988 + y;
+          else if (gengou === "昭和") year = 1925 + y;
+        } else {
+          const ym = s.match(/(\d{4})年/);
+          if (ym) year = parseInt(ym[1], 10);
+        }
+        if (season) {
+          if (season.includes("秋")) term = 2;
+          else if (season.includes("春")) term = 1;
+        }
+        if (num) qNum = parseInt(num, 10);
+      }
+      return { year, term, qNum };
+    }
+
+    function compareSourceGroup(aStr, bStr) {
+      const a = parseSourceLabel(aStr);
+      const b = parseSourceLabel(bStr);
+      if (a.year !== b.year) return b.year - a.year; // 新しい年度が上
+      if (a.term !== b.term) return b.term - a.term; // 秋期が春期より上
+      return aStr.localeCompare(bStr, "ja");
+    }
+
+    function compareQuestionOrder(a, b) {
+      const pa = parseSourceLabel(a._sourceLabel);
+      const pb = parseSourceLabel(b._sourceLabel);
+      if (pa.qNum !== pb.qNum) return pa.qNum - pb.qNum; // 問1, 問2...の順
+      return a.id.localeCompare(b.id, "ja");
     }
 
     // =========================
@@ -668,7 +706,7 @@
       if (bookmarks.has(key)) bookmarks.delete(key);
       else bookmarks.add(key);
       persistBookmarks();
-      renderList(); // ★更新
+      renderList();
     }
 
     // =========================
@@ -741,7 +779,6 @@
     }
 
     function normalizeQuestions(raw) {
-      // 確定版スキーマ前提だが、崩れててもできる限り吸収
       return raw.map(q => {
         const id = String(q.id || "").trim();
         const question = String(q.question || "").trim();
@@ -754,7 +791,6 @@
         const correct = Array.isArray(q.correct_indices) ? q.correct_indices.map(n => Number(n)).filter(Number.isFinite)
                       : Array.isArray(q.correct) ? q.correct.map(n => Number(n)).filter(Number.isFinite)
                       : [];
-        // taxonomy/source
         const { parent, child, full } = splitCategoryFromTaxonomy(q);
         const srcLabel = sourceLabel(q);
 
@@ -804,8 +840,7 @@
       $("db-progress").textContent = `${prog}%`;
       $("db-answered-count").textContent = `回答 ${answeredQ} / 全 ${totalQ} 問`;
 
-      // 親カテゴリ別（最新結果）
-      const catStats = new Map(); // parent -> {total, answered, correct}
+      const catStats = new Map();
       for (const q of QUESTIONS) {
         const p = q.taxonomy.parent;
         if (!catStats.has(p)) catStats.set(p, { total: 0, answered: 0, correct: 0 });
@@ -910,7 +945,7 @@
       }
 
       // group
-      const groups = new Map(); // key -> question[]
+      const groups = new Map();
       for (const q of filtered) {
         let key = "";
         if (mode === "cat-parent") key = q.taxonomy.parent;
@@ -920,13 +955,23 @@
         groups.get(key).push(q);
       }
 
-      const groupKeys = Array.from(groups.keys()).sort((a,b)=>a.localeCompare(b,"ja"));
+      let groupKeys = Array.from(groups.keys());
+      if (mode === "source-session") {
+        groupKeys.sort(compareSourceGroup); // 出題年度（新しい順）
+      } else {
+        groupKeys.sort((a,b)=>a.localeCompare(b,"ja")); // カテゴリ（文字順）
+      }
 
       let seq = 0;
       for (const key of groupKeys) {
         const arr = groups.get(key) || [];
-        // within group: by child then id
-        arr.sort((a,b) => (a.taxonomy.child + a.id).localeCompare(b.taxonomy.child + b.id, "ja"));
+        
+        // グループ内ソート
+        if (mode === "source-session") {
+          arr.sort(compareQuestionOrder); // 問題順（1, 2, 3...順）
+        } else {
+          arr.sort((a,b) => (a.taxonomy.child + a.id).localeCompare(b.taxonomy.child + b.id, "ja"));
+        }
 
         const sec = document.createElement("section");
         sec.innerHTML = `
@@ -989,16 +1034,15 @@
 
       if (!info || !ov || !dt || !btn) return;
 
-      info.hidden = false;        // 回答後はinfo領域自体を表示
-      ov.hidden = !open;          // overview
-      dt.hidden = !open;          // detail
+      info.hidden = false;
+      ov.hidden = !open;
+      dt.hidden = !open;
       btn.disabled = false;
       btn.classList.toggle("is-open", open);
       if (span) span.textContent = open ? "解説を閉じる" : "解説を開く";
     }
 
     function renderQuestion(q) {
-      // playlist banner
       const banner = $("playlistBanner");
       if (playList.length > 0) {
         banner.hidden = false;
@@ -1029,7 +1073,6 @@
       const sessionRes = SESSION_RESULTS.get(String(q.id));
       const selected = new Set();
 
-      // build choices
       for (let i = 0; i < q.choices.length; i++) {
         const c = q.choices[i];
         const node = tpl.content.firstElementChild.cloneNode(true);
@@ -1046,12 +1089,10 @@
         text.textContent = c.text || "";
         dtContent.textContent = c.detail || "";
 
-        // link
         const href = String(c.link || "").trim();
         if (href) { link.href = href; link.hidden = false; }
         else { link.href = ""; link.hidden = true; }
 
-        // before answer: info is hidden, button disabled
         info.hidden = true;
         ov.hidden = true;
         dt.hidden = true;
@@ -1061,31 +1102,26 @@
 
         input.disabled = !!sessionRes;
 
-        // restore if already answered in this session
         if (sessionRes) {
           input.checked = sessionRes.selected.includes(i);
           node.classList.add("disabled");
 
-          // correct highlighting
           const correct = Array.isArray(q.correct_indices) ? q.correct_indices : [];
           if (correct.includes(i)) node.classList.add("is-correct");
           else if (input.checked) node.classList.add("is-wrong");
 
-          // overview text
           if (c.overview) {
             ov.textContent = c.overview;
           } else {
             ov.textContent = "";
           }
 
-          // ✅ 仕様：回答が完了すると overview + detail を同時に開く
           openExplanationUIForChoice(node, true);
         }
 
-        // toggle (after answer)
         btn.onclick = () => {
           if (!SESSION_RESULTS.get(String(q.id))) return;
-          const open = ov.hidden && dt.hidden; // currently closed -> open
+          const open = ov.hidden && dt.hidden;
           openExplanationUIForChoice(node, open);
         };
 
@@ -1099,7 +1135,6 @@
         choicesEl.appendChild(node);
       }
 
-      // submit
       const submitBtn = $("submitBtn");
       submitBtn.disabled = !!sessionRes;
 
@@ -1121,11 +1156,9 @@
         });
 
         SESSION_RESULTS.set(String(q.id), { selected: sel, isCorrect });
-        // ✅ 回答後：overview/detail を同時に開くので renderQuestion で反映
         renderQuestion(q);
       };
 
-      // nav
       let isFirst = false, isLast = false;
       let prevFn = null, nextFn = null;
 
@@ -1157,7 +1190,6 @@
       $("nextBtn").disabled = isLast && playList.length === 0;
       $("nextBtn").onclick = nextFn;
 
-      // result banner
       const sr = SESSION_RESULTS.get(String(q.id));
       if (sr) {
         resultEl.innerHTML = sr.isCorrect
@@ -1182,7 +1214,6 @@
         loadBookmarks();
         setupFilters();
 
-        // nav button
         $("navDashboard").onclick = () => setRoute(null, "dashboard");
         $("navList").onclick = () => setRoute(null, "list");
 
