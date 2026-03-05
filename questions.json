@@ -176,6 +176,50 @@
     }
   },
   {
+    "id": "ap-tech-network-poe",
+    "source": {
+      "label": "令和7年春期　問29"
+    },
+    "taxonomy": {
+      "parent": "未分類",
+      "child": "未分類",
+      "path": [
+        "未分類",
+        "未分類"
+      ]
+    },
+    "question": "無線LANのアクセスポイントやIP電話機などに、LANケーブルを利用して給電も行う仕組みはどれか。",
+    "choices": [
+      {
+        "text": "PLC",
+        "overview": "電力線を通信媒体として利用する技術でありLANケーブル給電ではない。",
+        "detail": "PLC（Power Line Communication）は家庭やオフィスの電力線を通信回線として利用する技術である。LANケーブルを通じて機器へ電力供給する仕組みではない。",
+        "link": ""
+      },
+      {
+        "text": "PoE",
+        "overview": "LANケーブルを通じて電力を供給する技術である。",
+        "detail": "PoE（Power over Ethernet）は、Ethernetケーブルを用いてデータ通信と同時に電力供給を行う技術である。IEEE 802.3afや802.3at、802.3btなどの規格があり、アクセスポイントやIP電話機などに広く利用されている。",
+        "link": ""
+      },
+      {
+        "text": "UPS",
+        "overview": "停電時に電力を供給する装置でありLANケーブル給電ではない。",
+        "detail": "UPS（Uninterruptible Power Supply）は停電時などに電力を供給する無停電電源装置である。LANケーブルを利用して機器へ給電する仕組みとは異なる。",
+        "link": ""
+      },
+      {
+        "text": "USB",
+        "overview": "周辺機器接続用インタフェースでありLANケーブル給電ではない。",
+        "detail": "USB（Universal Serial Bus）は周辺機器接続用インタフェースであり、給電機能も持つがEthernetケーブルを利用する仕組みではない。",
+        "link": ""
+      }
+    ],
+    "correct_indices": [
+      1
+    ]
+  },
+  {
     "id": "ap-tech-network-csma-cd",
     "source": {
       "label": "令和6年春期　問30"
@@ -1541,6 +1585,270 @@
     }
   },
   {
+    "id": "ap-tech-web-responsive-design",
+    "question": "レスポンシブWebデザインを実現するに当たり、単一のHTML文書で各種端末の画面サイズに応じた表示形式を切り替えるために使用する機能はどれか。",
+    "choices": [
+      {
+        "text": "User-Agent",
+        "overview": "誤り。端末情報を識別するもので表示切替の仕組みではない。",
+        "detail": "User-AgentはブラウザやOSの情報をサーバに伝えるための文字列であり、これを用いてHTMLを出し分けることは可能だが、単一HTMLで画面サイズに応じて表示を変えるレスポンシブWebデザインの仕組みではない。",
+        "link": ""
+      },
+      {
+        "text": "WebSocket",
+        "overview": "誤り。双方向通信を実現するプロトコルである。",
+        "detail": "WebSocketはクライアントとサーバ間でリアルタイム双方向通信を行うための技術であり、画面サイズに応じてレイアウトを変更する機能ではない。",
+        "link": ""
+      },
+      {
+        "text": "マッシュアップ",
+        "overview": "誤り。複数のWebサービスを組み合わせる手法である。",
+        "detail": "マッシュアップは公開されている複数のWebサービスやAPIを組み合わせて新しいサービスを作る手法であり、表示レイアウトの切替機能とは関係がない。",
+        "link": ""
+      },
+      {
+        "text": "メディアクエリ",
+        "overview": "正しい。画面特性に応じてCSSを切り替える機能である。",
+        "detail": "メディアクエリはCSSの機能であり、画面幅や解像度などのデバイス特性に応じて適用するスタイルを切り替えることができる。単一のHTML文書で各種端末に最適なレイアウトを実現するレスポンシブWebデザインの中核技術である。",
+        "link": ""
+      }
+    ],
+    "correct_indices": [
+      3
+    ],
+    "taxonomy": {
+      "parent": "マネジメント系",
+      "child": "ソフトウェア開発管理技術",
+      "path": [
+        "マネジメント系",
+        "ソフトウェア開発管理技術"
+      ]
+    },
+    "source": {
+      "label": "令和6年秋期　問50"
+    }
+  },
+  {
+    "id": "ap-mgmt-sms-continual-improvement",
+    "question": "JIS Q 20000-1:2020（サービスマネジメントシステム要求事項）における継続的改善に関する記述として、適切なものはどれか。",
+    "choices": [
+      {
+        "text": "品質と費用の両方について改善目標を設定しなければならない",
+        "overview": "誤り。1つ以上の項目について目標を設定すればよい。",
+        "detail": "JIS Q 20000-1:2020では、品質、価値、能力、費用、生産性、資源の活用、リスク低減のうち1つ以上について改善目標を設定することが求められている。必ず複数項目を設定する必要はない。",
+        "link": ""
+      },
+      {
+        "text": "サービスのみを改善対象とし、SMSは対象外とする",
+        "overview": "誤り。SMS自体も改善対象に含まれる。",
+        "detail": "継続的改善の対象は提供するサービスだけでなく、サービスマネジメントシステム（SMS）そのものも含まれる。SMS及びサービスの適切性、妥当性、有効性を継続的に向上させることが求められている。",
+        "link": ""
+      },
+      {
+        "text": "改善の評価基準には目的との整合性を含める",
+        "overview": "正しい。改善はサービスマネジメントの目的と整合している必要がある。",
+        "detail": "JIS Q 20000-1:2020では、改善の機会を評価する基準を定めることが求められ、その基準にはサービスマネジメントの目的との整合性が含まれなければならないとされている。改善活動は組織の目的と整合していることが重要である。",
+        "link": ""
+      },
+      {
+        "text": "改善効果は目標ではなく改善前との比較で判断する",
+        "overview": "誤り。設定した目標に照らして測定する。",
+        "detail": "実施された改善は、あらかじめ設定した目標に照らして測定し、目標が達成されていない場合には必要な処置をとることが求められている。単純な前後比較だけでは要求事項を満たさない。",
+        "link": ""
+      }
+    ],
+    "correct_indices": [
+      2
+    ],
+    "taxonomy": {
+      "parent": "マネジメント系",
+      "child": "サービスマネジメント",
+      "path": [
+        "マネジメント系",
+        "サービスマネジメント"
+      ]
+    },
+    "source": {
+      "label": "令和6年秋期　問56"
+    }
+  },
+  {
+    "id": "ap-tech-security-dnssec",
+    "question": "DNSSECの仕様として、適切なものはどれか。",
+    "choices": [
+      {
+        "text": "問合せごとに送信元ポート番号をランダムに変更する",
+        "overview": "誤り。これはソースポートランダマイゼーションの説明である。",
+        "detail": "送信元ポート番号をランダムに変更することで推測を困難にする手法は、DNSキャッシュポイズニング対策の一つであるが、DNSSECの仕様そのものではない。DNSSECはデジタル署名によって応答の正当性を保証する仕組みである。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.vw7jy3tw8uev#bookmark=id.lfzz1n3vpfr8"
+      },
+      {
+        "text": "公開鍵を公開し、秘密鍵で署名したリソースレコードを検証する",
+        "overview": "正しい。DNS応答に付与されたデジタル署名を検証する仕組みである。",
+        "detail": "DNSSECでは、権威DNSサーバが秘密鍵でリソースレコードにデジタル署名を付与し、公開鍵を用いて検証できるようにする。これにより、応答が正当な管理者によって生成され、改ざんされていないことを確認できる。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.vw7jy3tw8uev#bookmark=id.5sffc7m9mbud"
+      },
+      {
+        "text": "DNSに登録した送信元IPアドレスでメールを検証する",
+        "overview": "誤り。これはSPFの説明である。",
+        "detail": "SPFは、送信元メールサーバのIPアドレスをDNSに登録し、受信側がそれを照合することでなりすましを防止する仕組みである。DNSSECはDNS応答自体の正当性を保証する技術である。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.vw7jy3tw8uev#bookmark=id.3el58lboz823"
+      },
+      {
+        "text": "公開鍵でメール署名を検証する仕組みである",
+        "overview": "誤り。これはDKIMの説明である。",
+        "detail": "DKIMは、メール送信側が秘密鍵で電子メールに署名し、受信側が公開鍵で検証する仕組みである。DNSSECはメールではなく、DNSのリソースレコードの正当性を保証する拡張仕様である。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.vw7jy3tw8uev#bookmark=id.k4n6wmin985t"
+      }
+    ],
+    "correct_indices": [
+      1
+    ],
+    "taxonomy": {
+      "parent": "テクノロジ系",
+      "child": "セキュリティ",
+      "path": [
+        "テクノロジ系",
+        "セキュリティ"
+      ]
+    },
+    "source": {
+      "label": "令和6年秋期　問44"
+    }
+  },
+  {
+    "id": "ap-tech-security-sbom",
+    "question": "ソフトウェアのセキュリティ管理に使用されるSBOMの説明として、適切なものはどれか。",
+    "choices": [
+      {
+        "text": "セキュリティログを集約・分析し脅威を検出する仕組み",
+        "overview": "誤り。これはSIEMの説明である。",
+        "detail": "SIEMは、セキュリティアラートやログを集約・分析し、脅威を検知する仕組みである。SBOMはログ分析ではなく、ソフトウェア構成要素の一覧を管理するものである。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.vw7jy3tw8uev#bookmark=id.tuywduftvtjt"
+      },
+      {
+        "text": "IT資産をリスト化した構成管理データベース",
+        "overview": "誤り。これはCMDBの説明である。",
+        "detail": "CMDBは、ハードウェアやソフトウェアなどのIT資産情報を管理するデータベースである。SBOMは特定のソフトウェア製品を構成するコンポーネント情報を記載した一覧であり、対象範囲が異なる。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.vw7jy3tw8uev#bookmark=id.tuywduftvtjt"
+      },
+      {
+        "text": "脆弱性を特定・評価・報告するための管理プロセス",
+        "overview": "誤り。これは脆弱性管理の説明である。",
+        "detail": "脆弱性管理は、組織内のシステムやソフトウェアの脆弱性を特定し、評価し、対処するためのプロセスや戦略である。SBOMは、その前提となる構成情報を整理した成果物である。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.vw7jy3tw8uev#bookmark=id.tuywduftvtjt"
+      },
+      {
+        "text": "ソフトウェアの構成要素や依存関係を一覧化したもの",
+        "overview": "正しい。SBOMは構成コンポーネントの一覧である。",
+        "detail": "SBOMはSoftware Bill of Materialsの略であり、ソフトウェアを構成する各コンポーネントの名称、バージョン、ライセンス、依存関係などを機械可読形式でまとめた一覧である。脆弱性の影響範囲特定やアップデート判断に活用される。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.vw7jy3tw8uev#bookmark=id.tuywduftvtjt"
+      }
+    ],
+    "correct_indices": [
+      3
+    ],
+    "taxonomy": {
+      "parent": "テクノロジ系",
+      "child": "セキュリティ",
+      "path": [
+        "テクノロジ系",
+        "セキュリティ"
+      ]
+    },
+    "source": {
+      "label": "令和6年秋期　問43"
+    }
+  },
+  {
+    "id": "ap-strategy-dx-it-elements",
+    "question": "経済産業省のDX推進指標において、DXを実現する基盤となるITシステムの構築に関する指標のうち、「ITシステムに求められる要素」として経営者が確認すべき事項はどれか。",
+    "choices": [
+      {
+        "text": "IT全体設計やベンダー選定を担う人材を確保しているか",
+        "overview": "誤り。これはガバナンス・体制に関する要素である。",
+        "detail": "IT全体設計や協創できるベンダーの選定を行う人材の確保は、ガバナンス・体制の成熟度に関する観点である。ITシステム自体に求められる性能や構造の要素とは区別される。",
+        "link": ""
+      },
+      {
+        "text": "環境変化に迅速に対応できるITシステムとなっているか",
+        "overview": "正しい。スピード・アジリティはITに求められる要素である。",
+        "detail": "DX推進指標では、ITシステムに求められる要素として「スピード・アジリティ」を掲げ、環境変化に迅速に対応し、求められるデリバリースピードを実現できる柔軟なIT基盤となっているかを確認事項としている。",
+        "link": ""
+      },
+      {
+        "text": "ビッグデータ蓄積を重視し、リアルタイム性は重視しないか",
+        "overview": "誤り。リアルタイムにデータ活用できることが重視される。",
+        "detail": "DX推進指標では、データ活用の観点から、リアルタイムなど使いたい形でデータを活用できるITシステムであるかを重視している。事後分析のみを重視する姿勢は指標の趣旨に合致しない。",
+        "link": ""
+      },
+      {
+        "text": "全体最適よりも部門ごとの個別最適を優先しているか",
+        "overview": "誤り。全社最適を踏まえたITシステムが求められる。",
+        "detail": "DX推進指標では、部門を超えたデータ連携やバリューチェーン全体での価値創出を可能にする全社最適のITシステムを求めている。個別最適の追求はDXの推進を阻害する要因となる。",
+        "link": ""
+      }
+    ],
+    "correct_indices": [
+      1
+    ],
+    "taxonomy": {
+      "parent": "ストラテジ系",
+      "child": "システム戦略",
+      "path": [
+        "ストラテジ系",
+        "システム戦略"
+      ]
+    },
+    "source": {
+      "label": "令和6年秋期　問61"
+    }
+  },
+  {
+    "id": "ap-tech-network-throughput",
+    "question": "1Mバイトのデータを5秒以内に送信したい。伝送制御情報は考慮せず、回線の伝送効率を60%としたとき、必要な回線サービスの最低速度はどれか。",
+    "choices": [
+      {
+        "text": "1Mビット/秒",
+        "overview": "誤り。実効速度が不足し、5秒以内に送信できない。",
+        "detail": "1Mバイトは8Mビットであり、5秒以内に送るには実効1.6Mビット/秒が必要である。伝送効率60%では1Mビット/秒×0.6=0.6Mビット/秒となり、必要速度に達しない。",
+        "link": ""
+      },
+      {
+        "text": "2Mビット/秒",
+        "overview": "誤り。伝送効率を考慮すると実効速度が不足する。",
+        "detail": "2Mビット/秒の回線では実効速度は2×0.6=1.2Mビット/秒となる。必要な実効速度1.6Mビット/秒を満たせず、5秒以内に送信できない。",
+        "link": ""
+      },
+      {
+        "text": "4Mビット/秒",
+        "overview": "正しい。効率60%でも実効速度が必要条件を満たす最小値である。",
+        "detail": "8Mビットを5秒で送るには1.6Mビット/秒の実効速度が必要である。伝送効率60%を考慮すると必要回線速度は1.6/0.6=約2.67Mビット/秒以上である。選択肢の中でこれを満たす最小値は4Mビット/秒である。",
+        "link": ""
+      },
+      {
+        "text": "10Mビット/秒",
+        "overview": "誤り。条件は満たすが最低速度ではない。",
+        "detail": "10Mビット/秒では実効速度は6Mビット/秒となり十分条件を満たすが、設問は最低速度を問うているため、4Mビット/秒の方が適切である。",
+        "link": ""
+      }
+    ],
+    "correct_indices": [
+      2
+    ],
+    "taxonomy": {
+      "parent": "テクノロジ系",
+      "child": "ネットワーク",
+      "path": [
+        "テクノロジ系",
+        "ネットワーク"
+      ]
+    },
+    "source": {
+      "label": "令和6年秋期　問32"
+    }
+  },
+  {
     "id": "ap-tech-security-exploit-code",
     "question": "エクスプロイトコードの説明として、適切なものはどれか。",
     "choices": [
@@ -1582,6 +1890,50 @@
     },
     "source": {
       "label": "令和6年秋期　問46"
+    }
+  },
+  {
+    "id": "ap-tech-os-webapp-ha-session",
+    "question": "Webアプリケーションサーバの信頼性に関する記述のうち、適切なものはどれか。",
+    "choices": [
+      {
+        "text": "コールドスタンバイでは障害時もサービスは中断せず、トランザクションだけ継続できない",
+        "overview": "誤り。コールドスタンバイは切替えに時間が掛かり、サービスも中断する。",
+        "detail": "コールドスタンバイは予備系が停止状態で待機するため、障害時に予備系の起動やアプリケーションの立上げが必要となり、サービスは一時的に中断する。さらに主系との状態同期がない前提では、処理中トランザクションも継続できない。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.vy4ja03tfbnu#bookmark=id.vg5tvumltz4"
+      },
+      {
+        "text": "コールドスタンバイでは障害時にサービスは中断するが、トランザクションは継続できる",
+        "overview": "誤り。サービスが中断するだけでなく、通常はトランザクションも継続できない。",
+        "detail": "コールドスタンバイで障害が発生すると、予備系を起動して処理を引き継ぐまで停止が発生する。セッションや処理状態の同期が取れていない構成では、実行中のトランザクションは再開できず、再実行や再入力が必要になる。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.vy4ja03tfbnu#bookmark=id.vg5tvumltz4"
+      },
+      {
+        "text": "セッション非共有のクラスタで1台故障時、サービスは継続できないが、トランザクションは継続できる",
+        "overview": "誤り。フェールオーバーでサービスは継続し得るが、セッションが引き継げずトランザクションは継続できない。",
+        "detail": "クラスタ構成では1台故障時に他ノードへフェールオーバーできるため、サービス自体は中断せず継続できる。一方、セッションを共有しない構成ではユーザー状態や処理途中の情報が引き継げないため、同一トランザクションを継続できない。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.vy4ja03tfbnu#bookmark=id.vg5tvumltz4"
+      },
+      {
+        "text": "セッション共有のクラスタで1台故障時、サービスとトランザクションは継続できる",
+        "overview": "正しい。セッション情報を共有していれば故障ノードの処理を他ノードが引き継げる。",
+        "detail": "セッション共有クラスタでは、ユーザーのセッション情報がクラスタ内で共有または複製されているため、あるノードが障害を起こしても別ノードが同じセッション状態を用いて処理を継続できる。結果としてサービスの継続とトランザクション継続の両方を実現しやすい。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.vy4ja03tfbnu#bookmark=id.lulnwps9qyvv"
+      }
+    ],
+    "correct_indices": [
+      3
+    ],
+    "taxonomy": {
+      "parent": "テクノロジ系",
+      "child": "システム構成要素",
+      "path": [
+        "テクノロジ系",
+        "システム構成要素"
+      ]
+    },
+    "source": {
+      "label": "令和6年秋期　問12"
     }
   },
   {
