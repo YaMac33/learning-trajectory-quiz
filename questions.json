@@ -1585,50 +1585,6 @@
     }
   },
   {
-    "id": "ap-strategy-industry-five-forces",
-    "source": {
-      "label": "令和6年春期　問68"
-    },
-    "taxonomy": {
-      "parent": "ストラテジ系",
-      "child": "経営戦略",
-      "path": [
-        "ストラテジ系",
-        "経営戦略"
-      ]
-    },
-    "question": "企業が属する業界の競争状態と収益構造を、“新規参入の脅威”、“供給者の支配力”、“買い手の交渉力”、“代替製品・サービスの脅威”、“既存競合者同士の敵対関係”の要素に分類して、分析するフレームワークはどれか。",
-    "choices": [
-      {
-        "text": "PEST分析",
-        "overview": "誤り。PEST分析はマクロ環境を分析するフレームワークである。",
-        "detail": "PEST分析は、政治（Politics）、経済（Economy）、社会（Society）、技術（Technology）の4つの観点から、企業を取り巻くマクロ環境を分析するフレームワークであり、業界内の競争構造を分析するものではない。",
-        "link": ""
-      },
-      {
-        "text": "VRIO分析",
-        "overview": "誤り。VRIO分析は企業内部の経営資源を評価するフレームワークである。",
-        "detail": "VRIO分析は、Value（経済的価値）、Rarity（希少性）、Imitability（模倣困難性）、Organization（組織）の4つの観点から企業の経営資源を評価し、持続的競争優位性を分析するフレームワークである。",
-        "link": ""
-      },
-      {
-        "text": "バリューチェーン分析",
-        "overview": "誤り。バリューチェーン分析は企業の活動プロセスを分析する手法である。",
-        "detail": "バリューチェーン分析は、企業の主活動や支援活動などの業務プロセスを分解し、どの活動が価値を生み出しているかを分析することで、企業内部の強みや弱みを把握するためのフレームワークである。",
-        "link": ""
-      },
-      {
-        "text": "ファイブフォース分析",
-        "overview": "正しい。業界の競争構造を5つの要因から分析するフレームワークである。",
-        "detail": "ファイブフォース分析は、マイケル・ポーターが提唱したフレームワークであり、「新規参入の脅威」「供給者の交渉力」「買い手の交渉力」「代替製品・サービスの脅威」「既存企業間の競争」の5つの要因から業界構造と収益性を分析する。",
-        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.ojo1en54g6mk#bookmark=id.xhxpumbe7uwr"
-      }
-    ],
-    "correct_indices": [
-      3
-    ]
-  },
-  {
     "id": "ap-tech-ai-cross-validation",
     "question": "AIにおける教師あり学習で用いられる交差検証に関する記述として、最も適切なものはどれか。",
     "choices": [
@@ -3827,6 +3783,50 @@
     "source": {
       "label": "令和6年秋期　問12"
     }
+  },
+  {
+    "id": "ap-strategy-industry-five-forces",
+    "source": {
+      "label": "令和6年春期　問68"
+    },
+    "taxonomy": {
+      "parent": "ストラテジ系",
+      "child": "経営戦略",
+      "path": [
+        "ストラテジ系",
+        "経営戦略"
+      ]
+    },
+    "question": "企業が属する業界の競争状態と収益構造を、“新規参入の脅威”、“供給者の支配力”、“買い手の交渉力”、“代替製品・サービスの脅威”、“既存競合者同士の敵対関係”の要素に分類して、分析するフレームワークはどれか。",
+    "choices": [
+      {
+        "text": "PEST分析",
+        "overview": "誤り。PEST分析はマクロ環境を分析するフレームワークである。",
+        "detail": "PEST分析は、政治（Politics）、経済（Economy）、社会（Society）、技術（Technology）の4つの観点から、企業を取り巻くマクロ環境を分析するフレームワークであり、業界内の競争構造を分析するものではない。",
+        "link": "https://www.utokyo-ipc.co.jp/column/pest-analysis/"
+      },
+      {
+        "text": "VRIO分析",
+        "overview": "誤り。VRIO分析は企業内部の経営資源を評価するフレームワークである。",
+        "detail": "VRIO分析は、Value（経済的価値）、Rarity（希少性）、Imitability（模倣困難性）、Organization（組織）の4つの観点から企業の経営資源を評価し、持続的競争優位性を分析するフレームワークである。",
+        "link": ""
+      },
+      {
+        "text": "バリューチェーン分析",
+        "overview": "誤り。バリューチェーン分析は企業の活動プロセスを分析する手法である。",
+        "detail": "バリューチェーン分析は、企業の主活動や支援活動などの業務プロセスを分解し、どの活動が価値を生み出しているかを分析することで、企業内部の強みや弱みを把握するためのフレームワークである。",
+        "link": ""
+      },
+      {
+        "text": "ファイブフォース分析",
+        "overview": "正しい。業界の競争構造を5つの要因から分析するフレームワークである。",
+        "detail": "ファイブフォース分析は、マイケル・ポーターが提唱したフレームワークであり、「新規参入の脅威」「供給者の交渉力」「買い手の交渉力」「代替製品・サービスの脅威」「既存企業間の競争」の5つの要因から業界構造と収益性を分析する。",
+        "link": "https://docs.google.com/document/d/1-HE5wLpYPLsbp1kWzmfKx225uuF38cjyJm6Pln3ZJTc/edit?tab=t.ojo1en54g6mk#bookmark=id.xhxpumbe7uwr"
+      }
+    ],
+    "correct_indices": [
+      3
+    ]
   },
   {
     "id": "ap-tech-security-virus-detection-behavior",
